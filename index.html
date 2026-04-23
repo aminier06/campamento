@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Instrumento B - Autocorrección</title>
+  <title>Registro de Pruebas</title>
   <style>
     :root{
       --azul:#0f4c81;
@@ -15,6 +15,7 @@
       --borde:#d9e2ec;
       --fondo:#f7f9fc;
       --blanco:#ffffff;
+      --sombra:0 4px 14px rgba(0,0,0,.04);
     }
 
     *{box-sizing:border-box}
@@ -27,38 +28,48 @@
       line-height:1.45;
     }
 
+    .oculto{display:none !important;}
+
     .contenedor{
       max-width:1100px;
       margin:24px auto;
       padding:0 16px 40px;
     }
 
-    .encabezado{
+    .encabezado,
+    .seccion,
+    .pantalla-inicio{
       background:var(--blanco);
       border:1px solid var(--borde);
       border-radius:16px;
       padding:24px;
       margin-bottom:18px;
-      box-shadow:0 4px 14px rgba(0,0,0,.04);
+      box-shadow:var(--sombra);
     }
 
-    .encabezado h1{
-      margin:0 0 6px;
+    .pantalla-inicio{
+      max-width:760px;
+      margin:40px auto;
+    }
+
+    h1,h2,h3{
       color:var(--azul);
-      font-size:28px;
+      margin-top:0;
     }
 
-    .grid-info{
+    .grid-info,
+    .dos-columnas,
+    .tabla-bloques{
       display:grid;
-      grid-template-columns:repeat(auto-fit, minmax(260px,1fr));
-      gap:14px;
-      margin-top:18px;
+      grid-template-columns:repeat(auto-fit, minmax(280px,1fr));
+      gap:16px;
     }
 
     .campo{
       display:flex;
       flex-direction:column;
       gap:6px;
+      margin-bottom:14px;
     }
 
     label{
@@ -74,25 +85,30 @@
       background:#fff;
     }
 
-    .seccion{
-      background:var(--blanco);
-      border:1px solid var(--borde);
-      border-radius:16px;
-      padding:22px;
-      margin-bottom:18px;
-      box-shadow:0 4px 14px rgba(0,0,0,.04);
+    .grupo-opciones{
+      display:grid;
+      gap:12px;
+      margin-top:12px;
     }
 
-    .seccion h2{
-      margin:0 0 10px;
-      color:var(--azul);
-      font-size:22px;
+    .opcion-prueba{
+      border:1px solid #cfd8e3;
+      border-radius:12px;
+      padding:14px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      background:#fff;
     }
 
-    .seccion h3{
-      margin:18px 0 10px;
-      font-size:18px;
-      color:#243b53;
+    .opcion-prueba input[type="radio"]{
+      transform:scale(1.15);
+    }
+
+    .opcion-prueba small{
+      color:var(--gris);
+      display:block;
+      margin-top:2px;
     }
 
     .ayuda{
@@ -196,6 +212,11 @@
       color:#111827;
     }
 
+    .btn-exito{
+      background:var(--verde);
+      color:#fff;
+    }
+
     .resultado-global{
       margin-left:auto;
       background:#fff;
@@ -210,12 +231,6 @@
       margin-top:8px;
       font-size:14px;
       color:#52606d;
-    }
-
-    .dos-columnas{
-      display:grid;
-      grid-template-columns:repeat(auto-fit, minmax(280px,1fr));
-      gap:16px;
     }
 
     .enunciado-hueco{
@@ -241,10 +256,45 @@
       vertical-align:middle;
     }
 
-    .tabla-bloques{
-      display:grid;
-      grid-template-columns:repeat(auto-fit, minmax(280px,1fr));
-      gap:16px;
+    .modal-fondo{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.45);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+      z-index:9999;
+    }
+
+    .modal{
+      width:min(560px, 100%);
+      background:#fff;
+      border-radius:18px;
+      padding:24px;
+      box-shadow:0 12px 30px rgba(0,0,0,.18);
+    }
+
+    .modal h3{
+      margin-top:0;
+      margin-bottom:10px;
+    }
+
+    .acciones-modal{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:18px;
+    }
+
+    .placeholder-prueba{
+      max-width:760px;
+      margin:24px auto;
+      background:#fff;
+      border:1px solid var(--borde);
+      border-radius:16px;
+      padding:24px;
+      box-shadow:var(--sombra);
     }
 
     @media (max-width:700px){
@@ -256,260 +306,325 @@
   </style>
 </head>
 <body>
-  <div class="contenedor">
-    <div class="encabezado">
-      <h1>Instrumento B: Prueba de Lengua Española</h1>
 
-      <div class="grid-info">
-        <div class="campo">
-          <label for="nombre">Nombre completo del estudiante</label>
-          <input type="text" id="nombre" placeholder="Escriba el nombre del estudiante">
+  <!-- PANTALLA DE INICIO -->
+  <div id="pantallaInicio" class="pantalla-inicio">
+    <h1>Registro de pruebas</h1>
+    <p class="nota">Complete los datos antes de iniciar la digitación.</p>
+
+    <div class="campo">
+      <label for="inicioNombre">Nombre del estudiante</label>
+      <input type="text" id="inicioNombre" placeholder="Escriba el nombre del estudiante">
+    </div>
+
+    <div class="campo">
+      <label for="inicioCentro">Nombre del centro sede</label>
+      <input type="text" id="inicioCentro" placeholder="Escriba el nombre del centro sede">
+    </div>
+
+    <div class="campo">
+      <label>Seleccione la prueba</label>
+      <div class="grupo-opciones">
+        <label class="opcion-prueba">
+          <input type="radio" name="tipoPrueba" value="lengua">
+          <span>
+            <strong>Lengua Española</strong>
+            <small>Disponible</small>
+          </span>
+        </label>
+
+        <label class="opcion-prueba">
+          <input type="radio" name="tipoPrueba" value="matematica">
+          <span>
+            <strong>Matemática</strong>
+            <small>Aún no está lista</small>
+          </span>
+        </label>
+      </div>
+    </div>
+
+    <button class="btn-principal" onclick="iniciarProceso()">Continuar</button>
+  </div>
+
+  <!-- CONTENIDO LENGUA -->
+  <div id="pantallaLengua" class="oculto">
+    <div class="contenedor">
+      <div class="encabezado">
+        <h1>Instrumento B: Prueba de Lengua Española</h1>
+
+        <div class="grid-info">
+          <div class="campo">
+            <label for="nombre">Nombre completo del estudiante</label>
+            <input type="text" id="nombre" readonly>
+          </div>
+          <div class="campo">
+            <label for="centro">Centro sede</label>
+            <input type="text" id="centro" readonly>
+          </div>
         </div>
-        <div class="campo">
-          <label for="centro">Centro educativo</label>
-          <input type="text" id="centro" placeholder="Escriba el nombre del centro educativo">
+      </div>
+
+      <div class="seccion">
+        <h2>1. Escucha y selecciona la palabra correcta</h2>
+
+        <div class="item">
+          <p>1. Selecciona la opción correcta.</p>
+          <div class="opciones">
+            <label><input type="radio" name="p1" value="a"> a) moto</label>
+            <label><input type="radio" name="p1" value="b"> b) mata</label>
+            <label><input type="radio" name="p1" value="c"> c) moco</label>
+            <label><input type="radio" name="p1" value="d"> d) mono</label>
+          </div>
+          <div class="linea-respuesta" id="r-p1"></div>
+        </div>
+
+        <div class="item">
+          <p>2. Selecciona la opción correcta.</p>
+          <div class="opciones">
+            <label><input type="radio" name="p2" value="a"> a) pluma</label>
+            <label><input type="radio" name="p2" value="b"> b) paloma</label>
+            <label><input type="radio" name="p2" value="c"> c) palona</label>
+            <label><input type="radio" name="p2" value="d"> d) palloma</label>
+          </div>
+          <div class="linea-respuesta" id="r-p2"></div>
+        </div>
+
+        <div class="item">
+          <p>3. Selecciona la opción correcta.</p>
+          <div class="opciones">
+            <label><input type="radio" name="p3" value="a"> a) cocodilo</label>
+            <label><input type="radio" name="p3" value="b"> b) cocobrilo</label>
+            <label><input type="radio" name="p3" value="c"> c) cocodrilo</label>
+            <label><input type="radio" name="p3" value="d"> d) cocolilo</label>
+          </div>
+          <div class="linea-respuesta" id="r-p3"></div>
+        </div>
+
+        <div class="ayuda">
+          Ahora escucharás palabras que no tienen significado. Presta mucha atención. En cada fila, selecciona la opción correcta.
+        </div>
+
+        <div class="item">
+          <p>4. Selecciona la opción correcta.</p>
+          <div class="opciones">
+            <label><input type="radio" name="p4" value="a"> a) Lomipe</label>
+            <label><input type="radio" name="p4" value="b"> b) Lapimo</label>
+            <label><input type="radio" name="p4" value="c"> c) Lemipo</label>
+            <label><input type="radio" name="p4" value="d"> d) Lopame</label>
+          </div>
+          <div class="linea-respuesta" id="r-p4"></div>
+        </div>
+
+        <div class="item">
+          <p>5. Selecciona la opción correcta.</p>
+          <div class="opciones">
+            <label><input type="radio" name="p5" value="a"> a) trusal</label>
+            <label><input type="radio" name="p5" value="b"> b) trisa</label>
+            <label><input type="radio" name="p5" value="c"> c) tursal</label>
+            <label><input type="radio" name="p5" value="d"> d) turusal</label>
+          </div>
+          <div class="linea-respuesta" id="r-p5"></div>
+        </div>
+      </div>
+
+      <div class="seccion">
+        <h2>2. Completa los nombres de las palabras</h2>
+        <div class="ayuda">Escribe la letra que falta en cada palabra, usando letras del recuadro original: c, l, n, g, s, r, k, m.</div>
+
+        <div class="dos-columnas">
+          <div class="item">
+            <p class="enunciado-hueco">1. <input type="text" id="p6" maxlength="2" class="small-input">asa</p>
+            <div class="linea-respuesta" id="r-p6"></div>
+          </div>
+
+          <div class="item">
+            <p class="enunciado-hueco">2. ti<input type="text" id="p7" maxlength="2" class="small-input">re</p>
+            <div class="linea-respuesta" id="r-p7"></div>
+          </div>
+
+          <div class="item">
+            <p class="enunciado-hueco">3. e<input type="text" id="p8" maxlength="2" class="small-input">cuela</p>
+            <div class="linea-respuesta" id="r-p8"></div>
+          </div>
+
+          <div class="item">
+            <p class="enunciado-hueco">4. pa<input type="text" id="p9" maxlength="2" class="small-input">oma</p>
+            <div class="linea-respuesta" id="r-p9"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="seccion">
+        <h2>3. Organiza correctamente las sílabas</h2>
+
+        <div class="fila-palabras">
+          <div class="caja-palabra">
+            <strong>1. tra - es - ma</strong>
+            <p class="enunciado-hueco"><input type="text" id="p10"></p>
+            <div class="linea-respuesta" id="r-p10"></div>
+          </div>
+
+          <div class="caja-palabra">
+            <strong>2. bri - lla - som</strong>
+            <p class="enunciado-hueco"><input type="text" id="p11"></p>
+            <div class="linea-respuesta" id="r-p11"></div>
+          </div>
+
+          <div class="caja-palabra">
+            <strong>3. co - bar</strong>
+            <p class="enunciado-hueco"><input type="text" id="p12"></p>
+            <div class="linea-respuesta" id="r-p12"></div>
+          </div>
+
+          <div class="caja-palabra">
+            <strong>4. po - sa - ri - ma</strong>
+            <p class="enunciado-hueco"><input type="text" id="p13"></p>
+            <div class="linea-respuesta" id="r-p13"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="seccion">
+        <h2>4. Lee el texto y responde</h2>
+        <div class="ayuda">Texto base: <strong>El gato y los ratones</strong>.</div>
+
+        <div class="item">
+          <p>1. ¿Cuál es el nombre del gato?</p>
+          <div class="opciones">
+            <label><input type="radio" name="p14" value="a"> a) Ronald</label>
+            <label><input type="radio" name="p14" value="b"> b) Rodilardo</label>
+            <label><input type="radio" name="p14" value="c"> c) Rolando</label>
+          </div>
+          <div class="linea-respuesta" id="r-p14"></div>
+        </div>
+
+        <div class="item">
+          <p>2. ¿Quiénes estaban asustados por la presencia del gato?</p>
+          <div class="opciones">
+            <label><input type="radio" name="p15" value="a"> a) Solo las ratas</label>
+            <label><input type="radio" name="p15" value="b"> b) Solo los ratones</label>
+            <label><input type="radio" name="p15" value="c"> c) Las ratas y los ratones</label>
+          </div>
+          <div class="linea-respuesta" id="r-p15"></div>
+        </div>
+
+        <div class="item">
+          <p>3. ¿Por qué nadie quiso ponerle el cascabel al gato?</p>
+          <div class="opciones">
+            <label><input type="radio" name="p16" value="a"> a) Porque tenían miedo de ser atrapados por el gato</label>
+            <label><input type="radio" name="p16" value="b"> b) Porque no sabían dónde estaba el cascabel</label>
+            <label><input type="radio" name="p16" value="c"> c) Porque el gato estaba dormido todo el tiempo</label>
+          </div>
+          <div class="linea-respuesta" id="r-p16"></div>
+        </div>
+
+        <div class="item">
+          <p>4. ¿Qué cualidad necesitaría el ratón para ponerle el cascabel al gato?</p>
+          <div class="opciones">
+            <label><input type="radio" name="p17b" value="a"> a) valentía</label>
+            <label><input type="radio" name="p17b" value="b"> b) belleza</label>
+            <label><input type="radio" name="p17b" value="c"> c) miedo</label>
+          </div>
+          <div class="linea-respuesta" id="r-p17b"></div>
+        </div>
+      </div>
+
+      <div class="seccion">
+        <h2>5. Completa cada una de las siguientes ideas utilizando las palabras del recuadro</h2>
+        <div class="ayuda">solución / cascabel / madrigueras / astuto</div>
+
+        <div class="item">
+          <p class="enunciado-hueco">1. El gato es muy <input type="text" id="p17">.</p>
+          <div class="linea-respuesta" id="r-p17"></div>
+        </div>
+
+        <div class="item">
+          <p class="enunciado-hueco">2. El gato se dedicaba a vigilar las <input type="text" id="p18">.</p>
+          <div class="linea-respuesta" id="r-p18"></div>
+        </div>
+
+        <div class="item">
+          <p class="enunciado-hueco">3. ¿Quién le pondría el <input type="text" id="p19"> al gato?</p>
+          <div class="linea-respuesta" id="r-p19"></div>
+        </div>
+
+        <div class="item">
+          <p class="enunciado-hueco">4. Los ratones y ratas se reunieron para buscar una <input type="text" id="p20">.</p>
+          <div class="linea-respuesta" id="r-p20"></div>
+        </div>
+      </div>
+
+      <div class="seccion">
+        <h2>Resultado de la evaluación</h2>
+
+        <div class="item">
+          <p><strong>Clasificación global del estudiante</strong></p>
+          <div class="linea-respuesta neutra" id="clasificacionGlobal"></div>
+          <div class="nota" id="detalleClasificacion"></div>
+        </div>
+
+        <div class="tabla-bloques">
+          <div class="item">
+            <p><strong>Bloque 1. Discrimina sonidos con correspondencia</strong></p>
+            <div class="linea-respuesta neutra" id="bloque1"></div>
+            <div class="nota">Actividad 1. Según la cantidad de palabras discriminadas correctamente.</div>
+          </div>
+
+          <div class="item">
+            <p><strong>Bloque 2. Completa palabras con fonemas adecuados</strong></p>
+            <div class="linea-respuesta neutra" id="bloque2"></div>
+            <div class="nota">Actividad 2. Según la cantidad de palabras completadas correctamente.</div>
+          </div>
+
+          <div class="item">
+            <p><strong>Bloque 3. Organiza sílabas para formar palabras</strong></p>
+            <div class="linea-respuesta neutra" id="bloque3"></div>
+            <div class="nota">Actividad 3. Según la cantidad de palabras formadas correctamente.</div>
+          </div>
+
+          <div class="item">
+            <p><strong>Bloque 4. Comprende información explícita e implícita</strong></p>
+            <div class="linea-respuesta neutra" id="bloque4"></div>
+            <div class="nota">Actividad 4. Según la cantidad de preguntas respondidas correctamente.</div>
+          </div>
+
+          <div class="item">
+            <p><strong>Bloque 5. Completa ideas con vocabulario pertinente</strong></p>
+            <div class="linea-respuesta neutra" id="bloque5"></div>
+            <div class="nota">Actividad 5. Según la cantidad de ideas completadas correctamente.</div>
+          </div>
         </div>
       </div>
     </div>
 
-    <div class="seccion">
-      <h2>1. Escucha y selecciona la palabra correcta</h2>
-
-      <div class="item">
-        <p>1. Selecciona la opción correcta.</p>
-        <div class="opciones">
-          <label><input type="radio" name="p1" value="a"> a) moto</label>
-          <label><input type="radio" name="p1" value="b"> b) mata</label>
-          <label><input type="radio" name="p1" value="c"> c) moco</label>
-          <label><input type="radio" name="p1" value="d"> d) mono</label>
-        </div>
-        <div class="linea-respuesta" id="r-p1"></div>
-      </div>
-
-      <div class="item">
-        <p>2. Selecciona la opción correcta.</p>
-        <div class="opciones">
-          <label><input type="radio" name="p2" value="a"> a) pluma</label>
-          <label><input type="radio" name="p2" value="b"> b) paloma</label>
-          <label><input type="radio" name="p2" value="c"> c) palona</label>
-          <label><input type="radio" name="p2" value="d"> d) palloma</label>
-        </div>
-        <div class="linea-respuesta" id="r-p2"></div>
-      </div>
-
-      <div class="item">
-        <p>3. Selecciona la opción correcta.</p>
-        <div class="opciones">
-          <label><input type="radio" name="p3" value="a"> a) cocodilo</label>
-          <label><input type="radio" name="p3" value="b"> b) cocobrilo</label>
-          <label><input type="radio" name="p3" value="c"> c) cocodrilo</label>
-          <label><input type="radio" name="p3" value="d"> d) cocolilo</label>
-        </div>
-        <div class="linea-respuesta" id="r-p3"></div>
-      </div>
-
-      <div class="ayuda">
-        Ahora escucharás palabras que no tienen significado. Presta mucha atención. En cada fila, selecciona la opción correcta.
-      </div>
-
-      <div class="item">
-        <p>4. Selecciona la opción correcta.</p>
-        <div class="opciones">
-          <label><input type="radio" name="p4" value="a"> a) Lomipe</label>
-          <label><input type="radio" name="p4" value="b"> b) Lapimo</label>
-          <label><input type="radio" name="p4" value="c"> c) Lemipo</label>
-          <label><input type="radio" name="p4" value="d"> d) Lopame</label>
-        </div>
-        <div class="linea-respuesta" id="r-p4"></div>
-      </div>
-
-      <div class="item">
-        <p>5. Selecciona la opción correcta.</p>
-        <div class="opciones">
-          <label><input type="radio" name="p5" value="a"> a) trusal</label>
-          <label><input type="radio" name="p5" value="b"> b) trisa</label>
-          <label><input type="radio" name="p5" value="c"> c) tursal</label>
-          <label><input type="radio" name="p5" value="d"> d) turusal</label>
-        </div>
-        <div class="linea-respuesta" id="r-p5"></div>
-      </div>
-    </div>
-
-    <div class="seccion">
-      <h2>2. Completa los nombres de las palabras</h2>
-      <div class="ayuda">Escribe la letra que falta en cada palabra, usando letras del recuadro original: c, l, n, g, s, r, k, m.</div>
-
-      <div class="dos-columnas">
-        <div class="item">
-          <p class="enunciado-hueco">1. <input type="text" id="p6" maxlength="2" class="small-input">asa</p>
-          <div class="linea-respuesta" id="r-p6"></div>
-        </div>
-
-        <div class="item">
-          <p class="enunciado-hueco">2. ti<input type="text" id="p7" maxlength="2" class="small-input">re</p>
-          <div class="linea-respuesta" id="r-p7"></div>
-        </div>
-
-        <div class="item">
-          <p class="enunciado-hueco">3. e<input type="text" id="p8" maxlength="2" class="small-input">cuela</p>
-          <div class="linea-respuesta" id="r-p8"></div>
-        </div>
-
-        <div class="item">
-          <p class="enunciado-hueco">4. pa<input type="text" id="p9" maxlength="2" class="small-input">oma</p>
-          <div class="linea-respuesta" id="r-p9"></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="seccion">
-      <h2>3. Organiza correctamente las sílabas</h2>
-
-      <div class="fila-palabras">
-        <div class="caja-palabra">
-          <strong>1. tra - es - ma</strong>
-          <p class="enunciado-hueco"><input type="text" id="p10"></p>
-          <div class="linea-respuesta" id="r-p10"></div>
-        </div>
-
-        <div class="caja-palabra">
-          <strong>2. bri - lla - som</strong>
-          <p class="enunciado-hueco"><input type="text" id="p11"></p>
-          <div class="linea-respuesta" id="r-p11"></div>
-        </div>
-
-        <div class="caja-palabra">
-          <strong>3. co - bar</strong>
-          <p class="enunciado-hueco"><input type="text" id="p12"></p>
-          <div class="linea-respuesta" id="r-p12"></div>
-        </div>
-
-        <div class="caja-palabra">
-          <strong>4. po - sa - ri - ma</strong>
-          <p class="enunciado-hueco"><input type="text" id="p13"></p>
-          <div class="linea-respuesta" id="r-p13"></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="seccion">
-      <h2>4. Lee el texto y responde</h2>
-      <div class="ayuda">Texto base: <strong>El gato y los ratones</strong>.</div>
-
-      <div class="item">
-        <p>1. ¿Cuál es el nombre del gato?</p>
-        <div class="opciones">
-          <label><input type="radio" name="p14" value="a"> a) Ronald</label>
-          <label><input type="radio" name="p14" value="b"> b) Rodilardo</label>
-          <label><input type="radio" name="p14" value="c"> c) Rolando</label>
-        </div>
-        <div class="linea-respuesta" id="r-p14"></div>
-      </div>
-
-      <div class="item">
-        <p>2. ¿Quiénes estaban asustados por la presencia del gato?</p>
-        <div class="opciones">
-          <label><input type="radio" name="p15" value="a"> a) Solo las ratas</label>
-          <label><input type="radio" name="p15" value="b"> b) Solo los ratones</label>
-          <label><input type="radio" name="p15" value="c"> c) Las ratas y los ratones</label>
-        </div>
-        <div class="linea-respuesta" id="r-p15"></div>
-      </div>
-
-      <div class="item">
-        <p>3. ¿Por qué nadie quiso ponerle el cascabel al gato?</p>
-        <div class="opciones">
-          <label><input type="radio" name="p16" value="a"> a) Porque tenían miedo de ser atrapados por el gato</label>
-          <label><input type="radio" name="p16" value="b"> b) Porque no sabían dónde estaba el cascabel</label>
-          <label><input type="radio" name="p16" value="c"> c) Porque el gato estaba dormido todo el tiempo</label>
-        </div>
-        <div class="linea-respuesta" id="r-p16"></div>
-      </div>
-
-      <div class="item">
-        <p>4. ¿Qué cualidad necesitaría el ratón para ponerle el cascabel al gato?</p>
-        <div class="opciones">
-          <label><input type="radio" name="p17b" value="a"> a) valentía</label>
-          <label><input type="radio" name="p17b" value="b"> b) belleza</label>
-          <label><input type="radio" name="p17b" value="c"> c) miedo</label>
-        </div>
-        <div class="linea-respuesta" id="r-p17b"></div>
-      </div>
-    </div>
-
-    <div class="seccion">
-      <h2>5. Completa cada una de las siguientes ideas utilizando las palabras del recuadro</h2>
-      <div class="ayuda">solución / cascabel / madrigueras / astuto</div>
-
-      <div class="item">
-        <p class="enunciado-hueco">1. El gato es muy <input type="text" id="p17">.</p>
-        <div class="linea-respuesta" id="r-p17"></div>
-      </div>
-
-      <div class="item">
-        <p class="enunciado-hueco">2. El gato se dedicaba a vigilar las <input type="text" id="p18">.</p>
-        <div class="linea-respuesta" id="r-p18"></div>
-      </div>
-
-      <div class="item">
-        <p class="enunciado-hueco">3. ¿Quién le pondría el <input type="text" id="p19"> al gato?</p>
-        <div class="linea-respuesta" id="r-p19"></div>
-      </div>
-
-      <div class="item">
-        <p class="enunciado-hueco">4. Los ratones y ratas se reunieron para buscar una <input type="text" id="p20">.</p>
-        <div class="linea-respuesta" id="r-p20"></div>
-      </div>
-    </div>
-
-    <div class="seccion">
-      <h2>Resultado de la evaluación</h2>
-
-      <div class="item">
-        <p><strong>Clasificación global del estudiante</strong></p>
-        <div class="linea-respuesta neutra" id="clasificacionGlobal"></div>
-        <div class="nota" id="detalleClasificacion"></div>
-      </div>
-
-      <div class="tabla-bloques">
-        <div class="item">
-          <p><strong>Bloque 1. Discrimina sonidos con correspondencia</strong></p>
-          <div class="linea-respuesta neutra" id="bloque1"></div>
-          <div class="nota">Actividad 1. Según la cantidad de palabras discriminadas correctamente.</div>
-        </div>
-
-        <div class="item">
-          <p><strong>Bloque 2. Completa palabras con fonemas adecuados</strong></p>
-          <div class="linea-respuesta neutra" id="bloque2"></div>
-          <div class="nota">Actividad 2. Según la cantidad de palabras completadas correctamente.</div>
-        </div>
-
-        <div class="item">
-          <p><strong>Bloque 3. Organiza sílabas para formar palabras</strong></p>
-          <div class="linea-respuesta neutra" id="bloque3"></div>
-          <div class="nota">Actividad 3. Según la cantidad de palabras formadas correctamente.</div>
-        </div>
-
-        <div class="item">
-          <p><strong>Bloque 4. Comprende información explícita e implícita</strong></p>
-          <div class="linea-respuesta neutra" id="bloque4"></div>
-          <div class="nota">Actividad 4. Según la cantidad de preguntas respondidas correctamente.</div>
-        </div>
-
-        <div class="item">
-          <p><strong>Bloque 5. Completa ideas con vocabulario pertinente</strong></p>
-          <div class="linea-respuesta neutra" id="bloque5"></div>
-          <div class="nota">Actividad 5. Según la cantidad de ideas completadas correctamente.</div>
-        </div>
+    <div class="controles">
+      <div class="barra">
+        <button class="btn-principal" onclick="revisarPrueba()">Enviar</button>
+        <button class="btn-secundario" onclick="volverInicio()">Volver al inicio</button>
+        <button class="btn-secundario" onclick="reiniciarPrueba()">Reiniciar esta prueba</button>
+        <div class="resultado-global" id="resultadoGlobal">Puntuación: 0 / 21</div>
       </div>
     </div>
   </div>
 
-  <div class="controles">
-    <div class="barra">
-      <button class="btn-principal" onclick="revisarPrueba()">Enviar</button>
-      <button class="btn-secundario" onclick="reiniciarPrueba()">Reiniciar</button>
-      <div class="resultado-global" id="resultadoGlobal">Puntuación: 0 / 21</div>
+  <!-- PANTALLA MATEMÁTICA -->
+  <div id="pantallaMatematica" class="oculto placeholder-prueba">
+    <h2>Prueba de Matemática</h2>
+    <p class="nota">Esta prueba aún no está lista para la digitación.</p>
+    <button class="btn-secundario" onclick="volverInicio()">Volver al inicio</button>
+  </div>
+
+  <!-- MODAL FINAL -->
+  <div id="modalFinal" class="modal-fondo oculto">
+    <div class="modal">
+      <h3>Proceso completado</h3>
+      <p id="mensajeModal"></p>
+      <p class="nota">¿Qué desea hacer ahora?</p>
+      <div class="acciones-modal">
+        <button class="btn-principal" onclick="digitarOtraPrueba()">Digitar otra prueba</button>
+        <button class="btn-exito" onclick="digitarOtroEstudiante()">Digitar otro estudiante</button>
+        <button class="btn-secundario" onclick="cerrarModal()">Cerrar</button>
+      </div>
     </div>
   </div>
 
@@ -528,6 +643,51 @@
       p19: "cascabel",
       p20: "solucion"
     };
+
+    function obtenerPruebaSeleccionada(){
+      return document.querySelector('input[name="tipoPrueba"]:checked');
+    }
+
+    function iniciarProceso(){
+      const nombre = document.getElementById("inicioNombre").value.trim();
+      const centro = document.getElementById("inicioCentro").value.trim();
+      const prueba = obtenerPruebaSeleccionada();
+
+      if(!nombre){
+        alert("Debe digitar el nombre del estudiante.");
+        return;
+      }
+
+      if(!centro){
+        alert("Debe digitar el nombre del centro sede.");
+        return;
+      }
+
+      if(!prueba){
+        alert("Debe seleccionar la prueba que se va a digitar.");
+        return;
+      }
+
+      if(prueba.value === "matematica"){
+        document.getElementById("pantallaInicio").classList.add("oculto");
+        document.getElementById("pantallaMatematica").classList.remove("oculto");
+        return;
+      }
+
+      document.getElementById("nombre").value = nombre;
+      document.getElementById("centro").value = centro;
+
+      document.getElementById("pantallaInicio").classList.add("oculto");
+      document.getElementById("pantallaMatematica").classList.add("oculto");
+      document.getElementById("pantallaLengua").classList.remove("oculto");
+    }
+
+    function volverInicio(){
+      document.getElementById("pantallaLengua").classList.add("oculto");
+      document.getElementById("pantallaMatematica").classList.add("oculto");
+      document.getElementById("pantallaInicio").classList.remove("oculto");
+      cerrarModal();
+    }
 
     function normalizar(valor){
       return (valor || "")
@@ -758,14 +918,25 @@
       document.getElementById("resultadoGlobal").textContent = `Puntuación: ${total} / 21`;
 
       const nombreEstudiante = document.getElementById("nombre").value.trim() || "sin nombre registrado";
-      alert(`El estudiante ${nombreEstudiante} pertenece al grupo ${clasificacion.nombre} según el resultado.`);
+      document.getElementById("mensajeModal").textContent =
+        `El estudiante ${nombreEstudiante} pertenece al grupo ${clasificacion.nombre} según el resultado.`;
+
+      document.getElementById("modalFinal").classList.remove("oculto");
     }
 
-    function reiniciarPrueba(){
-      document.querySelectorAll('input[type="radio"]').forEach(el => el.checked = false);
-      document.querySelectorAll('input[type="text"]').forEach(el => el.value = "");
+    function cerrarModal(){
+      document.getElementById("modalFinal").classList.add("oculto");
+    }
 
-      document.querySelectorAll('[id^="r-p"]').forEach(el => {
+    function limpiarRespuestasPrueba(){
+      document.querySelectorAll('#pantallaLengua input[type="radio"]').forEach(el => el.checked = false);
+      document.querySelectorAll('#pantallaLengua input[type="text"]').forEach(el => {
+        if(el.id !== "nombre" && el.id !== "centro"){
+          el.value = "";
+        }
+      });
+
+      document.querySelectorAll('#pantallaLengua [id^="r-p"]').forEach(el => {
         el.className = "linea-respuesta";
         el.textContent = "";
       });
@@ -780,6 +951,41 @@
       document.getElementById("clasificacionGlobal").textContent = "";
       document.getElementById("detalleClasificacion").textContent = "";
       document.getElementById("resultadoGlobal").textContent = "Puntuación: 0 / 21";
+    }
+
+    function reiniciarPrueba(){
+      limpiarRespuestasPrueba();
+      window.scrollTo({top:0, behavior:"smooth"});
+    }
+
+    function digitarOtraPrueba(){
+      cerrarModal();
+      limpiarRespuestasPrueba();
+
+      document.getElementById("inicioNombre").value = document.getElementById("nombre").value;
+      document.getElementById("inicioCentro").value = document.getElementById("centro").value;
+      document.querySelectorAll('input[name="tipoPrueba"]').forEach(el => el.checked = false);
+
+      document.getElementById("pantallaLengua").classList.add("oculto");
+      document.getElementById("pantallaMatematica").classList.add("oculto");
+      document.getElementById("pantallaInicio").classList.remove("oculto");
+      window.scrollTo({top:0, behavior:"smooth"});
+    }
+
+    function digitarOtroEstudiante(){
+      cerrarModal();
+      limpiarRespuestasPrueba();
+
+      document.getElementById("inicioNombre").value = "";
+      document.getElementById("inicioCentro").value = "";
+      document.querySelectorAll('input[name="tipoPrueba"]').forEach(el => el.checked = false);
+
+      document.getElementById("nombre").value = "";
+      document.getElementById("centro").value = "";
+
+      document.getElementById("pantallaLengua").classList.add("oculto");
+      document.getElementById("pantallaMatematica").classList.add("oculto");
+      document.getElementById("pantallaInicio").classList.remove("oculto");
       window.scrollTo({top:0, behavior:"smooth"});
     }
   </script>
