@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Registro de Pruebas</title>
+  <title>Registro de pruebas</title>
   <style>
     :root{
       --azul:#0f4c81;
@@ -256,6 +256,27 @@
       vertical-align:middle;
     }
 
+    .ops-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(180px,1fr));
+      gap:14px;
+    }
+
+    .op-card{
+      border:1px dashed #cbd5e1;
+      border-radius:12px;
+      padding:12px;
+      background:#f8fafc;
+    }
+
+    .op-card .expr{
+      font-size:24px;
+      line-height:1.2;
+      white-space:pre-line;
+      font-weight:700;
+      margin-bottom:8px;
+    }
+
     .modal-fondo{
       position:fixed;
       inset:0;
@@ -287,16 +308,6 @@
       margin-top:18px;
     }
 
-    .placeholder-prueba{
-      max-width:760px;
-      margin:24px auto;
-      background:#fff;
-      border:1px solid var(--borde);
-      border-radius:16px;
-      padding:24px;
-      box-shadow:var(--sombra);
-    }
-
     @media (max-width:700px){
       .resultado-global{
         margin-left:0;
@@ -307,7 +318,6 @@
 </head>
 <body>
 
-  <!-- PANTALLA DE INICIO -->
   <div id="pantallaInicio" class="pantalla-inicio">
     <h1>Registro de pruebas</h1>
     <p class="nota">Complete los datos antes de iniciar la digitación.</p>
@@ -327,18 +337,12 @@
       <div class="grupo-opciones">
         <label class="opcion-prueba">
           <input type="radio" name="tipoPrueba" value="lengua">
-          <span>
-            <strong>Lengua Española</strong>
-            <small>Disponible</small>
-          </span>
+          <span><strong>Lengua Española</strong></span>
         </label>
 
         <label class="opcion-prueba">
           <input type="radio" name="tipoPrueba" value="matematica">
-          <span>
-            <strong>Matemática</strong>
-            <small>Aún no está lista</small>
-          </span>
+          <span><strong>Matemática</strong></span>
         </label>
       </div>
     </div>
@@ -346,12 +350,11 @@
     <button class="btn-principal" onclick="iniciarProceso()">Continuar</button>
   </div>
 
-  <!-- CONTENIDO LENGUA -->
+  <!-- LENGUA -->
   <div id="pantallaLengua" class="oculto">
     <div class="contenedor">
       <div class="encabezado">
         <h1>Instrumento B: Prueba de Lengua Española</h1>
-
         <div class="grid-info">
           <div class="campo">
             <label for="nombre">Nombre completo del estudiante</label>
@@ -400,9 +403,7 @@
           <div class="linea-respuesta" id="r-p3"></div>
         </div>
 
-        <div class="ayuda">
-          Ahora escucharás palabras que no tienen significado. Presta mucha atención. En cada fila, selecciona la opción correcta.
-        </div>
+        <div class="ayuda">Ahora escucharás palabras que no tienen significado. Presta mucha atención. En cada fila, selecciona la opción correcta.</div>
 
         <div class="item">
           <p>4. Selecciona la opción correcta.</p>
@@ -436,17 +437,14 @@
             <p class="enunciado-hueco">1. <input type="text" id="p6" maxlength="2" class="small-input">asa</p>
             <div class="linea-respuesta" id="r-p6"></div>
           </div>
-
           <div class="item">
             <p class="enunciado-hueco">2. ti<input type="text" id="p7" maxlength="2" class="small-input">re</p>
             <div class="linea-respuesta" id="r-p7"></div>
           </div>
-
           <div class="item">
             <p class="enunciado-hueco">3. e<input type="text" id="p8" maxlength="2" class="small-input">cuela</p>
             <div class="linea-respuesta" id="r-p8"></div>
           </div>
-
           <div class="item">
             <p class="enunciado-hueco">4. pa<input type="text" id="p9" maxlength="2" class="small-input">oma</p>
             <div class="linea-respuesta" id="r-p9"></div>
@@ -456,26 +454,22 @@
 
       <div class="seccion">
         <h2>3. Organiza correctamente las sílabas</h2>
-
         <div class="fila-palabras">
           <div class="caja-palabra">
             <strong>1. tra - es - ma</strong>
             <p class="enunciado-hueco"><input type="text" id="p10"></p>
             <div class="linea-respuesta" id="r-p10"></div>
           </div>
-
           <div class="caja-palabra">
             <strong>2. bri - lla - som</strong>
             <p class="enunciado-hueco"><input type="text" id="p11"></p>
             <div class="linea-respuesta" id="r-p11"></div>
           </div>
-
           <div class="caja-palabra">
             <strong>3. co - bar</strong>
             <p class="enunciado-hueco"><input type="text" id="p12"></p>
             <div class="linea-respuesta" id="r-p12"></div>
           </div>
-
           <div class="caja-palabra">
             <strong>4. po - sa - ri - ma</strong>
             <p class="enunciado-hueco"><input type="text" id="p13"></p>
@@ -537,17 +531,14 @@
           <p class="enunciado-hueco">1. El gato es muy <input type="text" id="p17">.</p>
           <div class="linea-respuesta" id="r-p17"></div>
         </div>
-
         <div class="item">
           <p class="enunciado-hueco">2. El gato se dedicaba a vigilar las <input type="text" id="p18">.</p>
           <div class="linea-respuesta" id="r-p18"></div>
         </div>
-
         <div class="item">
           <p class="enunciado-hueco">3. ¿Quién le pondría el <input type="text" id="p19"> al gato?</p>
           <div class="linea-respuesta" id="r-p19"></div>
         </div>
-
         <div class="item">
           <p class="enunciado-hueco">4. Los ratones y ratas se reunieron para buscar una <input type="text" id="p20">.</p>
           <div class="linea-respuesta" id="r-p20"></div>
@@ -556,7 +547,6 @@
 
       <div class="seccion">
         <h2>Resultado de la evaluación</h2>
-
         <div class="item">
           <p><strong>Clasificación global del estudiante</strong></p>
           <div class="linea-respuesta neutra" id="clasificacionGlobal"></div>
@@ -567,31 +557,22 @@
           <div class="item">
             <p><strong>Bloque 1. Discrimina sonidos con correspondencia</strong></p>
             <div class="linea-respuesta neutra" id="bloque1"></div>
-            <div class="nota">Actividad 1. Según la cantidad de palabras discriminadas correctamente.</div>
           </div>
-
           <div class="item">
             <p><strong>Bloque 2. Completa palabras con fonemas adecuados</strong></p>
             <div class="linea-respuesta neutra" id="bloque2"></div>
-            <div class="nota">Actividad 2. Según la cantidad de palabras completadas correctamente.</div>
           </div>
-
           <div class="item">
             <p><strong>Bloque 3. Organiza sílabas para formar palabras</strong></p>
             <div class="linea-respuesta neutra" id="bloque3"></div>
-            <div class="nota">Actividad 3. Según la cantidad de palabras formadas correctamente.</div>
           </div>
-
           <div class="item">
             <p><strong>Bloque 4. Comprende información explícita e implícita</strong></p>
             <div class="linea-respuesta neutra" id="bloque4"></div>
-            <div class="nota">Actividad 4. Según la cantidad de preguntas respondidas correctamente.</div>
           </div>
-
           <div class="item">
             <p><strong>Bloque 5. Completa ideas con vocabulario pertinente</strong></p>
             <div class="linea-respuesta neutra" id="bloque5"></div>
-            <div class="nota">Actividad 5. Según la cantidad de ideas completadas correctamente.</div>
           </div>
         </div>
       </div>
@@ -599,22 +580,209 @@
 
     <div class="controles">
       <div class="barra">
-        <button class="btn-principal" onclick="revisarPrueba()">Enviar</button>
+        <button class="btn-principal" onclick="revisarPruebaLengua()">Enviar</button>
         <button class="btn-secundario" onclick="volverInicio()">Volver al inicio</button>
-        <button class="btn-secundario" onclick="reiniciarPrueba()">Reiniciar esta prueba</button>
-        <div class="resultado-global" id="resultadoGlobal">Puntuación: 0 / 21</div>
+        <button class="btn-secundario" onclick="reiniciarLengua()">Reiniciar esta prueba</button>
+        <div class="resultado-global" id="resultadoGlobalLengua">Puntuación: 0 / 21</div>
       </div>
     </div>
   </div>
 
-  <!-- PANTALLA MATEMÁTICA -->
-  <div id="pantallaMatematica" class="oculto placeholder-prueba">
-    <h2>Prueba de Matemática</h2>
-    <p class="nota">Esta prueba aún no está lista para la digitación.</p>
-    <button class="btn-secundario" onclick="volverInicio()">Volver al inicio</button>
+  <!-- MATEMATICA -->
+  <div id="pantallaMatematica" class="oculto">
+    <div class="contenedor">
+      <div class="encabezado">
+        <h1>Prueba de Matemática</h1>
+        <div class="grid-info">
+          <div class="campo">
+            <label for="nombreMa">Nombre completo del estudiante</label>
+            <input type="text" id="nombreMa" readonly>
+          </div>
+          <div class="campo">
+            <label for="centroMa">Centro sede</label>
+            <input type="text" id="centroMa" readonly>
+          </div>
+        </div>
+      </div>
+
+      <div class="seccion">
+        <h2>1. La abuela de Lucas tiene varias operaciones matemáticas que quiere realizar, para luego ir de compras, ¿la ayudas?</h2>
+        <div class="ops-grid">
+          <div class="op-card">
+            <div class="expr">34
++12</div>
+            <input type="text" id="ma1a" placeholder="Resultado">
+            <div class="linea-respuesta" id="r-ma1a"></div>
+          </div>
+          <div class="op-card">
+            <div class="expr">234
++45</div>
+            <input type="text" id="ma1b" placeholder="Resultado">
+            <div class="linea-respuesta" id="r-ma1b"></div>
+          </div>
+          <div class="op-card">
+            <div class="expr">347
++367</div>
+            <input type="text" id="ma1c" placeholder="Resultado">
+            <div class="linea-respuesta" id="r-ma1c"></div>
+          </div>
+          <div class="op-card">
+            <div class="expr">79
+-56</div>
+            <input type="text" id="ma1d" placeholder="Resultado">
+            <div class="linea-respuesta" id="r-ma1d"></div>
+          </div>
+          <div class="op-card">
+            <div class="expr">465
+-54</div>
+            <input type="text" id="ma1e" placeholder="Resultado">
+            <div class="linea-respuesta" id="r-ma1e"></div>
+          </div>
+          <div class="op-card">
+            <div class="expr">546
+-537</div>
+            <input type="text" id="ma1f" placeholder="Resultado">
+            <div class="linea-respuesta" id="r-ma1f"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="seccion">
+        <h2>2. El número de la casa de María es 708 se lee:</h2>
+        <div class="item">
+          <div class="opciones">
+            <label><input type="radio" name="ma2" value="a"> A) Setenta y ocho</label>
+            <label><input type="radio" name="ma2" value="b"> B) Setecientos ocho</label>
+            <label><input type="radio" name="ma2" value="c"> C) Setecientos ochenta</label>
+            <label><input type="radio" name="ma2" value="d"> D) Siete mil ocho</label>
+          </div>
+          <div class="linea-respuesta" id="r-ma2"></div>
+        </div>
+      </div>
+
+      <div class="seccion">
+        <h2>3. Mil ochocientos cuarenta y cuatro es el año de nuestra Independencia Nacional, en cifra es:</h2>
+        <div class="item">
+          <div class="opciones">
+            <label><input type="radio" name="ma3" value="a"> A) 1,844</label>
+            <label><input type="radio" name="ma3" value="b"> B) 1,484</label>
+            <label><input type="radio" name="ma3" value="c"> C) 8,144</label>
+            <label><input type="radio" name="ma3" value="d"> D) 8,414</label>
+          </div>
+          <div class="linea-respuesta" id="r-ma3"></div>
+        </div>
+      </div>
+
+      <div class="seccion">
+        <h2>4. ¿Cuál de estos números es el mayor?</h2>
+        <div class="item">
+          <div class="opciones">
+            <label><input type="radio" name="ma4" value="a"> A) 2735</label>
+            <label><input type="radio" name="ma4" value="b"> B) 2537</label>
+            <label><input type="radio" name="ma4" value="c"> C) 2573</label>
+            <label><input type="radio" name="ma4" value="d"> D) 2753</label>
+          </div>
+          <div class="linea-respuesta" id="r-ma4"></div>
+        </div>
+      </div>
+
+      <div class="seccion">
+        <h2>5. Ordena de menor a mayor los precios y selecciona la opción correcta</h2>
+        <div class="ayuda">
+          Fresa RD$155 · Sandía RD$150 · Piña RD$140 · Manzana RD$160 · Guineo RD$145
+        </div>
+        <div class="item">
+          <div class="opciones">
+            <label><input type="radio" name="ma5" value="a"> A) 140, 155, 160, 145, 150</label>
+            <label><input type="radio" name="ma5" value="b"> B) 140, 150, 145, 155, 160</label>
+            <label><input type="radio" name="ma5" value="c"> C) 140, 155, 150, 145, 160</label>
+            <label><input type="radio" name="ma5" value="d"> D) 140, 145, 150, 155, 160</label>
+          </div>
+          <div class="linea-respuesta" id="r-ma5"></div>
+        </div>
+      </div>
+
+      <div class="seccion">
+        <h2>6. En un juego en línea Manuel tiene 63 vidas y regala a su hermana 25 vidas. ¿Cuántas vidas le quedaron a Manuel?</h2>
+        <div class="item">
+          <div class="opciones">
+            <label><input type="radio" name="ma6" value="a"> A) 28 vidas</label>
+            <label><input type="radio" name="ma6" value="b"> B) 38 vidas</label>
+            <label><input type="radio" name="ma6" value="c"> C) 42 vidas</label>
+            <label><input type="radio" name="ma6" value="d"> D) 88 vidas</label>
+          </div>
+          <div class="linea-respuesta" id="r-ma6"></div>
+        </div>
+      </div>
+
+      <div class="seccion">
+        <h2>7. Wilson abre su alcancía y cuenta con RD$575 para ir de compras, su papá le regala RD$360. ¿Cuánto dinero tiene Wilson en total?</h2>
+        <div class="item">
+          <div class="opciones">
+            <label><input type="radio" name="ma7" value="a"> A) RD$8,135</label>
+            <label><input type="radio" name="ma7" value="b"> B) RD$9,135</label>
+            <label><input type="radio" name="ma7" value="c"> C) RD$835</label>
+            <label><input type="radio" name="ma7" value="d"> D) RD$935</label>
+          </div>
+          <div class="linea-respuesta" id="r-ma7"></div>
+        </div>
+      </div>
+
+      <div class="seccion">
+        <h2>8. En un restaurante se sirven 54 mesas, cada mesa tiene 6 platos. ¿Cuántos platos se sirven en total en el restaurante?</h2>
+        <div class="item">
+          <div class="opciones">
+            <label><input type="radio" name="ma8" value="a"> A) 324 platos</label>
+            <label><input type="radio" name="ma8" value="b"> B) 342 platos</label>
+            <label><input type="radio" name="ma8" value="c"> C) 432 platos</label>
+            <label><input type="radio" name="ma8" value="d"> D) 312 platos</label>
+          </div>
+          <div class="linea-respuesta" id="r-ma8"></div>
+        </div>
+      </div>
+
+      <div class="seccion">
+        <h2>9. Escribe la cifra que corresponde a cada valor posicional: 679</h2>
+        <div class="dos-columnas">
+          <div class="item">
+            <p class="enunciado-hueco"><input type="text" id="ma9c" class="small-input"> Centenas</p>
+            <div class="linea-respuesta" id="r-ma9c"></div>
+          </div>
+          <div class="item">
+            <p class="enunciado-hueco"><input type="text" id="ma9d" class="small-input"> Decenas</p>
+            <div class="linea-respuesta" id="r-ma9d"></div>
+          </div>
+          <div class="item">
+            <p class="enunciado-hueco"><input type="text" id="ma9u" class="small-input"> Unidades</p>
+            <div class="linea-respuesta" id="r-ma9u"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="seccion">
+        <h2>10. La escuela de Karla empieza a las 7. Ella llega una hora tarde. ¿A qué hora llega a la escuela?</h2>
+        <div class="item">
+          <div class="opciones">
+            <label><input type="radio" name="ma10" value="a"> A) A las 6</label>
+            <label><input type="radio" name="ma10" value="b"> B) A las 8</label>
+            <label><input type="radio" name="ma10" value="c"> C) A la 1</label>
+            <label><input type="radio" name="ma10" value="d"> D) A las 12</label>
+          </div>
+          <div class="linea-respuesta" id="r-ma10"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="controles">
+      <div class="barra">
+        <button class="btn-principal" onclick="revisarPruebaMatematica()">Enviar</button>
+        <button class="btn-secundario" onclick="volverInicio()">Volver al inicio</button>
+        <button class="btn-secundario" onclick="reiniciarMatematica()">Reiniciar esta prueba</button>
+        <div class="resultado-global" id="resultadoGlobalMatematica">Puntuación: 0 / 15</div>
+      </div>
+    </div>
   </div>
 
-  <!-- MODAL FINAL -->
   <div id="modalFinal" class="modal-fondo oculto">
     <div class="modal">
       <h3>Proceso completado</h3>
@@ -630,18 +798,21 @@
 
   <script>
     const respuestasTexto = {
-      p6: "c",
-      p7: "g",
-      p8: "s",
-      p9: "l",
-      p10: "maestra",
-      p11: "sombrilla",
-      p12: "barco",
-      p13: "mariposa",
-      p17: "astuto",
-      p18: "madrigueras",
-      p19: "cascabel",
-      p20: "solucion"
+      p6: "c", p7: "g", p8: "s", p9: "l",
+      p10: "maestra", p11: "sombrilla", p12: "barco", p13: "mariposa",
+      p17: "astuto", p18: "madrigueras", p19: "cascabel", p20: "solucion"
+    };
+
+    const respuestasMatematica = {
+      ma1a: "46",
+      ma1b: "279",
+      ma1c: "714",
+      ma1d: "23",
+      ma1e: "411",
+      ma1f: "9",
+      ma9c: "6",
+      ma9d: "7",
+      ma9u: "9"
     };
 
     function obtenerPruebaSeleccionada(){
@@ -653,33 +824,26 @@
       const centro = document.getElementById("inicioCentro").value.trim();
       const prueba = obtenerPruebaSeleccionada();
 
-      if(!nombre){
-        alert("Debe digitar el nombre del estudiante.");
-        return;
-      }
-
-      if(!centro){
-        alert("Debe digitar el nombre del centro sede.");
-        return;
-      }
-
-      if(!prueba){
-        alert("Debe seleccionar la prueba que se va a digitar.");
-        return;
-      }
-
-      if(prueba.value === "matematica"){
-        document.getElementById("pantallaInicio").classList.add("oculto");
-        document.getElementById("pantallaMatematica").classList.remove("oculto");
-        return;
-      }
+      if(!nombre){ alert("Debe digitar el nombre del estudiante."); return; }
+      if(!centro){ alert("Debe digitar el nombre del centro sede."); return; }
+      if(!prueba){ alert("Debe seleccionar la prueba que se va a digitar."); return; }
 
       document.getElementById("nombre").value = nombre;
       document.getElementById("centro").value = centro;
+      document.getElementById("nombreMa").value = nombre;
+      document.getElementById("centroMa").value = centro;
 
       document.getElementById("pantallaInicio").classList.add("oculto");
+      document.getElementById("pantallaLengua").classList.add("oculto");
       document.getElementById("pantallaMatematica").classList.add("oculto");
-      document.getElementById("pantallaLengua").classList.remove("oculto");
+
+      if(prueba.value === "lengua"){
+        document.getElementById("pantallaLengua").classList.remove("oculto");
+      } else {
+        document.getElementById("pantallaMatematica").classList.remove("oculto");
+      }
+
+      window.scrollTo({top:0, behavior:"smooth"});
     }
 
     function volverInicio(){
@@ -735,88 +899,36 @@
     }
 
     function obtenerNivelBloque(aciertos, actividad){
-      let texto = "";
-      let clase = "";
-      let nivel = "";
+      let texto = "", clase = "", nivel = "";
 
       if (actividad === 1) {
-        if (aciertos <= 1) {
-          nivel = "Elemental";
-          texto = `Elemental (${aciertos}/5). Discrimina 1 o ninguna palabra.`;
-          clase = "elemental";
-        } else if (aciertos <= 3) {
-          nivel = "Aceptable";
-          texto = `Aceptable (${aciertos}/5). Discrimina 2 o 3 palabras.`;
-          clase = "aceptable";
-        } else {
-          nivel = "Satisfactorio";
-          texto = `Satisfactorio (${aciertos}/5). Discrimina correctamente 4 o 5 palabras.`;
-          clase = "satisfactorio";
-        }
+        if (aciertos <= 1) { nivel = "Elemental"; texto = `Elemental (${aciertos}/5).`; clase = "elemental"; }
+        else if (aciertos <= 3) { nivel = "Aceptable"; texto = `Aceptable (${aciertos}/5).`; clase = "aceptable"; }
+        else { nivel = "Satisfactorio"; texto = `Satisfactorio (${aciertos}/5).`; clase = "satisfactorio"; }
       }
 
       if (actividad === 2) {
-        if (aciertos <= 1) {
-          nivel = "Elemental";
-          texto = `Elemental (${aciertos}/4). Completa correctamente 1 o ninguna palabra.`;
-          clase = "elemental";
-        } else if (aciertos <= 2) {
-          nivel = "Aceptable";
-          texto = `Aceptable (${aciertos}/4). Completa correctamente hasta 2 palabras.`;
-          clase = "aceptable";
-        } else {
-          nivel = "Satisfactorio";
-          texto = `Satisfactorio (${aciertos}/4). Completa correctamente 3 o 4 palabras.`;
-          clase = "satisfactorio";
-        }
+        if (aciertos <= 1) { nivel = "Elemental"; texto = `Elemental (${aciertos}/4).`; clase = "elemental"; }
+        else if (aciertos <= 2) { nivel = "Aceptable"; texto = `Aceptable (${aciertos}/4).`; clase = "aceptable"; }
+        else { nivel = "Satisfactorio"; texto = `Satisfactorio (${aciertos}/4).`; clase = "satisfactorio"; }
       }
 
       if (actividad === 3) {
-        if (aciertos <= 1) {
-          nivel = "Elemental";
-          texto = `Elemental (${aciertos}/4). Forma correctamente 1 o ninguna palabra.`;
-          clase = "elemental";
-        } else if (aciertos === 2) {
-          nivel = "Aceptable";
-          texto = `Aceptable (${aciertos}/4). Forma correctamente 2 palabras.`;
-          clase = "aceptable";
-        } else {
-          nivel = "Satisfactorio";
-          texto = `Satisfactorio (${aciertos}/4). Forma correctamente 3 o 4 palabras.`;
-          clase = "satisfactorio";
-        }
+        if (aciertos <= 1) { nivel = "Elemental"; texto = `Elemental (${aciertos}/4).`; clase = "elemental"; }
+        else if (aciertos === 2) { nivel = "Aceptable"; texto = `Aceptable (${aciertos}/4).`; clase = "aceptable"; }
+        else { nivel = "Satisfactorio"; texto = `Satisfactorio (${aciertos}/4).`; clase = "satisfactorio"; }
       }
 
       if (actividad === 4) {
-        if (aciertos <= 1) {
-          nivel = "Elemental";
-          texto = `Elemental (${aciertos}/4). Responde correctamente 1 o ninguna pregunta.`;
-          clase = "elemental";
-        } else if (aciertos <= 2) {
-          nivel = "Aceptable";
-          texto = `Aceptable (${aciertos}/4). Responde correctamente hasta 2 preguntas.`;
-          clase = "aceptable";
-        } else {
-          nivel = "Satisfactorio";
-          texto = `Satisfactorio (${aciertos}/4). Responde correctamente 3 o 4 preguntas.`;
-          clase = "satisfactorio";
-        }
+        if (aciertos <= 1) { nivel = "Elemental"; texto = `Elemental (${aciertos}/4).`; clase = "elemental"; }
+        else if (aciertos <= 2) { nivel = "Aceptable"; texto = `Aceptable (${aciertos}/4).`; clase = "aceptable"; }
+        else { nivel = "Satisfactorio"; texto = `Satisfactorio (${aciertos}/4).`; clase = "satisfactorio"; }
       }
 
       if (actividad === 5) {
-        if (aciertos <= 1) {
-          nivel = "Elemental";
-          texto = `Elemental (${aciertos}/4). Completa correctamente 1 o ninguna idea.`;
-          clase = "elemental";
-        } else if (aciertos === 2) {
-          nivel = "Aceptable";
-          texto = `Aceptable (${aciertos}/4). Usa correctamente 2 palabras.`;
-          clase = "aceptable";
-        } else {
-          nivel = "Satisfactorio";
-          texto = `Satisfactorio (${aciertos}/4). Usa correctamente 3 o 4 palabras del recuadro.`;
-          clase = "satisfactorio";
-        }
+        if (aciertos <= 1) { nivel = "Elemental"; texto = `Elemental (${aciertos}/4).`; clase = "elemental"; }
+        else if (aciertos === 2) { nivel = "Aceptable"; texto = `Aceptable (${aciertos}/4).`; clase = "aceptable"; }
+        else { nivel = "Satisfactorio"; texto = `Satisfactorio (${aciertos}/4).`; clase = "satisfactorio"; }
       }
 
       return { nivel, texto, clase };
@@ -831,37 +943,14 @@
     function obtenerClasificacionGlobal(resultados){
       const satisfactorios = resultados.filter(r => r.nivel === "Satisfactorio").length;
 
-      if (satisfactorios <= 1) {
-        return {
-          nombre: "Explorador",
-          detalle: `${satisfactorios} bloque(s) en satisfactorio.`,
-          clase: "elemental"
-        };
-      }
-
-      if (satisfactorios <= 3) {
-        return {
-          nombre: "Creador",
-          detalle: `${satisfactorios} bloque(s) en satisfactorio.`,
-          clase: "aceptable"
-        };
-      }
-
-      return {
-        nombre: "Innovador",
-        detalle: `${satisfactorios} bloque(s) en satisfactorio.`,
-        clase: "satisfactorio"
-      };
+      if (satisfactorios <= 1) return { nombre: "Explorador", detalle: `${satisfactorios} bloque(s) en satisfactorio.`, clase: "elemental" };
+      if (satisfactorios <= 3) return { nombre: "Creador", detalle: `${satisfactorios} bloque(s) en satisfactorio.`, clase: "aceptable" };
+      return { nombre: "Innovador", detalle: `${satisfactorios} bloque(s) en satisfactorio.`, clase: "satisfactorio" };
     }
 
-    function revisarPrueba(){
+    function revisarPruebaLengua(){
       let total = 0;
-
-      let bloque1 = 0;
-      let bloque2 = 0;
-      let bloque3 = 0;
-      let bloque4 = 0;
-      let bloque5 = 0;
+      let bloque1 = 0, bloque2 = 0, bloque3 = 0, bloque4 = 0, bloque5 = 0;
 
       bloque1 += revisarRadio("p1", "c", "r-p1");
       bloque1 += revisarRadio("p2", "b", "r-p2");
@@ -906,21 +995,48 @@
       mostrarNivel("bloque4", resultado4);
       mostrarNivel("bloque5", resultado5);
 
-      const clasificacion = obtenerClasificacionGlobal([
-        resultado1, resultado2, resultado3, resultado4, resultado5
-      ]);
-
+      const clasificacion = obtenerClasificacionGlobal([resultado1, resultado2, resultado3, resultado4, resultado5]);
       const clasificacionEl = document.getElementById("clasificacionGlobal");
       clasificacionEl.className = "linea-respuesta " + clasificacion.clase;
       clasificacionEl.textContent = clasificacion.nombre;
-
       document.getElementById("detalleClasificacion").textContent = clasificacion.detalle;
-      document.getElementById("resultadoGlobal").textContent = `Puntuación: ${total} / 21`;
+      document.getElementById("resultadoGlobalLengua").textContent = `Puntuación: ${total} / 21`;
 
       const nombreEstudiante = document.getElementById("nombre").value.trim() || "sin nombre registrado";
       document.getElementById("mensajeModal").textContent =
-        `El estudiante ${nombreEstudiante} pertenece al grupo ${clasificacion.nombre} según el resultado.`;
+        `El estudiante ${nombreEstudiante} pertenece al grupo ${clasificacion.nombre} según el resultado. ¿Qué desea hacer ahora?`;
+      document.getElementById("modalFinal").classList.remove("oculto");
+    }
 
+    function revisarPruebaMatematica(){
+      let total = 0;
+
+      total += revisarTexto("ma1a", respuestasMatematica.ma1a, "r-ma1a");
+      total += revisarTexto("ma1b", respuestasMatematica.ma1b, "r-ma1b");
+      total += revisarTexto("ma1c", respuestasMatematica.ma1c, "r-ma1c");
+      total += revisarTexto("ma1d", respuestasMatematica.ma1d, "r-ma1d");
+      total += revisarTexto("ma1e", respuestasMatematica.ma1e, "r-ma1e");
+      total += revisarTexto("ma1f", respuestasMatematica.ma1f, "r-ma1f");
+
+      total += revisarRadio("ma2", "b", "r-ma2");
+      total += revisarRadio("ma3", "a", "r-ma3");
+      total += revisarRadio("ma4", "d", "r-ma4");
+      total += revisarRadio("ma5", "d", "r-ma5");
+      total += revisarRadio("ma6", "b", "r-ma6");
+      total += revisarRadio("ma7", "d", "r-ma7");
+      total += revisarRadio("ma8", "a", "r-ma8");
+
+      total += revisarTexto("ma9c", respuestasMatematica.ma9c, "r-ma9c");
+      total += revisarTexto("ma9d", respuestasMatematica.ma9d, "r-ma9d");
+      total += revisarTexto("ma9u", respuestasMatematica.ma9u, "r-ma9u");
+
+      total += revisarRadio("ma10", "b", "r-ma10");
+
+      document.getElementById("resultadoGlobalMatematica").textContent = `Puntuación: ${total} / 17`;
+
+      const nombreEstudiante = document.getElementById("nombreMa").value.trim() || "sin nombre registrado";
+      document.getElementById("mensajeModal").textContent =
+        `La prueba de Matemática del estudiante ${nombreEstudiante} fue registrada con una puntuación de ${total} / 17. ¿Qué desea hacer ahora?`;
       document.getElementById("modalFinal").classList.remove("oculto");
     }
 
@@ -928,65 +1044,81 @@
       document.getElementById("modalFinal").classList.add("oculto");
     }
 
-    function limpiarRespuestasPrueba(){
+    function limpiarLengua(){
       document.querySelectorAll('#pantallaLengua input[type="radio"]').forEach(el => el.checked = false);
       document.querySelectorAll('#pantallaLengua input[type="text"]').forEach(el => {
-        if(el.id !== "nombre" && el.id !== "centro"){
-          el.value = "";
-        }
+        if(el.id !== "nombre" && el.id !== "centro"){ el.value = ""; }
       });
-
       document.querySelectorAll('#pantallaLengua [id^="r-p"]').forEach(el => {
         el.className = "linea-respuesta";
         el.textContent = "";
       });
-
       ["bloque1","bloque2","bloque3","bloque4","bloque5"].forEach(id => {
         const el = document.getElementById(id);
         el.className = "linea-respuesta neutra";
         el.textContent = "";
       });
-
       document.getElementById("clasificacionGlobal").className = "linea-respuesta neutra";
       document.getElementById("clasificacionGlobal").textContent = "";
       document.getElementById("detalleClasificacion").textContent = "";
-      document.getElementById("resultadoGlobal").textContent = "Puntuación: 0 / 21";
+      document.getElementById("resultadoGlobalLengua").textContent = "Puntuación: 0 / 21";
     }
 
-    function reiniciarPrueba(){
-      limpiarRespuestasPrueba();
+    function limpiarMatematica(){
+      document.querySelectorAll('#pantallaMatematica input[type="radio"]').forEach(el => el.checked = false);
+      document.querySelectorAll('#pantallaMatematica input[type="text"]').forEach(el => {
+        if(el.id !== "nombreMa" && el.id !== "centroMa"){ el.value = ""; }
+      });
+      document.querySelectorAll('#pantallaMatematica [id^="r-ma"]').forEach(el => {
+        el.className = "linea-respuesta";
+        el.textContent = "";
+      });
+      document.getElementById("resultadoGlobalMatematica").textContent = "Puntuación: 0 / 17";
+    }
+
+    function reiniciarLengua(){
+      limpiarLengua();
+      window.scrollTo({top:0, behavior:"smooth"});
+    }
+
+    function reiniciarMatematica(){
+      limpiarMatematica();
       window.scrollTo({top:0, behavior:"smooth"});
     }
 
     function digitarOtraPrueba(){
       cerrarModal();
-      limpiarRespuestasPrueba();
+      limpiarLengua();
+      limpiarMatematica();
 
-      document.getElementById("inicioNombre").value = document.getElementById("nombre").value;
-      document.getElementById("inicioCentro").value = document.getElementById("centro").value;
+      const nombreActual = document.getElementById("nombre").value || document.getElementById("nombreMa").value;
+      const centroActual = document.getElementById("centro").value || document.getElementById("centroMa").value;
+
+      document.getElementById("inicioNombre").value = nombreActual;
+      document.getElementById("inicioCentro").value = centroActual;
       document.querySelectorAll('input[name="tipoPrueba"]').forEach(el => el.checked = false);
 
       document.getElementById("pantallaLengua").classList.add("oculto");
       document.getElementById("pantallaMatematica").classList.add("oculto");
       document.getElementById("pantallaInicio").classList.remove("oculto");
-      window.scrollTo({top:0, behavior:"smooth"});
     }
 
     function digitarOtroEstudiante(){
       cerrarModal();
-      limpiarRespuestasPrueba();
+      limpiarLengua();
+      limpiarMatematica();
 
       document.getElementById("inicioNombre").value = "";
       document.getElementById("inicioCentro").value = "";
-      document.querySelectorAll('input[name="tipoPrueba"]').forEach(el => el.checked = false);
-
       document.getElementById("nombre").value = "";
       document.getElementById("centro").value = "";
+      document.getElementById("nombreMa").value = "";
+      document.getElementById("centroMa").value = "";
+      document.querySelectorAll('input[name="tipoPrueba"]').forEach(el => el.checked = false);
 
       document.getElementById("pantallaLengua").classList.add("oculto");
       document.getElementById("pantallaMatematica").classList.add("oculto");
       document.getElementById("pantallaInicio").classList.remove("oculto");
-      window.scrollTo({top:0, behavior:"smooth"});
     }
   </script>
 </body>
