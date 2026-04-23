@@ -53,8 +53,8 @@
       position:relative;
       overflow:hidden;
       background:
-        linear-gradient(rgba(255,255,255,.88), rgba(255,255,255,.88)),
-        url("Foto campamento.png") center/cover no-repeat;
+        linear-gradient(rgba(255,255,255,.68), rgba(255,255,255,.78)),
+        url("Foto campamento.png") center top/cover no-repeat;
     }
 
     h1,h2,h3{
@@ -335,6 +335,33 @@
       min-width:260px;
     }
 
+    .logo-inicio{
+      width:140px;
+      height:140px;
+      object-fit:cover;
+      border-radius:16px;
+      border:2px solid #ffffff;
+      box-shadow:0 6px 18px rgba(0,0,0,.18);
+      background:#fff;
+    }
+
+    .cabecera-inicio{
+      display:flex;
+      align-items:center;
+      gap:18px;
+      flex-wrap:wrap;
+      margin-bottom:10px;
+    }
+
+    .cabecera-inicio-texto{
+      flex:1;
+      min-width:240px;
+    }
+
+    .cabecera-inicio-texto h1{
+      margin-bottom:6px;
+    }
+
     @media (max-width:700px){
       .resultado-global{
         margin-left:0;
@@ -346,8 +373,14 @@
 <body>
 
   <div id="pantallaInicio" class="pantalla-inicio">
-    <h1>Registro de pruebas</h1>
-    <p class="nota">Complete los datos antes de iniciar la digitación.</p>
+    <div class="cabecera-inicio">
+      <img src="Foto campamento.png" alt="Logo del campamento" class="logo-inicio">
+
+      <div class="cabecera-inicio-texto">
+        <h1>Registro de pruebas</h1>
+        <p class="nota">Complete los datos antes de iniciar la digitación.</p>
+      </div>
+    </div>
 
     <div class="campo">
       <label for="inicioNombre">Nombre del estudiante</label>
