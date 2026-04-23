@@ -50,6 +50,11 @@
     .pantalla-inicio{
       max-width:760px;
       margin:40px auto;
+      position:relative;
+      overflow:hidden;
+      background:
+        linear-gradient(rgba(255,255,255,.88), rgba(255,255,255,.88)),
+        url("Foto campamento.png") center/cover no-repeat;
     }
 
     h1,h2,h3{
@@ -308,6 +313,28 @@
       margin-top:18px;
     }
 
+    .logo-esquina{
+      width:90px;
+      height:90px;
+      object-fit:cover;
+      border-radius:12px;
+      border:1px solid #d9e2ec;
+      background:#fff;
+      box-shadow:0 4px 10px rgba(0,0,0,.08);
+    }
+
+    .encabezado-con-logo{
+      display:flex;
+      align-items:flex-start;
+      gap:16px;
+      flex-wrap:wrap;
+    }
+
+    .encabezado-texto{
+      flex:1;
+      min-width:260px;
+    }
+
     @media (max-width:700px){
       .resultado-global{
         margin-left:0;
@@ -354,15 +381,20 @@
   <div id="pantallaLengua" class="oculto">
     <div class="contenedor">
       <div class="encabezado">
-        <h1>Instrumento B: Prueba de Lengua Española</h1>
-        <div class="grid-info">
-          <div class="campo">
-            <label for="nombre">Nombre completo del estudiante</label>
-            <input type="text" id="nombre" readonly>
-          </div>
-          <div class="campo">
-            <label for="centro">Centro sede</label>
-            <input type="text" id="centro" readonly>
+        <div class="encabezado-con-logo">
+          <img src="Foto campamento.png" alt="Imagen de apoyo" class="logo-esquina">
+          <div class="encabezado-texto">
+            <h1>Instrumento B: Prueba de Lengua Española</h1>
+            <div class="grid-info">
+              <div class="campo">
+                <label for="nombre">Nombre completo del estudiante</label>
+                <input type="text" id="nombre" readonly>
+              </div>
+              <div class="campo">
+                <label for="centro">Centro sede</label>
+                <input type="text" id="centro" readonly>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -592,15 +624,20 @@
   <div id="pantallaMatematica" class="oculto">
     <div class="contenedor">
       <div class="encabezado">
-        <h1>Prueba de Matemática</h1>
-        <div class="grid-info">
-          <div class="campo">
-            <label for="nombreMa">Nombre completo del estudiante</label>
-            <input type="text" id="nombreMa" readonly>
-          </div>
-          <div class="campo">
-            <label for="centroMa">Centro sede</label>
-            <input type="text" id="centroMa" readonly>
+        <div class="encabezado-con-logo">
+          <img src="Foto campamento.png" alt="Imagen de apoyo" class="logo-esquina">
+          <div class="encabezado-texto">
+            <h1>Prueba de Matemática</h1>
+            <div class="grid-info">
+              <div class="campo">
+                <label for="nombreMa">Nombre completo del estudiante</label>
+                <input type="text" id="nombreMa" readonly>
+              </div>
+              <div class="campo">
+                <label for="centroMa">Centro sede</label>
+                <input type="text" id="centroMa" readonly>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -778,7 +815,7 @@
         <button class="btn-principal" onclick="revisarPruebaMatematica()">Enviar</button>
         <button class="btn-secundario" onclick="volverInicio()">Volver al inicio</button>
         <button class="btn-secundario" onclick="reiniciarMatematica()">Reiniciar esta prueba</button>
-        <div class="resultado-global" id="resultadoGlobalMatematica">Puntuación: 0 / 15</div>
+        <div class="resultado-global" id="resultadoGlobalMatematica">Puntuación: 0 / 17</div>
       </div>
     </div>
   </div>
@@ -824,9 +861,20 @@
       const centro = document.getElementById("inicioCentro").value.trim();
       const prueba = obtenerPruebaSeleccionada();
 
-      if(!nombre){ alert("Debe digitar el nombre del estudiante."); return; }
-      if(!centro){ alert("Debe digitar el nombre del centro sede."); return; }
-      if(!prueba){ alert("Debe seleccionar la prueba que se va a digitar."); return; }
+      if(!nombre){
+        alert("Debe digitar el nombre del estudiante.");
+        return;
+      }
+
+      if(!centro){
+        alert("Debe digitar el nombre del centro sede.");
+        return;
+      }
+
+      if(!prueba){
+        alert("Debe seleccionar la prueba que se va a digitar.");
+        return;
+      }
 
       document.getElementById("nombre").value = nombre;
       document.getElementById("centro").value = centro;
@@ -902,33 +950,83 @@
       let texto = "", clase = "", nivel = "";
 
       if (actividad === 1) {
-        if (aciertos <= 1) { nivel = "Elemental"; texto = `Elemental (${aciertos}/5).`; clase = "elemental"; }
-        else if (aciertos <= 3) { nivel = "Aceptable"; texto = `Aceptable (${aciertos}/5).`; clase = "aceptable"; }
-        else { nivel = "Satisfactorio"; texto = `Satisfactorio (${aciertos}/5).`; clase = "satisfactorio"; }
+        if (aciertos <= 1) {
+          nivel = "Elemental";
+          texto = `Elemental (${aciertos}/5).`;
+          clase = "elemental";
+        } else if (aciertos <= 3) {
+          nivel = "Aceptable";
+          texto = `Aceptable (${aciertos}/5).`;
+          clase = "aceptable";
+        } else {
+          nivel = "Satisfactorio";
+          texto = `Satisfactorio (${aciertos}/5).`;
+          clase = "satisfactorio";
+        }
       }
 
       if (actividad === 2) {
-        if (aciertos <= 1) { nivel = "Elemental"; texto = `Elemental (${aciertos}/4).`; clase = "elemental"; }
-        else if (aciertos <= 2) { nivel = "Aceptable"; texto = `Aceptable (${aciertos}/4).`; clase = "aceptable"; }
-        else { nivel = "Satisfactorio"; texto = `Satisfactorio (${aciertos}/4).`; clase = "satisfactorio"; }
+        if (aciertos <= 1) {
+          nivel = "Elemental";
+          texto = `Elemental (${aciertos}/4).`;
+          clase = "elemental";
+        } else if (aciertos <= 2) {
+          nivel = "Aceptable";
+          texto = `Aceptable (${aciertos}/4).`;
+          clase = "aceptable";
+        } else {
+          nivel = "Satisfactorio";
+          texto = `Satisfactorio (${aciertos}/4).`;
+          clase = "satisfactorio";
+        }
       }
 
       if (actividad === 3) {
-        if (aciertos <= 1) { nivel = "Elemental"; texto = `Elemental (${aciertos}/4).`; clase = "elemental"; }
-        else if (aciertos === 2) { nivel = "Aceptable"; texto = `Aceptable (${aciertos}/4).`; clase = "aceptable"; }
-        else { nivel = "Satisfactorio"; texto = `Satisfactorio (${aciertos}/4).`; clase = "satisfactorio"; }
+        if (aciertos <= 1) {
+          nivel = "Elemental";
+          texto = `Elemental (${aciertos}/4).`;
+          clase = "elemental";
+        } else if (aciertos === 2) {
+          nivel = "Aceptable";
+          texto = `Aceptable (${aciertos}/4).`;
+          clase = "aceptable";
+        } else {
+          nivel = "Satisfactorio";
+          texto = `Satisfactorio (${aciertos}/4).`;
+          clase = "satisfactorio";
+        }
       }
 
       if (actividad === 4) {
-        if (aciertos <= 1) { nivel = "Elemental"; texto = `Elemental (${aciertos}/4).`; clase = "elemental"; }
-        else if (aciertos <= 2) { nivel = "Aceptable"; texto = `Aceptable (${aciertos}/4).`; clase = "aceptable"; }
-        else { nivel = "Satisfactorio"; texto = `Satisfactorio (${aciertos}/4).`; clase = "satisfactorio"; }
+        if (aciertos <= 1) {
+          nivel = "Elemental";
+          texto = `Elemental (${aciertos}/4).`;
+          clase = "elemental";
+        } else if (aciertos <= 2) {
+          nivel = "Aceptable";
+          texto = `Aceptable (${aciertos}/4).`;
+          clase = "aceptable";
+        } else {
+          nivel = "Satisfactorio";
+          texto = `Satisfactorio (${aciertos}/4).`;
+          clase = "satisfactorio";
+        }
       }
 
       if (actividad === 5) {
-        if (aciertos <= 1) { nivel = "Elemental"; texto = `Elemental (${aciertos}/4).`; clase = "elemental"; }
-        else if (aciertos === 2) { nivel = "Aceptable"; texto = `Aceptable (${aciertos}/4).`; clase = "aceptable"; }
-        else { nivel = "Satisfactorio"; texto = `Satisfactorio (${aciertos}/4).`; clase = "satisfactorio"; }
+        if (aciertos <= 1) {
+          nivel = "Elemental";
+          texto = `Elemental (${aciertos}/4).`;
+          clase = "elemental";
+        } else if (aciertos === 2) {
+          nivel = "Aceptable";
+          texto = `Aceptable (${aciertos}/4).`;
+          clase = "aceptable";
+        } else {
+          nivel = "Satisfactorio";
+          texto = `Satisfactorio (${aciertos}/4).`;
+          clase = "satisfactorio";
+        }
       }
 
       return { nivel, texto, clase };
@@ -943,9 +1041,27 @@
     function obtenerClasificacionGlobal(resultados){
       const satisfactorios = resultados.filter(r => r.nivel === "Satisfactorio").length;
 
-      if (satisfactorios <= 1) return { nombre: "Explorador", detalle: `${satisfactorios} bloque(s) en satisfactorio.`, clase: "elemental" };
-      if (satisfactorios <= 3) return { nombre: "Creador", detalle: `${satisfactorios} bloque(s) en satisfactorio.`, clase: "aceptable" };
-      return { nombre: "Innovador", detalle: `${satisfactorios} bloque(s) en satisfactorio.`, clase: "satisfactorio" };
+      if (satisfactorios <= 1) {
+        return {
+          nombre: "Explorador",
+          detalle: `${satisfactorios} bloque(s) en satisfactorio.`,
+          clase: "elemental"
+        };
+      }
+
+      if (satisfactorios <= 3) {
+        return {
+          nombre: "Creador",
+          detalle: `${satisfactorios} bloque(s) en satisfactorio.`,
+          clase: "aceptable"
+        };
+      }
+
+      return {
+        nombre: "Innovador",
+        detalle: `${satisfactorios} bloque(s) en satisfactorio.`,
+        clase: "satisfactorio"
+      };
     }
 
     function revisarPruebaLengua(){
