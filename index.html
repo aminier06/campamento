@@ -694,70 +694,276 @@
       };
     }
 
-    function revisarPrueba(){
-      let total = 0;
+    <script>
+  const respuestasTexto = {
+    p6: "c",
+    p7: "g",
+    p8: "s",
+    p9: "l",
+    p10: "maestra",
+    p11: "sombrilla",
+    p12: "barco",
+    p13: "mariposa",
+    p17: "astuto",
+    p18: "madrigueras",
+    p19: "cascabel",
+    p20: "solucion"
+  };
 
-      let bloque1 = 0;
-      let bloque2 = 0;
-      let bloque3 = 0;
-      let bloque4 = 0;
-      let bloque5 = 0;
+  function normalizar(valor){
+    return (valor || "")
+      .toString()
+      .trim()
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/\s+/g, "");
+  }
 
-      bloque1 += revisarRadio("p1", "c", "r-p1");
-      bloque1 += revisarRadio("p2", "b", "r-p2");
-      bloque1 += revisarRadio("p3", "c", "r-p3");
-      bloque1 += revisarRadio("p4", "c", "r-p4");
-      bloque1 += revisarRadio("p5", "d", "r-p5");
-      total += bloque1;
+  function marcarResultado(idLinea, correcto, mensaje){
+    const linea = document.getElementById(idLinea);
+    linea.className = "linea-respuesta " + (correcto ? "correcta" : "incorrecta");
+    linea.textContent = mensaje;
+  }
 
-      bloque2 += revisarTexto("p6", respuestasTexto.p6, "r-p6");
-      bloque2 += revisarTexto("p7", respuestasTexto.p7, "r-p7");
-      bloque2 += revisarTexto("p8", respuestasTexto.p8, "r-p8");
-      bloque2 += revisarTexto("p9", respuestasTexto.p9, "r-p9");
-      total += bloque2;
+  function revisarRadio(nombre, correcta, idLinea){
+    const seleccionada = document.querySelector(`input[name="${nombre}"]:checked`);
+    if(!seleccionada){
+      marcarResultado(idLinea, false, `No respondida. Respuesta correcta: ${correcta.toUpperCase()}.`);
+      return 0;
+    }
+    if(seleccionada.value === correcta){
+      marcarResultado(idLinea, true, "Correcta.");
+      return 1;
+    }
+    marcarResultado(idLinea, false, `Incorrecta. Respuesta correcta: ${correcta.toUpperCase()}.`);
+    return 0;
+  }
 
-      bloque3 += revisarTexto("p10", respuestasTexto.p10, "r-p10");
-      bloque3 += revisarTexto("p11", respuestasTexto.p11, "r-p11");
-      bloque3 += revisarTexto("p12", respuestasTexto.p12, "r-p12");
-      bloque3 += revisarTexto("p13", respuestasTexto.p13, "r-p13");
-      total += bloque3;
+  function revisarTexto(idCampo, correcta, idLinea){
+    const valor = normalizar(document.getElementById(idCampo).value);
+    const esperado = normalizar(correcta);
+    if(!valor){
+      marcarResultado(idLinea, false, `No respondida. Respuesta correcta: ${correcta}.`);
+      return 0;
+    }
+    if(valor === esperado){
+      marcarResultado(idLinea, true, "Correcta.");
+      return 1;
+    }
+    marcarResultado(idLinea, false, `Incorrecta. Respuesta correcta: ${correcta}.`);
+    return 0;
+  }
 
-      bloque4 += revisarRadio("p14", "b", "r-p14");
-      bloque4 += revisarRadio("p15", "c", "r-p15");
-      bloque4 += revisarRadio("p16", "a", "r-p16");
-      bloque4 += revisarRadio("p17b", "a", "r-p17b");
-      total += bloque4;
+  function obtenerNivelBloque(aciertos, actividad){
+    let texto = "";
+    let clase = "";
+    let nivel = "";
 
-      bloque5 += revisarTexto("p17", respuestasTexto.p17, "r-p17");
-      bloque5 += revisarTexto("p18", respuestasTexto.p18, "r-p18");
-      bloque5 += revisarTexto("p19", respuestasTexto.p19, "r-p19");
-      bloque5 += revisarTexto("p20", respuestasTexto.p20, "r-p20");
-      total += bloque5;
-
-      const resultado1 = obtenerNivelBloque(bloque1, 1);
-      const resultado2 = obtenerNivelBloque(bloque2, 2);
-      const resultado3 = obtenerNivelBloque(bloque3, 3);
-      const resultado4 = obtenerNivelBloque(bloque4, 4);
-      const resultado5 = obtenerNivelBloque(bloque5, 5);
-
-      mostrarNivel("bloque1", resultado1);
-      mostrarNivel("bloque2", resultado2);
-      mostrarNivel("bloque3", resultado3);
-      mostrarNivel("bloque4", resultado4);
-      mostrarNivel("bloque5", resultado5);
-
-      const clasificacion = obtenerClasificacionGlobal([
-        resultado1, resultado2, resultado3, resultado4, resultado5
-      ]);
-
-      const clasificacionEl = document.getElementById("clasificacionGlobal");
-      clasificacionEl.className = "linea-respuesta " + clasificacion.clase;
-      clasificacionEl.textContent = clasificacion.nombre;
-
-      document.getElementById("detalleClasificacion").textContent = clasificacion.detalle;
-      document.getElementById("resultadoGlobal").textContent = `Puntuación: ${total} / 21`;
+    if (actividad === 1) {
+      if (aciertos <= 1) {
+        nivel = "Elemental";
+        texto = `Elemental (${aciertos}/5). Discrimina 1 o ninguna palabra.`;
+        clase = "elemental";
+      } else if (aciertos <= 3) {
+        nivel = "Aceptable";
+        texto = `Aceptable (${aciertos}/5). Discrimina 2 o 3 palabras.`;
+        clase = "aceptable";
+      } else {
+        nivel = "Satisfactorio";
+        texto = `Satisfactorio (${aciertos}/5). Discrimina correctamente 4 o 5 palabras.`;
+        clase = "satisfactorio";
+      }
     }
 
+    if (actividad === 2) {
+      if (aciertos <= 1) {
+        nivel = "Elemental";
+        texto = `Elemental (${aciertos}/4). Completa correctamente 1 o ninguna palabra.`;
+        clase = "elemental";
+      } else if (aciertos <= 2) {
+        nivel = "Aceptable";
+        texto = `Aceptable (${aciertos}/4). Completa correctamente hasta 2 palabras.`;
+        clase = "aceptable";
+      } else {
+        nivel = "Satisfactorio";
+        texto = `Satisfactorio (${aciertos}/4). Completa correctamente 3 o 4 palabras.`;
+        clase = "satisfactorio";
+      }
+    }
+
+    if (actividad === 3) {
+      if (aciertos <= 1) {
+        nivel = "Elemental";
+        texto = `Elemental (${aciertos}/4). Forma correctamente 1 o ninguna palabra.`;
+        clase = "elemental";
+      } else if (aciertos === 2) {
+        nivel = "Aceptable";
+        texto = `Aceptable (${aciertos}/4). Forma correctamente 2 palabras.`;
+        clase = "aceptable";
+      } else {
+        nivel = "Satisfactorio";
+        texto = `Satisfactorio (${aciertos}/4). Forma correctamente 3 o 4 palabras.`;
+        clase = "satisfactorio";
+      }
+    }
+
+    if (actividad === 4) {
+      if (aciertos <= 1) {
+        nivel = "Elemental";
+        texto = `Elemental (${aciertos}/4). Responde correctamente 1 o ninguna pregunta.`;
+        clase = "elemental";
+      } else if (aciertos <= 2) {
+        nivel = "Aceptable";
+        texto = `Aceptable (${aciertos}/4). Responde correctamente hasta 2 preguntas.`;
+        clase = "aceptable";
+      } else {
+        nivel = "Satisfactorio";
+        texto = `Satisfactorio (${aciertos}/4). Responde correctamente 3 o 4 preguntas.`;
+        clase = "satisfactorio";
+      }
+    }
+
+    if (actividad === 5) {
+      if (aciertos <= 1) {
+        nivel = "Elemental";
+        texto = `Elemental (${aciertos}/4). Completa correctamente 1 o ninguna idea.`;
+        clase = "elemental";
+      } else if (aciertos === 2) {
+        nivel = "Aceptable";
+        texto = `Aceptable (${aciertos}/4). Usa correctamente 2 palabras.`;
+        clase = "aceptable";
+      } else {
+        nivel = "Satisfactorio";
+        texto = `Satisfactorio (${aciertos}/4). Usa correctamente 3 o 4 palabras del recuadro.`;
+        clase = "satisfactorio";
+      }
+    }
+
+    return { nivel, texto, clase };
+  }
+
+  function mostrarNivel(id, resultado){
+    const el = document.getElementById(id);
+    el.className = "linea-respuesta " + resultado.clase;
+    el.textContent = resultado.texto;
+  }
+
+  function obtenerClasificacionGlobal(resultados){
+    const satisfactorios = resultados.filter(r => r.nivel === "Satisfactorio").length;
+
+    if (satisfactorios <= 1) {
+      return {
+        nombre: "Explorador",
+        detalle: `${satisfactorios} bloque(s) en satisfactorio.`,
+        clase: "elemental"
+      };
+    }
+
+    if (satisfactorios <= 3) {
+      return {
+        nombre: "Creador",
+        detalle: `${satisfactorios} bloque(s) en satisfactorio.`,
+        clase: "aceptable"
+      };
+    }
+
+    return {
+      nombre: "Innovador",
+      detalle: `${satisfactorios} bloque(s) en satisfactorio.`,
+      clase: "satisfactorio"
+    };
+  }
+
+  function revisarPrueba(){
+    let total = 0;
+
+    let bloque1 = 0;
+    let bloque2 = 0;
+    let bloque3 = 0;
+    let bloque4 = 0;
+    let bloque5 = 0;
+
+    bloque1 += revisarRadio("p1", "c", "r-p1");
+    bloque1 += revisarRadio("p2", "b", "r-p2");
+    bloque1 += revisarRadio("p3", "c", "r-p3");
+    bloque1 += revisarRadio("p4", "c", "r-p4");
+    bloque1 += revisarRadio("p5", "d", "r-p5");
+    total += bloque1;
+
+    bloque2 += revisarTexto("p6", respuestasTexto.p6, "r-p6");
+    bloque2 += revisarTexto("p7", respuestasTexto.p7, "r-p7");
+    bloque2 += revisarTexto("p8", respuestasTexto.p8, "r-p8");
+    bloque2 += revisarTexto("p9", respuestasTexto.p9, "r-p9");
+    total += bloque2;
+
+    bloque3 += revisarTexto("p10", respuestasTexto.p10, "r-p10");
+    bloque3 += revisarTexto("p11", respuestasTexto.p11, "r-p11");
+    bloque3 += revisarTexto("p12", respuestasTexto.p12, "r-p12");
+    bloque3 += revisarTexto("p13", respuestasTexto.p13, "r-p13");
+    total += bloque3;
+
+    bloque4 += revisarRadio("p14", "b", "r-p14");
+    bloque4 += revisarRadio("p15", "c", "r-p15");
+    bloque4 += revisarRadio("p16", "a", "r-p16");
+    bloque4 += revisarRadio("p17b", "a", "r-p17b");
+    total += bloque4;
+
+    bloque5 += revisarTexto("p17", respuestasTexto.p17, "r-p17");
+    bloque5 += revisarTexto("p18", respuestasTexto.p18, "r-p18");
+    bloque5 += revisarTexto("p19", respuestasTexto.p19, "r-p19");
+    bloque5 += revisarTexto("p20", respuestasTexto.p20, "r-p20");
+    total += bloque5;
+
+    const resultado1 = obtenerNivelBloque(bloque1, 1);
+    const resultado2 = obtenerNivelBloque(bloque2, 2);
+    const resultado3 = obtenerNivelBloque(bloque3, 3);
+    const resultado4 = obtenerNivelBloque(bloque4, 4);
+    const resultado5 = obtenerNivelBloque(bloque5, 5);
+
+    mostrarNivel("bloque1", resultado1);
+    mostrarNivel("bloque2", resultado2);
+    mostrarNivel("bloque3", resultado3);
+    mostrarNivel("bloque4", resultado4);
+    mostrarNivel("bloque5", resultado5);
+
+    const clasificacion = obtenerClasificacionGlobal([
+      resultado1, resultado2, resultado3, resultado4, resultado5
+    ]);
+
+    const clasificacionEl = document.getElementById("clasificacionGlobal");
+    clasificacionEl.className = "linea-respuesta " + clasificacion.clase;
+    clasificacionEl.textContent = clasificacion.nombre;
+
+    document.getElementById("detalleClasificacion").textContent = clasificacion.detalle;
+    document.getElementById("resultadoGlobal").textContent = `Puntuación: ${total} / 21`;
+
+    const nombreEstudiante = document.getElementById("nombre").value.trim() || "sin nombre registrado";
+    alert(`El estudiante ${nombreEstudiante} pertenece al grupo ${clasificacion.nombre} según el resultado.`);
+  }
+
+  function reiniciarPrueba(){
+    document.querySelectorAll('input[type="radio"]').forEach(el => el.checked = false);
+    document.querySelectorAll('input[type="text"]').forEach(el => el.value = "");
+
+    document.querySelectorAll('[id^="r-p"]').forEach(el => {
+      el.className = "linea-respuesta";
+      el.textContent = "";
+    });
+
+    ["bloque1","bloque2","bloque3","bloque4","bloque5"].forEach(id => {
+      const el = document.getElementById(id);
+      el.className = "linea-respuesta neutra";
+      el.textContent = "";
+    });
+
+    document.getElementById("clasificacionGlobal").className = "linea-respuesta neutra";
+    document.getElementById("clasificacionGlobal").textContent = "";
+    document.getElementById("detalleClasificacion").textContent = "";
+    document.getElementById("resultadoGlobal").textContent = "Puntuación: 0 / 21";
+    window.scrollTo({top:0, behavior:"smooth"});
+  }
+</script>
     function reiniciarPrueba(){
       document.querySelectorAll('input[type="radio"]').forEach(el => el.checked = false);
       document.querySelectorAll('input[type="text"]').forEach(el => el.value = "");
