@@ -3,117 +3,1545 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Registro de pruebas - Campamento 2026</title>
+  <title>Registro de pruebas</title>
   <style>
-    :root{--azul:#0f4c81;--azul-claro:#eaf3fb;--verde:#1b8f4d;--rojo:#c0392b;--naranja:#c97a00;--gris:#6b7280;--borde:#d9e2ec;--fondo:#f7f9fc;--blanco:#fff;--sombra:0 4px 14px rgba(0,0,0,.05)}
-    *{box-sizing:border-box} body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--fondo);color:#1f2937;line-height:1.45}.oculto{display:none!important}.contenedor{max-width:1100px;margin:24px auto;padding:0 16px 45px}.encabezado,.seccion,.pantalla-inicio{background:var(--blanco);border:1px solid var(--borde);border-radius:16px;padding:24px;margin-bottom:18px;box-shadow:var(--sombra)}.pantalla-inicio{max-width:760px;margin:40px auto;position:relative;overflow:hidden;background:linear-gradient(rgba(255,255,255,.72),rgba(255,255,255,.82)),url("Foto campamento.png") center top/cover no-repeat}h1,h2,h3{color:var(--azul);margin-top:0}.grid-info,.dos-columnas,.tabla-bloques{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}.campo{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}label{font-weight:700}input[type="text"]{width:100%;padding:10px 12px;border:1px solid #cfd8e3;border-radius:10px;font-size:15px;background:#fff}.grupo-opciones{display:grid;gap:12px;margin-top:12px}.opcion-prueba{border:1px solid #cfd8e3;border-radius:12px;padding:14px;display:flex;align-items:center;gap:10px;background:#fff}.ayuda{background:var(--azul-claro);border-left:4px solid var(--azul);padding:10px 12px;border-radius:8px;margin:10px 0 16px}.item{padding:14px;border:1px solid #e5e7eb;border-radius:12px;margin:12px 0;background:#fcfdff}.item p{margin:0 0 10px;font-weight:700}.opciones label{display:block;font-weight:400;margin:7px 0;cursor:pointer}.linea-respuesta{margin-top:10px;font-size:14px;font-weight:700;min-height:20px}.correcta{color:var(--verde)}.incorrecta{color:var(--rojo)}.neutra{color:var(--gris)}.elemental{color:var(--rojo)}.aceptable{color:var(--naranja)}.satisfactorio{color:var(--verde)}.fila-palabras{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin:10px 0}.caja-palabra{padding:12px;background:#f8fafc;border:1px dashed #cbd5e1;border-radius:12px}.caja-palabra strong{display:block;margin-bottom:8px;color:#334e68}.controles{position:sticky;bottom:0;background:rgba(247,249,252,.96);backdrop-filter:blur(8px);border-top:1px solid var(--borde);padding:16px 0 0;margin-top:12px}.barra{max-width:1100px;margin:0 auto;padding:0 16px 12px;display:flex;gap:12px;flex-wrap:wrap;align-items:center}button{border:none;border-radius:12px;padding:12px 18px;font-size:15px;font-weight:700;cursor:pointer}.btn-principal{background:var(--azul);color:#fff}.btn-secundario{background:#e5e7eb;color:#111827}.btn-exito{background:var(--verde);color:#fff}.resultado-global{margin-left:auto;background:#fff;border:1px solid var(--borde);border-radius:12px;padding:10px 14px;min-width:240px;font-weight:700}.nota{margin-top:8px;font-size:14px;color:#52606d}.enunciado-hueco{font-size:18px;font-weight:700;letter-spacing:.3px;margin:8px 0}.enunciado-hueco input{width:110px;display:inline-block;margin:0 6px;text-align:center;font-weight:700;vertical-align:middle}.small-input{max-width:90px;text-align:center;font-weight:700;vertical-align:middle}.modal-fondo{position:fixed;inset:0;background:rgba(0,0,0,.45);display:flex;align-items:center;justify-content:center;padding:20px;z-index:9999}.modal{width:min(620px,100%);background:#fff;border-radius:18px;padding:24px;box-shadow:0 12px 30px rgba(0,0,0,.18)}.acciones-modal{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}.logo-esquina{width:90px;height:90px;object-fit:cover;border-radius:12px;border:1px solid #d9e2ec;background:#fff}.encabezado-con-logo{display:flex;align-items:flex-start;gap:16px;flex-wrap:wrap}.encabezado-texto{flex:1;min-width:260px}.logo-inicio{width:140px;height:140px;object-fit:cover;border-radius:16px;border:2px solid #fff;box-shadow:0 6px 18px rgba(0,0,0,.18);background:#fff}.cabecera-inicio{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-bottom:10px}.cabecera-inicio-texto{flex:1;min-width:240px}.resumen{background:#fff;border:1px solid var(--borde);border-radius:12px;padding:14px}.resumen h3{margin-bottom:6px}@media(max-width:700px){.resultado-global{margin-left:0;width:100%}}
+    :root{
+      --azul:#0f4c81;
+      --azul-claro:#eaf3fb;
+      --verde:#1b8f4d;
+      --rojo:#c0392b;
+      --naranja:#c97a00;
+      --gris:#6b7280;
+      --borde:#d9e2ec;
+      --fondo:#f7f9fc;
+      --blanco:#ffffff;
+      --sombra:0 4px 14px rgba(0,0,0,.04);
+    }
+
+    *{box-sizing:border-box}
+
+    body{
+      margin:0;
+      font-family:Arial, Helvetica, sans-serif;
+      background:var(--fondo);
+      color:#1f2937;
+      line-height:1.45;
+    }
+
+    .oculto{display:none !important;}
+
+    .contenedor{
+      max-width:1100px;
+      margin:24px auto;
+      padding:0 16px 40px;
+    }
+
+    .encabezado,
+    .seccion,
+    .pantalla-inicio{
+      background:var(--blanco);
+      border:1px solid var(--borde);
+      border-radius:16px;
+      padding:24px;
+      margin-bottom:18px;
+      box-shadow:var(--sombra);
+    }
+
+    .pantalla-inicio{
+      max-width:760px;
+      margin:40px auto;
+      position:relative;
+      overflow:hidden;
+      background:
+        linear-gradient(rgba(255,255,255,.68), rgba(255,255,255,.78)),
+        url("Foto campamento.png") center top/cover no-repeat;
+    }
+
+    h1,h2,h3{
+      color:var(--azul);
+      margin-top:0;
+    }
+
+    .grid-info,
+    .dos-columnas,
+    .tabla-bloques{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(280px,1fr));
+      gap:16px;
+    }
+
+    .campo{
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+      margin-bottom:14px;
+    }
+
+    label{
+      font-weight:700;
+    }
+
+    input[type="text"]{
+      width:100%;
+      padding:10px 12px;
+      border:1px solid #cfd8e3;
+      border-radius:10px;
+      font-size:15px;
+      background:#fff;
+    }
+
+    .grupo-opciones{
+      display:grid;
+      gap:12px;
+      margin-top:12px;
+    }
+
+    .opcion-prueba{
+      border:1px solid #cfd8e3;
+      border-radius:12px;
+      padding:14px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      background:#fff;
+    }
+
+    .opcion-prueba input[type="radio"]{
+      transform:scale(1.15);
+    }
+
+    .opcion-prueba small{
+      color:var(--gris);
+      display:block;
+      margin-top:2px;
+    }
+
+    .ayuda{
+      background:var(--azul-claro);
+      border-left:4px solid var(--azul);
+      padding:10px 12px;
+      border-radius:8px;
+      margin:10px 0 16px;
+    }
+
+    .item{
+      padding:14px;
+      border:1px solid #e5e7eb;
+      border-radius:12px;
+      margin:12px 0;
+      background:#fcfdff;
+    }
+
+    .item p{
+      margin:0 0 10px;
+      font-weight:700;
+    }
+
+    .opciones label{
+      display:block;
+      font-weight:400;
+      margin:7px 0;
+      cursor:pointer;
+    }
+
+    .linea-respuesta{
+      margin-top:10px;
+      font-size:14px;
+      font-weight:700;
+      min-height:20px;
+    }
+
+    .correcta{ color:var(--verde); }
+    .incorrecta{ color:var(--rojo); }
+    .neutra{ color:var(--gris); }
+    .elemental{ color:var(--rojo); }
+    .aceptable{ color:var(--naranja); }
+    .satisfactorio{ color:var(--verde); }
+
+    .fila-palabras{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(180px,1fr));
+      gap:14px;
+      margin:10px 0;
+    }
+
+    .caja-palabra{
+      padding:12px;
+      background:#f8fafc;
+      border:1px dashed #cbd5e1;
+      border-radius:12px;
+    }
+
+    .caja-palabra strong{
+      display:block;
+      margin-bottom:8px;
+      color:#334e68;
+    }
+
+    .controles{
+      position:sticky;
+      bottom:0;
+      background:rgba(247,249,252,.95);
+      backdrop-filter:blur(8px);
+      border-top:1px solid var(--borde);
+      padding:16px 0 0;
+      margin-top:12px;
+    }
+
+    .barra{
+      max-width:1100px;
+      margin:0 auto;
+      padding:0 16px 12px;
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+
+    button{
+      border:none;
+      border-radius:12px;
+      padding:12px 18px;
+      font-size:15px;
+      font-weight:700;
+      cursor:pointer;
+    }
+
+    .btn-principal{
+      background:var(--azul);
+      color:#fff;
+    }
+
+    .btn-secundario{
+      background:#e5e7eb;
+      color:#111827;
+    }
+
+    .btn-exito{
+      background:var(--verde);
+      color:#fff;
+    }
+
+    .resultado-global{
+      margin-left:auto;
+      background:#fff;
+      border:1px solid var(--borde);
+      border-radius:12px;
+      padding:10px 14px;
+      min-width:240px;
+      font-weight:700;
+    }
+
+    .nota{
+      margin-top:8px;
+      font-size:14px;
+      color:#52606d;
+    }
+
+    .enunciado-hueco{
+      font-size:18px;
+      font-weight:700;
+      letter-spacing:.3px;
+      margin:8px 0;
+    }
+
+    .enunciado-hueco input{
+      width:110px;
+      display:inline-block;
+      margin:0 6px;
+      text-align:center;
+      font-weight:700;
+      vertical-align:middle;
+    }
+
+    .small-input{
+      max-width:90px;
+      text-align:center;
+      font-weight:700;
+      vertical-align:middle;
+    }
+
+    .ops-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(180px,1fr));
+      gap:14px;
+    }
+
+    .op-card{
+      border:1px dashed #cbd5e1;
+      border-radius:12px;
+      padding:12px;
+      background:#f8fafc;
+    }
+
+    .op-card .expr{
+      font-size:24px;
+      line-height:1.2;
+      white-space:pre-line;
+      font-weight:700;
+      margin-bottom:8px;
+    }
+
+    .modal-fondo{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.45);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+      z-index:9999;
+    }
+
+    .modal{
+      width:min(560px, 100%);
+      background:#fff;
+      border-radius:18px;
+      padding:24px;
+      box-shadow:0 12px 30px rgba(0,0,0,.18);
+    }
+
+    .modal h3{
+      margin-top:0;
+      margin-bottom:10px;
+    }
+
+    .acciones-modal{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:18px;
+    }
+
+    .logo-esquina{
+      width:90px;
+      height:90px;
+      object-fit:cover;
+      border-radius:12px;
+      border:1px solid #d9e2ec;
+      background:#fff;
+      box-shadow:0 4px 10px rgba(0,0,0,.08);
+    }
+
+    .encabezado-con-logo{
+      display:flex;
+      align-items:flex-start;
+      gap:16px;
+      flex-wrap:wrap;
+    }
+
+    .encabezado-texto{
+      flex:1;
+      min-width:260px;
+    }
+
+    .logo-inicio{
+      width:140px;
+      height:140px;
+      object-fit:cover;
+      border-radius:16px;
+      border:2px solid #ffffff;
+      box-shadow:0 6px 18px rgba(0,0,0,.18);
+      background:#fff;
+    }
+
+    .cabecera-inicio{
+      display:flex;
+      align-items:center;
+      gap:18px;
+      flex-wrap:wrap;
+      margin-bottom:10px;
+    }
+
+    .cabecera-inicio-texto{
+      flex:1;
+      min-width:240px;
+    }
+
+    .cabecera-inicio-texto h1{
+      margin-bottom:6px;
+    }
+
+    @media (max-width:700px){
+      .resultado-global{
+        margin-left:0;
+        width:100%;
+      }
+    }
   </style>
 </head>
 <body>
+
   <div id="pantallaInicio" class="pantalla-inicio">
-    <div class="cabecera-inicio"><img src="Foto campamento.png" alt="Logo" class="logo-inicio"><div class="cabecera-inicio-texto"><h1>Registro de pruebas</h1><p class="nota">Complete los datos antes de iniciar la digitación.</p></div></div>
-    <div class="campo"><label for="inicioNombre">Nombre del estudiante</label><input type="text" id="inicioNombre" placeholder="Escriba el nombre del estudiante"></div>
-    <div class="campo"><label for="inicioCentro">Nombre del centro sede</label><input type="text" id="inicioCentro" placeholder="Escriba el nombre del centro sede"></div>
-    <div class="campo"><label>Seleccione la prueba</label><div class="grupo-opciones"><label class="opcion-prueba"><input type="radio" name="tipoPrueba" value="lengua"> <span><strong>Lengua Española</strong></span></label><label class="opcion-prueba"><input type="radio" name="tipoPrueba" value="matematica"> <span><strong>Matemática</strong></span></label></div></div>
+    <div class="cabecera-inicio">
+      <img src="Foto campamento.png" alt="Logo del campamento" class="logo-inicio">
+
+      <div class="cabecera-inicio-texto">
+        <h1>Registro de pruebas</h1>
+        <p class="nota">Complete los datos antes de iniciar la digitación.</p>
+      </div>
+    </div>
+
+    <div class="campo">
+      <label for="inicioID">ID del estudiante</label>
+      <input type="text" id="inicioID" placeholder="Escriba el ID del estudiante" onblur="buscarEstudianteDesdeInicio(false)">
+      <button type="button" class="btn-secundario" onclick="buscarEstudianteDesdeInicio(true)">Buscar estudiante</button>
+      <div class="linea-respuesta neutra" id="estadoBusqueda"></div>
+    </div>
+
+    <div class="campo">
+      <label for="inicioNombre">Nombre del estudiante</label>
+      <input type="text" id="inicioNombre" placeholder="Se completará automáticamente al colocar el ID" readonly>
+    </div>
+
+    <div class="campo">
+      <label for="inicioCentro">Nombre del centro sede</label>
+      <input type="text" id="inicioCentro" placeholder="Escriba el nombre del centro sede">
+    </div>
+
+    <div class="campo">
+      <label>Seleccione la prueba</label>
+      <div class="grupo-opciones">
+        <label class="opcion-prueba">
+          <input type="radio" name="tipoPrueba" value="lengua">
+          <span><strong>Lengua Española</strong></span>
+        </label>
+
+        <label class="opcion-prueba">
+          <input type="radio" name="tipoPrueba" value="matematica">
+          <span><strong>Matemática</strong></span>
+        </label>
+      </div>
+    </div>
+
     <button class="btn-principal" onclick="iniciarProceso()">Continuar</button>
   </div>
 
-  <div id="pantallaLengua" class="oculto"><div class="contenedor">
-    <div class="encabezado"><div class="encabezado-con-logo"><img src="Foto campamento.png" alt="Imagen" class="logo-esquina"><div class="encabezado-texto"><h1>Prueba de Lengua Española</h1><div class="grid-info"><div class="campo"><label>Nombre completo del estudiante</label><input type="text" id="nombre" readonly></div><div class="campo"><label>Centro sede</label><input type="text" id="centro" readonly></div></div></div></div></div>
+  <!-- LENGUA -->
+  <div id="pantallaLengua" class="oculto">
+    <div class="contenedor">
+      <div class="encabezado">
+        <div class="encabezado-con-logo">
+          <img src="Foto campamento.png" alt="Imagen de apoyo" class="logo-esquina">
+          <div class="encabezado-texto">
+            <h1>Instrumento B: Prueba de Lengua Española</h1>
+            <div class="grid-info">
+              <div class="campo">
+                <label for="nombre">Nombre completo del estudiante</label>
+                <input type="text" id="nombre" readonly>
+              </div>
+              <div class="campo">
+                <label for="idEstudiante">ID del estudiante</label>
+                <input type="text" id="idEstudiante" readonly>
+              </div>
+              <div class="campo">
+                <label for="centro">Centro sede</label>
+                <input type="text" id="centro" readonly>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-    <div class="seccion"><h2>Actividad 1. Escucha y selecciona la palabra correcta</h2><div class="ayuda">El docente pronuncia cada palabra una sola vez.</div>
-      <div class="item"><p>1. Selecciona la opción correcta.</p><div class="opciones"><label><input type="radio" name="p1" value="a"> a) abejas</label><label><input type="radio" name="p1" value="b"> b) almejas</label><label><input type="radio" name="p1" value="c"> c) manejas</label><label><input type="radio" name="p1" value="d"> d) arvejas</label></div><div class="linea-respuesta" id="r-p1"></div></div>
-      <div class="item"><p>2. Selecciona la opción correcta.</p><div class="opciones"><label><input type="radio" name="p2" value="a"> a) piel</label><label><input type="radio" name="p2" value="b"> b) fiel</label><label><input type="radio" name="p2" value="c"> c) miel</label><label><input type="radio" name="p2" value="d"> d) riel</label></div><div class="linea-respuesta" id="r-p2"></div></div>
-      <div class="item"><p>3. Selecciona la opción correcta.</p><div class="opciones"><label><input type="radio" name="p3" value="a"> a) ciruela</label><label><input type="radio" name="p3" value="b"> b) muela</label><label><input type="radio" name="p3" value="c"> c) abuela</label><label><input type="radio" name="p3" value="d"> d) escuela</label></div><div class="linea-respuesta" id="r-p3"></div></div>
-      <div class="ayuda">Ahora escucharás palabras que no tienen significado.</div>
-      <div class="item"><p>4. Selecciona la opción correcta.</p><div class="opciones"><label><input type="radio" name="p4" value="a"> a) Lomipe</label><label><input type="radio" name="p4" value="b"> b) Lapimo</label><label><input type="radio" name="p4" value="c"> c) Lemipo</label><label><input type="radio" name="p4" value="d"> d) lopame</label></div><div class="linea-respuesta" id="r-p4"></div></div>
-      <div class="item"><p>5. Selecciona la opción correcta.</p><div class="opciones"><label><input type="radio" name="p5" value="a"> a) trusal</label><label><input type="radio" name="p5" value="b"> b) trisa</label><label><input type="radio" name="p5" value="c"> c) tursal</label><label><input type="radio" name="p5" value="d"> d) turusa</label></div><div class="linea-respuesta" id="r-p5"></div></div>
+      <div class="seccion">
+        <h2>1. Escucha y selecciona la palabra correcta</h2>
+
+        <div class="item">
+          <p>1. Selecciona la opción correcta.</p>
+          <div class="opciones">
+            <label><input type="radio" name="p1" value="a"> a) moto</label>
+            <label><input type="radio" name="p1" value="b"> b) mata</label>
+            <label><input type="radio" name="p1" value="c"> c) moco</label>
+            <label><input type="radio" name="p1" value="d"> d) mono</label>
+          </div>
+          <div class="linea-respuesta" id="r-p1"></div>
+        </div>
+
+        <div class="item">
+          <p>2. Selecciona la opción correcta.</p>
+          <div class="opciones">
+            <label><input type="radio" name="p2" value="a"> a) pluma</label>
+            <label><input type="radio" name="p2" value="b"> b) paloma</label>
+            <label><input type="radio" name="p2" value="c"> c) palona</label>
+            <label><input type="radio" name="p2" value="d"> d) palloma</label>
+          </div>
+          <div class="linea-respuesta" id="r-p2"></div>
+        </div>
+
+        <div class="item">
+          <p>3. Selecciona la opción correcta.</p>
+          <div class="opciones">
+            <label><input type="radio" name="p3" value="a"> a) cocodilo</label>
+            <label><input type="radio" name="p3" value="b"> b) cocobrilo</label>
+            <label><input type="radio" name="p3" value="c"> c) cocodrilo</label>
+            <label><input type="radio" name="p3" value="d"> d) cocolilo</label>
+          </div>
+          <div class="linea-respuesta" id="r-p3"></div>
+        </div>
+
+        <div class="ayuda">Ahora escucharás palabras que no tienen significado. Presta mucha atención. En cada fila, selecciona la opción correcta.</div>
+
+        <div class="item">
+          <p>4. Selecciona la opción correcta.</p>
+          <div class="opciones">
+            <label><input type="radio" name="p4" value="a"> a) Lomipe</label>
+            <label><input type="radio" name="p4" value="b"> b) Lapimo</label>
+            <label><input type="radio" name="p4" value="c"> c) Lemipo</label>
+            <label><input type="radio" name="p4" value="d"> d) Lopame</label>
+          </div>
+          <div class="linea-respuesta" id="r-p4"></div>
+        </div>
+
+        <div class="item">
+          <p>5. Selecciona la opción correcta.</p>
+          <div class="opciones">
+            <label><input type="radio" name="p5" value="a"> a) trusal</label>
+            <label><input type="radio" name="p5" value="b"> b) trisa</label>
+            <label><input type="radio" name="p5" value="c"> c) tursal</label>
+            <label><input type="radio" name="p5" value="d"> d) turusal</label>
+          </div>
+          <div class="linea-respuesta" id="r-p5"></div>
+        </div>
+      </div>
+
+      <div class="seccion">
+        <h2>2. Completa los nombres de las palabras</h2>
+        <div class="ayuda">Escribe la letra que falta en cada palabra, usando letras del recuadro original: c, l, n, g, s, r, k, m.</div>
+
+        <div class="dos-columnas">
+          <div class="item">
+            <p class="enunciado-hueco">1. <input type="text" id="p6" maxlength="2" class="small-input">asa</p>
+            <div class="linea-respuesta" id="r-p6"></div>
+          </div>
+          <div class="item">
+            <p class="enunciado-hueco">2. ti<input type="text" id="p7" maxlength="2" class="small-input">re</p>
+            <div class="linea-respuesta" id="r-p7"></div>
+          </div>
+          <div class="item">
+            <p class="enunciado-hueco">3. e<input type="text" id="p8" maxlength="2" class="small-input">cuela</p>
+            <div class="linea-respuesta" id="r-p8"></div>
+          </div>
+          <div class="item">
+            <p class="enunciado-hueco">4. pa<input type="text" id="p9" maxlength="2" class="small-input">oma</p>
+            <div class="linea-respuesta" id="r-p9"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="seccion">
+        <h2>3. Organiza correctamente las sílabas</h2>
+        <div class="fila-palabras">
+          <div class="caja-palabra">
+            <strong>1. tra - es - ma</strong>
+            <p class="enunciado-hueco"><input type="text" id="p10"></p>
+            <div class="linea-respuesta" id="r-p10"></div>
+          </div>
+          <div class="caja-palabra">
+            <strong>2. bri - lla - som</strong>
+            <p class="enunciado-hueco"><input type="text" id="p11"></p>
+            <div class="linea-respuesta" id="r-p11"></div>
+          </div>
+          <div class="caja-palabra">
+            <strong>3. co - bar</strong>
+            <p class="enunciado-hueco"><input type="text" id="p12"></p>
+            <div class="linea-respuesta" id="r-p12"></div>
+          </div>
+          <div class="caja-palabra">
+            <strong>4. po - sa - ri - ma</strong>
+            <p class="enunciado-hueco"><input type="text" id="p13"></p>
+            <div class="linea-respuesta" id="r-p13"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="seccion">
+        <h2>4. Lee el texto y responde</h2>
+        <div class="ayuda">Texto base: <strong>El gato y los ratones</strong>.</div>
+
+        <div class="item">
+          <p>1. ¿Cuál es el nombre del gato?</p>
+          <div class="opciones">
+            <label><input type="radio" name="p14" value="a"> a) Ronald</label>
+            <label><input type="radio" name="p14" value="b"> b) Rodilardo</label>
+            <label><input type="radio" name="p14" value="c"> c) Rolando</label>
+          </div>
+          <div class="linea-respuesta" id="r-p14"></div>
+        </div>
+
+        <div class="item">
+          <p>2. ¿Quiénes estaban asustados por la presencia del gato?</p>
+          <div class="opciones">
+            <label><input type="radio" name="p15" value="a"> a) Solo las ratas</label>
+            <label><input type="radio" name="p15" value="b"> b) Solo los ratones</label>
+            <label><input type="radio" name="p15" value="c"> c) Las ratas y los ratones</label>
+          </div>
+          <div class="linea-respuesta" id="r-p15"></div>
+        </div>
+
+        <div class="item">
+          <p>3. ¿Por qué nadie quiso ponerle el cascabel al gato?</p>
+          <div class="opciones">
+            <label><input type="radio" name="p16" value="a"> a) Porque tenían miedo de ser atrapados por el gato</label>
+            <label><input type="radio" name="p16" value="b"> b) Porque no sabían dónde estaba el cascabel</label>
+            <label><input type="radio" name="p16" value="c"> c) Porque el gato estaba dormido todo el tiempo</label>
+          </div>
+          <div class="linea-respuesta" id="r-p16"></div>
+        </div>
+
+        <div class="item">
+          <p>4. ¿Qué cualidad necesitaría el ratón para ponerle el cascabel al gato?</p>
+          <div class="opciones">
+            <label><input type="radio" name="p17b" value="a"> a) valentía</label>
+            <label><input type="radio" name="p17b" value="b"> b) belleza</label>
+            <label><input type="radio" name="p17b" value="c"> c) miedo</label>
+          </div>
+          <div class="linea-respuesta" id="r-p17b"></div>
+        </div>
+      </div>
+
+      <div class="seccion">
+        <h2>5. Completa cada una de las siguientes ideas utilizando las palabras del recuadro</h2>
+        <div class="ayuda">solución / cascabel / madrigueras / astuto</div>
+
+        <div class="item">
+          <p class="enunciado-hueco">1. El gato es muy <input type="text" id="p17">.</p>
+          <div class="linea-respuesta" id="r-p17"></div>
+        </div>
+        <div class="item">
+          <p class="enunciado-hueco">2. El gato se dedicaba a vigilar las <input type="text" id="p18">.</p>
+          <div class="linea-respuesta" id="r-p18"></div>
+        </div>
+        <div class="item">
+          <p class="enunciado-hueco">3. ¿Quién le pondría el <input type="text" id="p19"> al gato?</p>
+          <div class="linea-respuesta" id="r-p19"></div>
+        </div>
+        <div class="item">
+          <p class="enunciado-hueco">4. Los ratones y ratas se reunieron para buscar una <input type="text" id="p20">.</p>
+          <div class="linea-respuesta" id="r-p20"></div>
+        </div>
+      </div>
+
+      <div class="seccion">
+        <h2>Resultado de la evaluación</h2>
+        <div class="item">
+          <p><strong>Clasificación global del estudiante</strong></p>
+          <div class="linea-respuesta neutra" id="clasificacionGlobal"></div>
+          <div class="nota" id="detalleClasificacion"></div>
+        </div>
+
+        <div class="tabla-bloques">
+          <div class="item">
+            <p><strong>Bloque 1. Discrimina sonidos con correspondencia</strong></p>
+            <div class="linea-respuesta neutra" id="bloque1"></div>
+          </div>
+          <div class="item">
+            <p><strong>Bloque 2. Completa palabras con fonemas adecuados</strong></p>
+            <div class="linea-respuesta neutra" id="bloque2"></div>
+          </div>
+          <div class="item">
+            <p><strong>Bloque 3. Organiza sílabas para formar palabras</strong></p>
+            <div class="linea-respuesta neutra" id="bloque3"></div>
+          </div>
+          <div class="item">
+            <p><strong>Bloque 4. Comprende información explícita e implícita</strong></p>
+            <div class="linea-respuesta neutra" id="bloque4"></div>
+          </div>
+          <div class="item">
+            <p><strong>Bloque 5. Completa ideas con vocabulario pertinente</strong></p>
+            <div class="linea-respuesta neutra" id="bloque5"></div>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <div class="seccion"><h2>Actividad 2. Completa los nombres de las palabras</h2><div class="ayuda">Usa letras del recuadro: c, l, n, g, s, r, k, m.</div><div class="dos-columnas">
-      <div class="item"><p class="enunciado-hueco">1. <input type="text" id="p6" maxlength="2" class="small-input">asa</p><div class="linea-respuesta" id="r-p6"></div></div>
-      <div class="item"><p class="enunciado-hueco">2. ti<input type="text" id="p7" maxlength="2" class="small-input">re</p><div class="linea-respuesta" id="r-p7"></div></div>
-      <div class="item"><p class="enunciado-hueco">3. e<input type="text" id="p8" maxlength="2" class="small-input">cuela</p><div class="linea-respuesta" id="r-p8"></div></div>
-      <div class="item"><p class="enunciado-hueco">4. pa<input type="text" id="p9" maxlength="2" class="small-input">oma</p><div class="linea-respuesta" id="r-p9"></div></div>
-    </div></div>
+    <div class="controles">
+      <div class="barra">
+        <button class="btn-principal" onclick="revisarPruebaLengua()">Enviar</button>
+        <button class="btn-secundario" onclick="volverInicio()">Volver al inicio</button>
+        <button class="btn-secundario" onclick="reiniciarLengua()">Reiniciar esta prueba</button>
+        <div class="resultado-global" id="resultadoGlobalLengua">Puntuación: 0 / 21</div>
+      </div>
+    </div>
+  </div>
 
-    <div class="seccion"><h2>Actividad 3. Organiza correctamente las sílabas</h2><div class="fila-palabras">
-      <div class="caja-palabra"><strong>1. ma - es - tra</strong><input type="text" id="p10"><div class="linea-respuesta" id="r-p10"></div></div>
-      <div class="caja-palabra"><strong>2. som - bri - lla</strong><input type="text" id="p11"><div class="linea-respuesta" id="r-p11"></div></div>
-      <div class="caja-palabra"><strong>3. bar - co</strong><input type="text" id="p12"><div class="linea-respuesta" id="r-p12"></div></div>
-      <div class="caja-palabra"><strong>4. ma - ri - po - sa</strong><input type="text" id="p13"><div class="linea-respuesta" id="r-p13"></div></div>
-    </div></div>
+  <!-- MATEMATICA -->
+  <div id="pantallaMatematica" class="oculto">
+    <div class="contenedor">
+      <div class="encabezado">
+        <div class="encabezado-con-logo">
+          <img src="Foto campamento.png" alt="Imagen de apoyo" class="logo-esquina">
+          <div class="encabezado-texto">
+            <h1>Prueba de Matemática</h1>
+            <div class="grid-info">
+              <div class="campo">
+                <label for="nombreMa">Nombre completo del estudiante</label>
+                <input type="text" id="nombreMa" readonly>
+              </div>
+              <div class="campo">
+                <label for="idEstudianteMa">ID del estudiante</label>
+                <input type="text" id="idEstudianteMa" readonly>
+              </div>
+              <div class="campo">
+                <label for="centroMa">Centro sede</label>
+                <input type="text" id="centroMa" readonly>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-    <div class="seccion"><h2>Actividad 4. Lee el texto y responde</h2><div class="ayuda"><strong>Texto base: El gato y los ratones.</strong></div>
-      <div class="item"><p>1. ¿Cuál es el nombre del gato?</p><div class="opciones"><label><input type="radio" name="p14" value="a"> a) Ronald</label><label><input type="radio" name="p14" value="b"> b) Rodilardo</label><label><input type="radio" name="p14" value="c"> c) Rolando</label></div><div class="linea-respuesta" id="r-p14"></div></div>
-      <div class="item"><p>2. ¿Quiénes estaban asustados por la presencia del gato?</p><div class="opciones"><label><input type="radio" name="p15" value="a"> a) Solo las ratas</label><label><input type="radio" name="p15" value="b"> b) Solo los ratones</label><label><input type="radio" name="p15" value="c"> c) Las ratas y los ratones</label></div><div class="linea-respuesta" id="r-p15"></div></div>
-      <div class="item"><p>3. ¿Por qué nadie quiso ponerle el cascabel al gato?</p><div class="opciones"><label><input type="radio" name="p16" value="a"> a) Porque tenían miedo de ser atrapados por el gato</label><label><input type="radio" name="p16" value="b"> b) Porque no sabían dónde estaba el cascabel</label><label><input type="radio" name="p16" value="c"> c) Porque el gato estaba dormido todo el tiempo</label></div><div class="linea-respuesta" id="r-p16"></div></div>
-      <div class="item"><p>4. ¿Qué cualidad necesitaría el ratón para ponerle el cascabel al gato?</p><div class="opciones"><label><input type="radio" name="p17b" value="a"> a) valentía</label><label><input type="radio" name="p17b" value="b"> b) belleza</label><label><input type="radio" name="p17b" value="c"> c) miedo</label></div><div class="linea-respuesta" id="r-p17b"></div></div>
+      <div class="seccion">
+        <h2>1. La abuela de Lucas tiene varias operaciones matemáticas que quiere realizar, para luego ir de compras, ¿la ayudas?</h2>
+        <div class="ops-grid">
+          <div class="op-card">
+            <div class="expr">34
++12</div>
+            <input type="text" id="ma1a" placeholder="Resultado">
+            <div class="linea-respuesta" id="r-ma1a"></div>
+          </div>
+          <div class="op-card">
+            <div class="expr">234
++45</div>
+            <input type="text" id="ma1b" placeholder="Resultado">
+            <div class="linea-respuesta" id="r-ma1b"></div>
+          </div>
+          <div class="op-card">
+            <div class="expr">347
++367</div>
+            <input type="text" id="ma1c" placeholder="Resultado">
+            <div class="linea-respuesta" id="r-ma1c"></div>
+          </div>
+          <div class="op-card">
+            <div class="expr">79
+-56</div>
+            <input type="text" id="ma1d" placeholder="Resultado">
+            <div class="linea-respuesta" id="r-ma1d"></div>
+          </div>
+          <div class="op-card">
+            <div class="expr">465
+-54</div>
+            <input type="text" id="ma1e" placeholder="Resultado">
+            <div class="linea-respuesta" id="r-ma1e"></div>
+          </div>
+          <div class="op-card">
+            <div class="expr">546
+-537</div>
+            <input type="text" id="ma1f" placeholder="Resultado">
+            <div class="linea-respuesta" id="r-ma1f"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="seccion">
+        <h2>2. El número de la casa de María es 708 se lee:</h2>
+        <div class="item">
+          <div class="opciones">
+            <label><input type="radio" name="ma2" value="a"> A) Setenta y ocho</label>
+            <label><input type="radio" name="ma2" value="b"> B) Setecientos ocho</label>
+            <label><input type="radio" name="ma2" value="c"> C) Setecientos ochenta</label>
+            <label><input type="radio" name="ma2" value="d"> D) Siete mil ocho</label>
+          </div>
+          <div class="linea-respuesta" id="r-ma2"></div>
+        </div>
+      </div>
+
+      <div class="seccion">
+        <h2>3. Mil ochocientos cuarenta y cuatro es el año de nuestra Independencia Nacional, en cifra es:</h2>
+        <div class="item">
+          <div class="opciones">
+            <label><input type="radio" name="ma3" value="a"> A) 1,844</label>
+            <label><input type="radio" name="ma3" value="b"> B) 1,484</label>
+            <label><input type="radio" name="ma3" value="c"> C) 8,144</label>
+            <label><input type="radio" name="ma3" value="d"> D) 8,414</label>
+          </div>
+          <div class="linea-respuesta" id="r-ma3"></div>
+        </div>
+      </div>
+
+      <div class="seccion">
+        <h2>4. ¿Cuál de estos números es el mayor?</h2>
+        <div class="item">
+          <div class="opciones">
+            <label><input type="radio" name="ma4" value="a"> A) 2735</label>
+            <label><input type="radio" name="ma4" value="b"> B) 2537</label>
+            <label><input type="radio" name="ma4" value="c"> C) 2573</label>
+            <label><input type="radio" name="ma4" value="d"> D) 2753</label>
+          </div>
+          <div class="linea-respuesta" id="r-ma4"></div>
+        </div>
+      </div>
+
+      <div class="seccion">
+        <h2>5. Ordena de menor a mayor los precios y selecciona la opción correcta</h2>
+        <div class="ayuda">
+          Fresa RD$155 · Sandía RD$150 · Piña RD$140 · Manzana RD$160 · Guineo RD$145
+        </div>
+        <div class="item">
+          <div class="opciones">
+            <label><input type="radio" name="ma5" value="a"> A) 140, 155, 160, 145, 150</label>
+            <label><input type="radio" name="ma5" value="b"> B) 140, 150, 145, 155, 160</label>
+            <label><input type="radio" name="ma5" value="c"> C) 140, 155, 150, 145, 160</label>
+            <label><input type="radio" name="ma5" value="d"> D) 140, 145, 150, 155, 160</label>
+          </div>
+          <div class="linea-respuesta" id="r-ma5"></div>
+        </div>
+      </div>
+
+      <div class="seccion">
+        <h2>6. En un juego en línea Manuel tiene 63 vidas y regala a su hermana 25 vidas. ¿Cuántas vidas le quedaron a Manuel?</h2>
+        <div class="item">
+          <div class="opciones">
+            <label><input type="radio" name="ma6" value="a"> A) 28 vidas</label>
+            <label><input type="radio" name="ma6" value="b"> B) 38 vidas</label>
+            <label><input type="radio" name="ma6" value="c"> C) 42 vidas</label>
+            <label><input type="radio" name="ma6" value="d"> D) 88 vidas</label>
+          </div>
+          <div class="linea-respuesta" id="r-ma6"></div>
+        </div>
+      </div>
+
+      <div class="seccion">
+        <h2>7. Wilson abre su alcancía y cuenta con RD$575 para ir de compras, su papá le regala RD$360. ¿Cuánto dinero tiene Wilson en total?</h2>
+        <div class="item">
+          <div class="opciones">
+            <label><input type="radio" name="ma7" value="a"> A) RD$8,135</label>
+            <label><input type="radio" name="ma7" value="b"> B) RD$9,135</label>
+            <label><input type="radio" name="ma7" value="c"> C) RD$835</label>
+            <label><input type="radio" name="ma7" value="d"> D) RD$935</label>
+          </div>
+          <div class="linea-respuesta" id="r-ma7"></div>
+        </div>
+      </div>
+
+      <div class="seccion">
+        <h2>8. En un restaurante se sirven 54 mesas, cada mesa tiene 6 platos. ¿Cuántos platos se sirven en total en el restaurante?</h2>
+        <div class="item">
+          <div class="opciones">
+            <label><input type="radio" name="ma8" value="a"> A) 324 platos</label>
+            <label><input type="radio" name="ma8" value="b"> B) 342 platos</label>
+            <label><input type="radio" name="ma8" value="c"> C) 432 platos</label>
+            <label><input type="radio" name="ma8" value="d"> D) 312 platos</label>
+          </div>
+          <div class="linea-respuesta" id="r-ma8"></div>
+        </div>
+      </div>
+
+      <div class="seccion">
+        <h2>9. Escribe la cifra que corresponde a cada valor posicional: 679</h2>
+        <div class="dos-columnas">
+          <div class="item">
+            <p class="enunciado-hueco"><input type="text" id="ma9c" class="small-input"> Centenas</p>
+            <div class="linea-respuesta" id="r-ma9c"></div>
+          </div>
+          <div class="item">
+            <p class="enunciado-hueco"><input type="text" id="ma9d" class="small-input"> Decenas</p>
+            <div class="linea-respuesta" id="r-ma9d"></div>
+          </div>
+          <div class="item">
+            <p class="enunciado-hueco"><input type="text" id="ma9u" class="small-input"> Unidades</p>
+            <div class="linea-respuesta" id="r-ma9u"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="seccion">
+        <h2>10. La escuela de Karla empieza a las 7. Ella llega una hora tarde. ¿A qué hora llega a la escuela?</h2>
+        <div class="item">
+          <div class="opciones">
+            <label><input type="radio" name="ma10" value="a"> A) A las 6</label>
+            <label><input type="radio" name="ma10" value="b"> B) A las 8</label>
+            <label><input type="radio" name="ma10" value="c"> C) A la 1</label>
+            <label><input type="radio" name="ma10" value="d"> D) A las 12</label>
+          </div>
+          <div class="linea-respuesta" id="r-ma10"></div>
+        </div>
+      </div>
+
+      <div class="seccion">
+        <h2>Resultado de la evaluación de Matemática</h2>
+        <div class="item">
+          <p><strong>Clasificación global del estudiante</strong></p>
+          <div class="linea-respuesta neutra" id="clasificacionGlobalMatematica"></div>
+          <div class="nota" id="detalleClasificacionMatematica"></div>
+        </div>
+
+        <div class="tabla-bloques">
+          <div class="item">
+            <p><strong>Indicador 1. Aplica operaciones básicas de suma y resta</strong></p>
+            <div class="linea-respuesta neutra" id="maIndicador1"></div>
+          </div>
+          <div class="item">
+            <p><strong>Indicador 2. Lee y escribe números en diferentes representaciones</strong></p>
+            <div class="linea-respuesta neutra" id="maIndicador2"></div>
+          </div>
+          <div class="item">
+            <p><strong>Indicador 3. Compara y ordena números</strong></p>
+            <div class="linea-respuesta neutra" id="maIndicador3"></div>
+          </div>
+          <div class="item">
+            <p><strong>Indicador 4. Resuelve problemas de suma y resta en contexto</strong></p>
+            <div class="linea-respuesta neutra" id="maIndicador4"></div>
+          </div>
+          <div class="item">
+            <p><strong>Indicador 5. Resuelve problemas diversos en contexto</strong></p>
+            <div class="linea-respuesta neutra" id="maIndicador5"></div>
+          </div>
+          <div class="item">
+            <p><strong>Indicador 6. Identifica el valor posicional de las cifras</strong></p>
+            <div class="linea-respuesta neutra" id="maIndicador6"></div>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <div class="seccion"><h2>Actividad 5. Completa las ideas usando las palabras del recuadro</h2><div class="ayuda">solución / cascabel / madrigueras / astuto</div>
-      <div class="item"><p class="enunciado-hueco">1. El gato es muy <input type="text" id="p17">.</p><div class="linea-respuesta" id="r-p17"></div></div>
-      <div class="item"><p class="enunciado-hueco">2. El gato vigilaba las <input type="text" id="p18">.</p><div class="linea-respuesta" id="r-p18"></div></div>
-      <div class="item"><p class="enunciado-hueco">3. ¿Quién le pondría el <input type="text" id="p19"> al gato?</p><div class="linea-respuesta" id="r-p19"></div></div>
-      <div class="item"><p class="enunciado-hueco">4. Los ratones y ratas se reunieron para buscar una <input type="text" id="p20">.</p><div class="linea-respuesta" id="r-p20"></div></div>
+    <div class="controles">
+      <div class="barra">
+        <button class="btn-principal" onclick="revisarPruebaMatematica()">Enviar</button>
+        <button class="btn-secundario" onclick="volverInicio()">Volver al inicio</button>
+        <button class="btn-secundario" onclick="reiniciarMatematica()">Reiniciar esta prueba</button>
+        <div class="resultado-global" id="resultadoGlobalMatematica">Puntuación: 0 / 17</div>
+      </div>
     </div>
+  </div>
 
-    <div class="seccion"><h2>Resultado de Lengua Española</h2><div class="resumen"><h3>Clasificación global</h3><div id="clasificacionGlobal" class="linea-respuesta neutra"></div><div id="detalleClasificacion" class="nota"></div></div><div class="tabla-bloques">
-      <div class="item"><p><strong>Discrimina sonidos con correspondencia</strong></p><div id="bloque1" class="linea-respuesta neutra"></div></div>
-      <div class="item"><p><strong>Completa palabras con fonemas adecuados</strong></p><div id="bloque2" class="linea-respuesta neutra"></div></div>
-      <div class="item"><p><strong>Organiza sílabas para formar palabras</strong></p><div id="bloque3" class="linea-respuesta neutra"></div></div>
-      <div class="item"><p><strong>Comprende información explícita e implícita</strong></p><div id="bloque4" class="linea-respuesta neutra"></div></div>
-      <div class="item"><p><strong>Completa ideas con vocabulario pertinente</strong></p><div id="bloque5" class="linea-respuesta neutra"></div></div>
-    </div></div>
-  </div><div class="controles"><div class="barra"><button class="btn-principal" onclick="revisarPruebaLengua()">Enviar</button><button class="btn-secundario" onclick="volverInicio()">Volver al inicio</button><button class="btn-secundario" onclick="reiniciarLengua()">Reiniciar esta prueba</button><div class="resultado-global" id="resultadoGlobalLengua">Puntuación: 0 / 21</div></div></div></div>
-
-  <div id="pantallaMatematica" class="oculto"><div class="contenedor">
-    <div class="encabezado"><div class="encabezado-con-logo"><img src="Foto campamento.png" alt="Imagen" class="logo-esquina"><div class="encabezado-texto"><h1>Prueba de Matemática</h1><div class="grid-info"><div class="campo"><label>Nombre completo del estudiante</label><input type="text" id="nombreMa" readonly></div><div class="campo"><label>Centro sede</label><input type="text" id="centroMa" readonly></div></div></div></div></div>
-
-    <div class="seccion"><h2>I. Numeración</h2>
-      <div class="item"><p>1. El número 708 se lee:</p><div class="opciones"><label><input type="radio" name="ma1" value="a"> A) Setenta y ocho</label><label><input type="radio" name="ma1" value="b"> B) Setecientos ocho</label><label><input type="radio" name="ma1" value="c"> C) Setecientos ochenta</label><label><input type="radio" name="ma1" value="d"> D) Siete mil ocho</label></div><div id="r-ma1" class="linea-respuesta"></div></div>
-      <div class="item"><p>2. “Mil ochocientos cuarenta y cuatro” es:</p><div class="opciones"><label><input type="radio" name="ma2" value="a"> A) 1,844</label><label><input type="radio" name="ma2" value="b"> B) 1,484</label><label><input type="radio" name="ma2" value="c"> C) 8,144</label><label><input type="radio" name="ma2" value="d"> D) 8,414</label></div><div id="r-ma2" class="linea-respuesta"></div></div>
-      <div class="item"><p>3. El número 679 se escribe en palabras como:</p><div class="opciones"><label><input type="radio" name="ma3" value="a"> A) Seiscientos setenta y nueve</label><label><input type="radio" name="ma3" value="b"> B) Seiscientos setenta y nueve mil</label><label><input type="radio" name="ma3" value="c"> C) Seiscientos diecisiete y nueve</label><label><input type="radio" name="ma3" value="d"> D) Setecientos sesenta y nueve</label></div><div id="r-ma3" class="linea-respuesta"></div></div>
+  <div id="modalFinal" class="modal-fondo oculto">
+    <div class="modal">
+      <h3>Proceso completado</h3>
+      <p id="mensajeModal"></p>
+      <p class="nota" id="estadoGuardado"></p>
+      <p class="nota">¿Qué desea hacer ahora?</p>
+      <div class="acciones-modal">
+        <button class="btn-principal" onclick="digitarOtraPrueba()">Digitar otra prueba</button>
+        <button class="btn-exito" onclick="digitarOtroEstudiante()">Digitar otro estudiante</button>
+        <button class="btn-secundario" onclick="cerrarModal()">Cerrar</button>
+      </div>
     </div>
-    <div class="seccion"><h2>II. Valor posicional</h2><div class="item"><p>4. En el número 352, el valor del 5 es:</p><div class="opciones"><label><input type="radio" name="ma4" value="a"> A) 5</label><label><input type="radio" name="ma4" value="b"> B) 50</label><label><input type="radio" name="ma4" value="c"> C) 500</label><label><input type="radio" name="ma4" value="d"> D) 5,000</label></div><div id="r-ma4" class="linea-respuesta"></div></div></div>
-    <div class="seccion"><h2>III. Comparación y ordenamiento</h2><div class="item"><p>5. ¿Cuál es el número mayor?</p><div class="opciones"><label><input type="radio" name="ma5" value="a"> A) 2735</label><label><input type="radio" name="ma5" value="b"> B) 2537</label><label><input type="radio" name="ma5" value="c"> C) 2573</label><label><input type="radio" name="ma5" value="d"> D) 2753</label></div><div id="r-ma5" class="linea-respuesta"></div></div><div class="item"><p>6. En una frutería se venden frutas con los siguientes precios:</p><div class="ayuda">Fresa RD$155 · Sandía RD$150 · Piña RD$140 · Manzana RD$160 · Guineo RD$145</div><p>¿Cuál es el orden de menor a mayor?</p><div class="opciones"><label><input type="radio" name="ma6" value="a"> A) 140, 145, 150, 155, 160</label><label><input type="radio" name="ma6" value="b"> B) 140, 150, 145, 155, 160</label><label><input type="radio" name="ma6" value="c"> C) 160, 155, 150, 145, 140</label><label><input type="radio" name="ma6" value="d"> D) 145, 140, 150, 155, 160</label></div><div id="r-ma6" class="linea-respuesta"></div></div></div>
-    <div class="seccion"><h2>IV. Patrones</h2><div class="item"><p>7. Completa: 5, 10, 15, 20, ___</p><input type="text" id="ma7" placeholder="Resultado"><div id="r-ma7" class="linea-respuesta"></div></div></div>
-    <div class="seccion"><h2>V. Operaciones básicas</h2><div class="dos-columnas"><div class="item"><p>8. 63 − 25 =</p><input type="text" id="ma8"><div id="r-ma8" class="linea-respuesta"></div></div><div class="item"><p>9. 575 + 360 =</p><input type="text" id="ma9"><div id="r-ma9" class="linea-respuesta"></div></div><div class="item"><p>10. 36 ÷ 6 =</p><input type="text" id="ma10"><div id="r-ma10" class="linea-respuesta"></div></div></div></div>
-    <div class="seccion"><h2>VI. Resolución de problemas</h2><div class="item"><p>11. Manuel tenía 75 canicas y regaló 34. ¿Cuántas le quedan?</p><input type="text" id="ma11"><div id="r-ma11" class="linea-respuesta"></div></div><div class="item"><p>12. En un restaurante hay 42 mesas con 6 platos cada una. ¿Cuántos platos hay en total?</p><input type="text" id="ma12"><div id="r-ma12" class="linea-respuesta"></div></div></div>
-
-    <div class="seccion"><h2>Resultado de Matemática</h2><div class="resumen"><h3>Clasificación global</h3><div id="clasificacionGlobalMa" class="linea-respuesta neutra"></div><div id="detalleClasificacionMa" class="nota"></div></div><div class="tabla-bloques">
-      <div class="item"><p><strong>Lee y escribe números en diferentes representaciones</strong></p><div id="maInd1" class="linea-respuesta neutra"></div></div>
-      <div class="item"><p><strong>Identifica el valor posicional de las cifras</strong></p><div id="maInd2" class="linea-respuesta neutra"></div></div>
-      <div class="item"><p><strong>Compara y ordena números</strong></p><div id="maInd3" class="linea-respuesta neutra"></div></div>
-      <div class="item"><p><strong>Identifica y continúa patrones numéricos</strong></p><div id="maInd4" class="linea-respuesta neutra"></div></div>
-      <div class="item"><p><strong>Aplica operaciones básicas</strong></p><div id="maInd5" class="linea-respuesta neutra"></div></div>
-      <div class="item"><p><strong>Resuelve problemas en contexto</strong></p><div id="maInd6" class="linea-respuesta neutra"></div></div>
-    </div></div>
-  </div><div class="controles"><div class="barra"><button class="btn-principal" onclick="revisarPruebaMatematica()">Enviar</button><button class="btn-secundario" onclick="volverInicio()">Volver al inicio</button><button class="btn-secundario" onclick="reiniciarMatematica()">Reiniciar esta prueba</button><div class="resultado-global" id="resultadoGlobalMatematica">Puntuación: 0 / 12</div></div></div></div>
-
-  <div id="modalFinal" class="modal-fondo oculto"><div class="modal"><h3>Proceso completado</h3><p id="mensajeModal"></p><p class="nota">¿Qué desea hacer ahora?</p><div class="acciones-modal"><button class="btn-principal" onclick="digitarOtraPrueba()">Digitar otra prueba</button><button class="btn-exito" onclick="digitarOtroEstudiante()">Digitar otro estudiante</button><button class="btn-secundario" onclick="cerrarModal()">Cerrar</button></div></div></div>
+  </div>
 
   <script>
-    const respuestasTexto={p6:"c",p7:"g",p8:"s",p9:"l",p10:"maestra",p11:"sombrilla",p12:"barco",p13:"mariposa",p17:"astuto",p18:"madrigueras",p19:"cascabel",p20:"solucion"};
-    const respuestasMatematicaTexto={ma7:"25",ma8:"38",ma9:"935",ma10:"6",ma11:"41",ma12:"252"};
-    function iniciarProceso(){const nombre=document.getElementById("inicioNombre").value.trim();const centro=document.getElementById("inicioCentro").value.trim();const prueba=document.querySelector('input[name="tipoPrueba"]:checked');if(!nombre){alert("Debe digitar el nombre del estudiante.");return}if(!centro){alert("Debe digitar el nombre del centro sede.");return}if(!prueba){alert("Debe seleccionar la prueba que se va a digitar.");return}document.getElementById("nombre").value=nombre;document.getElementById("centro").value=centro;document.getElementById("nombreMa").value=nombre;document.getElementById("centroMa").value=centro;document.getElementById("pantallaInicio").classList.add("oculto");document.getElementById("pantallaLengua").classList.add("oculto");document.getElementById("pantallaMatematica").classList.add("oculto");document.getElementById(prueba.value==="lengua"?"pantallaLengua":"pantallaMatematica").classList.remove("oculto");window.scrollTo({top:0,behavior:"smooth"})}
-    function volverInicio(){document.getElementById("pantallaLengua").classList.add("oculto");document.getElementById("pantallaMatematica").classList.add("oculto");document.getElementById("pantallaInicio").classList.remove("oculto");cerrarModal()}
-    function normalizar(v){return(v||"").toString().trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/\s+/g,"").replace(/\$/g,"").replace(/rd/g,"")}
-    function marcarResultado(id,correcto,mensaje){const l=document.getElementById(id);l.className="linea-respuesta "+(correcto?"correcta":"incorrecta");l.textContent=mensaje}
-    function revisarRadio(nombre,correcta,idLinea){const s=document.querySelector(`input[name="${nombre}"]:checked`);if(!s){marcarResultado(idLinea,false,`No respondida. Respuesta correcta: ${correcta.toUpperCase()}.`);return 0}if(s.value===correcta){marcarResultado(idLinea,true,"Correcta.");return 1}marcarResultado(idLinea,false,`Incorrecta. Respuesta correcta: ${correcta.toUpperCase()}.`);return 0}
-    function revisarTexto(idCampo,correcta,idLinea){const valor=normalizar(document.getElementById(idCampo).value);const esperado=normalizar(correcta);if(!valor){marcarResultado(idLinea,false,`No respondida. Respuesta correcta: ${correcta}.`);return 0}if(valor===esperado){marcarResultado(idLinea,true,"Correcta.");return 1}marcarResultado(idLinea,false,`Incorrecta. Respuesta correcta: ${correcta}.`);return 0}
-    function nivelLengua(aciertos,actividad){let nivel,txt,clase;if(actividad===1){if(aciertos<=1){nivel="Elemental";clase="elemental"}else if(aciertos<=3){nivel="Aceptable";clase="aceptable"}else{nivel="Satisfactorio";clase="satisfactorio"}txt=`${nivel} (${aciertos}/5).`}else{if(aciertos<=1){nivel="Elemental";clase="elemental"}else if((actividad===2||actividad===4)&&aciertos<=2){nivel="Aceptable";clase="aceptable"}else if((actividad===3||actividad===5)&&aciertos===2){nivel="Aceptable";clase="aceptable"}else{nivel="Satisfactorio";clase="satisfactorio"}txt=`${nivel} (${aciertos}/4).`}return{nivel,texto:txt,clase}}
-    function mostrarNivel(id,r){const el=document.getElementById(id);el.className="linea-respuesta "+r.clase;el.textContent=r.texto}
-    function clasificarPorSatisfactorios(satisfactorios,regla){if(regla==="ma"){if(satisfactorios>=5)return{nombre:"Innovador",clase:"satisfactorio",detalle:`${satisfactorios} indicador(es) en satisfactorio.`};if(satisfactorios>=3)return{nombre:"Creador",clase:"aceptable",detalle:`${satisfactorios} indicador(es) en satisfactorio.`};return{nombre:"Explorador",clase:"elemental",detalle:`${satisfactorios} indicador(es) en satisfactorio.`}}if(satisfactorios<=1)return{nombre:"Explorador",clase:"elemental",detalle:`${satisfactorios} indicador(es) en satisfactorio.`};if(satisfactorios<=3)return{nombre:"Creador",clase:"aceptable",detalle:`${satisfactorios} indicador(es) en satisfactorio.`};return{nombre:"Innovador",clase:"satisfactorio",detalle:`${satisfactorios} indicador(es) en satisfactorio.`}}
-    function revisarPruebaLengua(){let total=0,b1=0,b2=0,b3=0,b4=0,b5=0;b1+=revisarRadio("p1","a","r-p1");b1+=revisarRadio("p2","c","r-p2");b1+=revisarRadio("p3","d","r-p3");b1+=revisarRadio("p4","d","r-p4");b1+=revisarRadio("p5","c","r-p5");total+=b1;["p6","p7","p8","p9"].forEach(id=>b2+=revisarTexto(id,respuestasTexto[id],"r-"+id));total+=b2;["p10","p11","p12","p13"].forEach(id=>b3+=revisarTexto(id,respuestasTexto[id],"r-"+id));total+=b3;b4+=revisarRadio("p14","b","r-p14");b4+=revisarRadio("p15","c","r-p15");b4+=revisarRadio("p16","a","r-p16");b4+=revisarRadio("p17b","a","r-p17b");total+=b4;["p17","p18","p19","p20"].forEach(id=>b5+=revisarTexto(id,respuestasTexto[id],"r-"+id));total+=b5;const niveles=[nivelLengua(b1,1),nivelLengua(b2,2),nivelLengua(b3,3),nivelLengua(b4,4),nivelLengua(b5,5)];["bloque1","bloque2","bloque3","bloque4","bloque5"].forEach((id,i)=>mostrarNivel(id,niveles[i]));const sats=niveles.filter(n=>n.nivel==="Satisfactorio").length;const c=clasificarPorSatisfactorios(sats,"le");const gl=document.getElementById("clasificacionGlobal");gl.className="linea-respuesta "+c.clase;gl.textContent=`Grupo: ${c.nombre}`;document.getElementById("detalleClasificacion").textContent=c.detalle;document.getElementById("resultadoGlobalLengua").textContent=`Puntuación: ${total} / 21`;document.getElementById("mensajeModal").textContent=`El estudiante ${document.getElementById("nombre").value||"sin nombre"} pertenece al grupo ${c.nombre} en Lengua Española. ${c.detalle}`;document.getElementById("modalFinal").classList.remove("oculto")}
-    function nivelMat(aciertos,total){let nivel,clase;if(total===1){if(aciertos===1){nivel="Satisfactorio";clase="satisfactorio"}else{nivel="Elemental";clase="elemental"}}else if(total===2){if(aciertos===2){nivel="Satisfactorio";clase="satisfactorio"}else if(aciertos===1){nivel="Aceptable";clase="aceptable"}else{nivel="Elemental";clase="elemental"}}else if(total===3){if(aciertos===3){nivel="Satisfactorio";clase="satisfactorio"}else if(aciertos===2){nivel="Aceptable";clase="aceptable"}else{nivel="Elemental";clase="elemental"}}return{nivel,clase,texto:`${nivel} (${aciertos}/${total}).`}}
-    function revisarPruebaMatematica(){let total=0;let i1=0,i2=0,i3=0,i4=0,i5=0,i6=0;i1+=revisarRadio("ma1","b","r-ma1");i1+=revisarRadio("ma2","a","r-ma2");i1+=revisarRadio("ma3","a","r-ma3");total+=i1;i2+=revisarRadio("ma4","b","r-ma4");total+=i2;i3+=revisarRadio("ma5","d","r-ma5");i3+=revisarRadio("ma6","a","r-ma6");total+=i3;i4+=revisarTexto("ma7",respuestasMatematicaTexto.ma7,"r-ma7");total+=i4;i5+=revisarTexto("ma8",respuestasMatematicaTexto.ma8,"r-ma8");i5+=revisarTexto("ma9",respuestasMatematicaTexto.ma9,"r-ma9");i5+=revisarTexto("ma10",respuestasMatematicaTexto.ma10,"r-ma10");total+=i5;i6+=revisarTexto("ma11",respuestasMatematicaTexto.ma11,"r-ma11");i6+=revisarTexto("ma12",respuestasMatematicaTexto.ma12,"r-ma12");total+=i6;const niveles=[nivelMat(i1,3),nivelMat(i2,1),nivelMat(i3,2),nivelMat(i4,1),nivelMat(i5,3),nivelMat(i6,2)];["maInd1","maInd2","maInd3","maInd4","maInd5","maInd6"].forEach((id,i)=>mostrarNivel(id,niveles[i]));const sats=niveles.filter(n=>n.nivel==="Satisfactorio").length;const c=clasificarPorSatisfactorios(sats,"ma");const gl=document.getElementById("clasificacionGlobalMa");gl.className="linea-respuesta "+c.clase;gl.textContent=`Grupo: ${c.nombre}`;document.getElementById("detalleClasificacionMa").textContent=c.detalle;document.getElementById("resultadoGlobalMatematica").textContent=`Puntuación: ${total} / 12`;document.getElementById("mensajeModal").textContent=`El estudiante ${document.getElementById("nombreMa").value||"sin nombre"} pertenece al grupo ${c.nombre} en Matemática. ${c.detalle}`;document.getElementById("modalFinal").classList.remove("oculto")}
-    function cerrarModal(){document.getElementById("modalFinal").classList.add("oculto")}
-    function limpiarLengua(){document.querySelectorAll('#pantallaLengua input[type="radio"]').forEach(e=>e.checked=false);document.querySelectorAll('#pantallaLengua input[type="text"]').forEach(e=>{if(e.id!=="nombre"&&e.id!=="centro")e.value=""});document.querySelectorAll('#pantallaLengua .linea-respuesta').forEach(e=>{e.className="linea-respuesta neutra";e.textContent=""});document.getElementById("resultadoGlobalLengua").textContent="Puntuación: 0 / 21"}
-    function limpiarMatematica(){document.querySelectorAll('#pantallaMatematica input[type="radio"]').forEach(e=>e.checked=false);document.querySelectorAll('#pantallaMatematica input[type="text"]').forEach(e=>{if(e.id!=="nombreMa"&&e.id!=="centroMa")e.value=""});document.querySelectorAll('#pantallaMatematica .linea-respuesta').forEach(e=>{e.className="linea-respuesta neutra";e.textContent=""});document.getElementById("resultadoGlobalMatematica").textContent="Puntuación: 0 / 12"}
-    function reiniciarLengua(){limpiarLengua();window.scrollTo({top:0,behavior:"smooth"})}function reiniciarMatematica(){limpiarMatematica();window.scrollTo({top:0,behavior:"smooth"})}
-    function digitarOtraPrueba(){cerrarModal();limpiarLengua();limpiarMatematica();const n=document.getElementById("nombre").value||document.getElementById("nombreMa").value;const c=document.getElementById("centro").value||document.getElementById("centroMa").value;document.getElementById("inicioNombre").value=n;document.getElementById("inicioCentro").value=c;document.querySelectorAll('input[name="tipoPrueba"]').forEach(e=>e.checked=false);volverInicio()}
-    function digitarOtroEstudiante(){cerrarModal();limpiarLengua();limpiarMatematica();["inicioNombre","inicioCentro","nombre","centro","nombreMa","centroMa"].forEach(id=>document.getElementById(id).value="");document.querySelectorAll('input[name="tipoPrueba"]').forEach(e=>e.checked=false);volverInicio()}
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw7NjbP8xQDMAini1c0OzQ6yhzFwdp51A-LQpvF-WNSFpkElO3Xb8PaOsd_peHWEVE5AQ/exec";
+
+    function mostrarEstadoBusqueda(mensaje, clase = "neutra"){
+      const el = document.getElementById("estadoBusqueda");
+      if(el){
+        el.className = "linea-respuesta " + clase;
+        el.textContent = mensaje;
+      }
+    }
+
+    function buscarEstudianteDesdeInicio(mostrarAlerta){
+      const id = document.getElementById("inicioID").value.trim();
+      if(!id){
+        mostrarEstadoBusqueda("Digite el ID del estudiante.", "incorrecta");
+        return;
+      }
+
+      mostrarEstadoBusqueda("Buscando estudiante...", "neutra");
+
+      if(typeof google !== "undefined" && google.script && google.script.run){
+        google.script.run
+          .withSuccessHandler(function(res){ procesarBusquedaEstudiante(res, mostrarAlerta); })
+          .withFailureHandler(function(err){
+            const mensaje = err && err.message ? err.message : "No se pudo consultar el listado.";
+            mostrarEstadoBusqueda(mensaje, "incorrecta");
+            if(mostrarAlerta) alert(mensaje);
+          })
+          .buscarEstudiantePorID(id);
+      } else {
+        fetch(SCRIPT_URL + "?accion=buscar&idEstudiante=" + encodeURIComponent(id))
+          .then(r => r.json())
+          .then(res => procesarBusquedaEstudiante(res, mostrarAlerta))
+          .catch(() => {
+            const mensaje = "No se pudo consultar el listado. Si está usando Apps Script, ejecute este HTML como archivo Index del proyecto.";
+            mostrarEstadoBusqueda(mensaje, "incorrecta");
+            if(mostrarAlerta) alert(mensaje);
+          });
+      }
+    }
+
+    function procesarBusquedaEstudiante(res, mostrarAlerta){
+      if(res && res.encontrado){
+        document.getElementById("inicioNombre").value = res.nombre || "";
+        if(res.centro && document.getElementById("inicioCentro")){
+          document.getElementById("inicioCentro").value = res.centro;
+        }
+        mostrarEstadoBusqueda("Estudiante encontrado.", "correcta");
+        return;
+      }
+      const mensaje = (res && res.mensaje) ? res.mensaje : "No se encontró un estudiante con ese ID.";
+      document.getElementById("inicioNombre").value = "";
+      mostrarEstadoBusqueda(mensaje, "incorrecta");
+      if(mostrarAlerta) alert(mensaje);
+    }
+
+    function guardarResultadoServidor(payload, callback){
+      if(typeof google !== "undefined" && google.script && google.script.run){
+        google.script.run
+          .withSuccessHandler(function(res){ callback(res || {ok:true, mensaje:"Resultado guardado correctamente."}); })
+          .withFailureHandler(function(err){
+            callback({ok:false, mensaje: err && err.message ? err.message : "No se pudo guardar el resultado."});
+          })
+          .guardarResultado(payload);
+      } else {
+        fetch(SCRIPT_URL, {
+          method:"POST",
+          headers:{"Content-Type":"text/plain;charset=utf-8"},
+          body:JSON.stringify(payload)
+        })
+        .then(r => r.json())
+        .then(res => callback(res))
+        .catch(() => callback({ok:false, mensaje:"No se pudo guardar. Use este HTML dentro del proyecto Apps Script o habilite doPost en Code.gs."}));
+      }
+    }
+
+    function mostrarModalYGuardar(mensaje, payload){
+      document.getElementById("mensajeModal").textContent = mensaje;
+      document.getElementById("estadoGuardado").className = "nota";
+      document.getElementById("estadoGuardado").textContent = "Guardando resultado en la hoja de cálculo...";
+      document.getElementById("modalFinal").classList.remove("oculto");
+
+      guardarResultadoServidor(payload, function(res){
+        const estado = document.getElementById("estadoGuardado");
+        if(res && res.ok){
+          estado.textContent = res.mensaje || "Resultado guardado correctamente.";
+          estado.style.color = "#1b8f4d";
+        } else {
+          estado.textContent = (res && res.mensaje) ? res.mensaje : "No se pudo confirmar el guardado.";
+          estado.style.color = "#c0392b";
+        }
+      });
+    }
+
+    const respuestasTexto = {
+      p6: "c", p7: "g", p8: "s", p9: "l",
+      p10: "maestra", p11: "sombrilla", p12: "barco", p13: "mariposa",
+      p17: "astuto", p18: "madrigueras", p19: "cascabel", p20: "solucion"
+    };
+
+    const respuestasMatematica = {
+      ma1a: "46",
+      ma1b: "279",
+      ma1c: "714",
+      ma1d: "23",
+      ma1e: "411",
+      ma1f: "9",
+      ma9c: "6",
+      ma9d: "7",
+      ma9u: "9"
+    };
+
+    function obtenerPruebaSeleccionada(){
+      return document.querySelector('input[name="tipoPrueba"]:checked');
+    }
+
+    function iniciarProceso(){
+      const nombre = document.getElementById("inicioNombre").value.trim();
+      const idEstudiante = document.getElementById("inicioID").value.trim();
+      const centro = document.getElementById("inicioCentro").value.trim();
+      const prueba = obtenerPruebaSeleccionada();
+
+      if(!idEstudiante){
+        alert("Debe digitar el ID del estudiante.");
+        return;
+      }
+
+      if(!nombre){
+        alert("Debe buscar el estudiante por ID antes de continuar.");
+        buscarEstudianteDesdeInicio(true);
+        return;
+      }
+
+      if(!centro){
+        alert("Debe digitar el nombre del centro sede.");
+        return;
+      }
+
+      if(!prueba){
+        alert("Debe seleccionar la prueba que se va a digitar.");
+        return;
+      }
+
+      document.getElementById("nombre").value = nombre;
+      document.getElementById("idEstudiante").value = idEstudiante;
+      document.getElementById("centro").value = centro;
+      document.getElementById("nombreMa").value = nombre;
+      document.getElementById("idEstudianteMa").value = idEstudiante;
+      document.getElementById("centroMa").value = centro;
+
+      document.getElementById("pantallaInicio").classList.add("oculto");
+      document.getElementById("pantallaLengua").classList.add("oculto");
+      document.getElementById("pantallaMatematica").classList.add("oculto");
+
+      if(prueba.value === "lengua"){
+        document.getElementById("pantallaLengua").classList.remove("oculto");
+      } else {
+        document.getElementById("pantallaMatematica").classList.remove("oculto");
+      }
+
+      window.scrollTo({top:0, behavior:"smooth"});
+    }
+
+    function volverInicio(){
+      document.getElementById("pantallaLengua").classList.add("oculto");
+      document.getElementById("pantallaMatematica").classList.add("oculto");
+      document.getElementById("pantallaInicio").classList.remove("oculto");
+      cerrarModal();
+    }
+
+    function normalizar(valor){
+      return (valor || "")
+        .toString()
+        .trim()
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/\s+/g, "");
+    }
+
+    function marcarResultado(idLinea, correcto, mensaje){
+      const linea = document.getElementById(idLinea);
+      linea.className = "linea-respuesta " + (correcto ? "correcta" : "incorrecta");
+      linea.textContent = mensaje;
+    }
+
+    function revisarRadio(nombre, correcta, idLinea){
+      const seleccionada = document.querySelector(`input[name="${nombre}"]:checked`);
+      if(!seleccionada){
+        marcarResultado(idLinea, false, `No respondida. Respuesta correcta: ${correcta.toUpperCase()}.`);
+        return 0;
+      }
+      if(seleccionada.value === correcta){
+        marcarResultado(idLinea, true, "Correcta.");
+        return 1;
+      }
+      marcarResultado(idLinea, false, `Incorrecta. Respuesta correcta: ${correcta.toUpperCase()}.`);
+      return 0;
+    }
+
+    function revisarTexto(idCampo, correcta, idLinea){
+      const valor = normalizar(document.getElementById(idCampo).value);
+      const esperado = normalizar(correcta);
+      if(!valor){
+        marcarResultado(idLinea, false, `No respondida. Respuesta correcta: ${correcta}.`);
+        return 0;
+      }
+      if(valor === esperado){
+        marcarResultado(idLinea, true, "Correcta.");
+        return 1;
+      }
+      marcarResultado(idLinea, false, `Incorrecta. Respuesta correcta: ${correcta}.`);
+      return 0;
+    }
+
+    function obtenerNivelBloque(aciertos, actividad){
+      let texto = "", clase = "", nivel = "";
+
+      if (actividad === 1) {
+        if (aciertos <= 1) {
+          nivel = "Elemental";
+          texto = `Elemental (${aciertos}/5).`;
+          clase = "elemental";
+        } else if (aciertos <= 3) {
+          nivel = "Aceptable";
+          texto = `Aceptable (${aciertos}/5).`;
+          clase = "aceptable";
+        } else {
+          nivel = "Satisfactorio";
+          texto = `Satisfactorio (${aciertos}/5).`;
+          clase = "satisfactorio";
+        }
+      }
+
+      if (actividad === 2) {
+        if (aciertos <= 1) {
+          nivel = "Elemental";
+          texto = `Elemental (${aciertos}/4).`;
+          clase = "elemental";
+        } else if (aciertos <= 2) {
+          nivel = "Aceptable";
+          texto = `Aceptable (${aciertos}/4).`;
+          clase = "aceptable";
+        } else {
+          nivel = "Satisfactorio";
+          texto = `Satisfactorio (${aciertos}/4).`;
+          clase = "satisfactorio";
+        }
+      }
+
+      if (actividad === 3) {
+        if (aciertos <= 1) {
+          nivel = "Elemental";
+          texto = `Elemental (${aciertos}/4).`;
+          clase = "elemental";
+        } else if (aciertos === 2) {
+          nivel = "Aceptable";
+          texto = `Aceptable (${aciertos}/4).`;
+          clase = "aceptable";
+        } else {
+          nivel = "Satisfactorio";
+          texto = `Satisfactorio (${aciertos}/4).`;
+          clase = "satisfactorio";
+        }
+      }
+
+      if (actividad === 4) {
+        if (aciertos <= 1) {
+          nivel = "Elemental";
+          texto = `Elemental (${aciertos}/4).`;
+          clase = "elemental";
+        } else if (aciertos <= 2) {
+          nivel = "Aceptable";
+          texto = `Aceptable (${aciertos}/4).`;
+          clase = "aceptable";
+        } else {
+          nivel = "Satisfactorio";
+          texto = `Satisfactorio (${aciertos}/4).`;
+          clase = "satisfactorio";
+        }
+      }
+
+      if (actividad === 5) {
+        if (aciertos <= 1) {
+          nivel = "Elemental";
+          texto = `Elemental (${aciertos}/4).`;
+          clase = "elemental";
+        } else if (aciertos === 2) {
+          nivel = "Aceptable";
+          texto = `Aceptable (${aciertos}/4).`;
+          clase = "aceptable";
+        } else {
+          nivel = "Satisfactorio";
+          texto = `Satisfactorio (${aciertos}/4).`;
+          clase = "satisfactorio";
+        }
+      }
+
+      return { nivel, texto, clase };
+    }
+
+    function mostrarNivel(id, resultado){
+      const el = document.getElementById(id);
+      el.className = "linea-respuesta " + resultado.clase;
+      el.textContent = resultado.texto;
+    }
+
+    function obtenerClasificacionGlobal(resultados){
+      const satisfactorios = resultados.filter(r => r.nivel === "Satisfactorio").length;
+
+      if (satisfactorios <= 1) {
+        return {
+          nombre: "Explorador",
+          detalle: `${satisfactorios} bloque(s) en satisfactorio.`,
+          clase: "elemental"
+        };
+      }
+
+      if (satisfactorios <= 3) {
+        return {
+          nombre: "Creador",
+          detalle: `${satisfactorios} bloque(s) en satisfactorio.`,
+          clase: "aceptable"
+        };
+      }
+
+      return {
+        nombre: "Innovador",
+        detalle: `${satisfactorios} bloque(s) en satisfactorio.`,
+        clase: "satisfactorio"
+      };
+    }
+
+    function nivelPorAciertos(aciertos, totalItems){
+      if(totalItems === 1){
+        return aciertos === 1
+          ? {nivel:"Satisfactorio", texto:`Satisfactorio (${aciertos}/${totalItems}).`, clase:"satisfactorio"}
+          : {nivel:"Elemental", texto:`Elemental (${aciertos}/${totalItems}).`, clase:"elemental"};
+      }
+      const proporcion = aciertos / totalItems;
+      if(proporcion >= 0.80){
+        return {nivel:"Satisfactorio", texto:`Satisfactorio (${aciertos}/${totalItems}).`, clase:"satisfactorio"};
+      }
+      if(proporcion >= 0.50){
+        return {nivel:"Aceptable", texto:`Aceptable (${aciertos}/${totalItems}).`, clase:"aceptable"};
+      }
+      return {nivel:"Elemental", texto:`Elemental (${aciertos}/${totalItems}).`, clase:"elemental"};
+    }
+
+    function obtenerClasificacionMatematica(resultados){
+      const satisfactorios = resultados.filter(r => r.nivel === "Satisfactorio").length;
+      if(satisfactorios >= 5){
+        return {nombre:"Innovador", detalle:`${satisfactorios} indicador(es) en satisfactorio.`, clase:"satisfactorio", satisfactorios};
+      }
+      if(satisfactorios >= 3){
+        return {nombre:"Creador", detalle:`${satisfactorios} indicador(es) en satisfactorio.`, clase:"aceptable", satisfactorios};
+      }
+      return {nombre:"Explorador", detalle:`${satisfactorios} indicador(es) en satisfactorio.`, clase:"elemental", satisfactorios};
+    }
+
+    function revisarPruebaLengua(){
+      let total = 0;
+      let bloque1 = 0, bloque2 = 0, bloque3 = 0, bloque4 = 0, bloque5 = 0;
+
+      bloque1 += revisarRadio("p1", "c", "r-p1");
+      bloque1 += revisarRadio("p2", "b", "r-p2");
+      bloque1 += revisarRadio("p3", "c", "r-p3");
+      bloque1 += revisarRadio("p4", "c", "r-p4");
+      bloque1 += revisarRadio("p5", "d", "r-p5");
+      total += bloque1;
+
+      bloque2 += revisarTexto("p6", respuestasTexto.p6, "r-p6");
+      bloque2 += revisarTexto("p7", respuestasTexto.p7, "r-p7");
+      bloque2 += revisarTexto("p8", respuestasTexto.p8, "r-p8");
+      bloque2 += revisarTexto("p9", respuestasTexto.p9, "r-p9");
+      total += bloque2;
+
+      bloque3 += revisarTexto("p10", respuestasTexto.p10, "r-p10");
+      bloque3 += revisarTexto("p11", respuestasTexto.p11, "r-p11");
+      bloque3 += revisarTexto("p12", respuestasTexto.p12, "r-p12");
+      bloque3 += revisarTexto("p13", respuestasTexto.p13, "r-p13");
+      total += bloque3;
+
+      bloque4 += revisarRadio("p14", "b", "r-p14");
+      bloque4 += revisarRadio("p15", "c", "r-p15");
+      bloque4 += revisarRadio("p16", "a", "r-p16");
+      bloque4 += revisarRadio("p17b", "a", "r-p17b");
+      total += bloque4;
+
+      bloque5 += revisarTexto("p17", respuestasTexto.p17, "r-p17");
+      bloque5 += revisarTexto("p18", respuestasTexto.p18, "r-p18");
+      bloque5 += revisarTexto("p19", respuestasTexto.p19, "r-p19");
+      bloque5 += revisarTexto("p20", respuestasTexto.p20, "r-p20");
+      total += bloque5;
+
+      const resultado1 = obtenerNivelBloque(bloque1, 1);
+      const resultado2 = obtenerNivelBloque(bloque2, 2);
+      const resultado3 = obtenerNivelBloque(bloque3, 3);
+      const resultado4 = obtenerNivelBloque(bloque4, 4);
+      const resultado5 = obtenerNivelBloque(bloque5, 5);
+
+      mostrarNivel("bloque1", resultado1);
+      mostrarNivel("bloque2", resultado2);
+      mostrarNivel("bloque3", resultado3);
+      mostrarNivel("bloque4", resultado4);
+      mostrarNivel("bloque5", resultado5);
+
+      const clasificacion = obtenerClasificacionGlobal([resultado1, resultado2, resultado3, resultado4, resultado5]);
+      const clasificacionEl = document.getElementById("clasificacionGlobal");
+      clasificacionEl.className = "linea-respuesta " + clasificacion.clase;
+      clasificacionEl.textContent = clasificacion.nombre;
+      document.getElementById("detalleClasificacion").textContent = clasificacion.detalle;
+      document.getElementById("resultadoGlobalLengua").textContent = `Puntuación: ${total} / 21`;
+
+      const nombreEstudiante = document.getElementById("nombre").value.trim() || "sin nombre registrado";
+      const cantidadSatisfactorios = [resultado1, resultado2, resultado3, resultado4, resultado5].filter(r => r.nivel === "Satisfactorio").length;
+      const payload = {
+        tipoPrueba: "LENGUA",
+        idEstudiante: document.getElementById("idEstudiante").value.trim(),
+        nombreEstudiante: nombreEstudiante,
+        centroSede: document.getElementById("centro").value.trim(),
+        indicador1: resultado1.nivel,
+        indicador2: resultado2.nivel,
+        indicador3: resultado3.nivel,
+        indicador4: resultado4.nivel,
+        indicador5: resultado5.nivel,
+        indicador6: "",
+        cantidadSatisfactorios: cantidadSatisfactorios,
+        grupo: clasificacion.nombre,
+        puntuacionTotal: total + " / 21",
+        observacion: clasificacion.detalle
+      };
+
+      mostrarModalYGuardar(
+        `El estudiante ${nombreEstudiante} pertenece al grupo ${clasificacion.nombre} según el resultado.`,
+        payload
+      );
+    }
+
+    function revisarPruebaMatematica(){
+      let total = 0;
+      let indicador1 = 0; // operaciones básicas de suma y resta
+      let indicador2 = 0; // lectura y escritura de números
+      let indicador3 = 0; // comparación y ordenamiento
+      let indicador4 = 0; // problemas de suma y resta
+      let indicador5 = 0; // problemas diversos en contexto
+      let indicador6 = 0; // valor posicional
+
+      indicador1 += revisarTexto("ma1a", respuestasMatematica.ma1a, "r-ma1a");
+      indicador1 += revisarTexto("ma1b", respuestasMatematica.ma1b, "r-ma1b");
+      indicador1 += revisarTexto("ma1c", respuestasMatematica.ma1c, "r-ma1c");
+      indicador1 += revisarTexto("ma1d", respuestasMatematica.ma1d, "r-ma1d");
+      indicador1 += revisarTexto("ma1e", respuestasMatematica.ma1e, "r-ma1e");
+      indicador1 += revisarTexto("ma1f", respuestasMatematica.ma1f, "r-ma1f");
+      total += indicador1;
+
+      indicador2 += revisarRadio("ma2", "b", "r-ma2");
+      indicador2 += revisarRadio("ma3", "a", "r-ma3");
+      total += indicador2;
+
+      indicador3 += revisarRadio("ma4", "d", "r-ma4");
+      indicador3 += revisarRadio("ma5", "d", "r-ma5");
+      total += indicador3;
+
+      indicador4 += revisarRadio("ma6", "b", "r-ma6");
+      indicador4 += revisarRadio("ma7", "d", "r-ma7");
+      total += indicador4;
+
+      indicador5 += revisarRadio("ma8", "a", "r-ma8");
+      indicador5 += revisarRadio("ma10", "b", "r-ma10");
+      total += indicador5;
+
+      indicador6 += revisarTexto("ma9c", respuestasMatematica.ma9c, "r-ma9c");
+      indicador6 += revisarTexto("ma9d", respuestasMatematica.ma9d, "r-ma9d");
+      indicador6 += revisarTexto("ma9u", respuestasMatematica.ma9u, "r-ma9u");
+      total += indicador6;
+
+      const resultado1 = nivelPorAciertos(indicador1, 6);
+      const resultado2 = nivelPorAciertos(indicador2, 2);
+      const resultado3 = nivelPorAciertos(indicador3, 2);
+      const resultado4 = nivelPorAciertos(indicador4, 2);
+      const resultado5 = nivelPorAciertos(indicador5, 2);
+      const resultado6 = nivelPorAciertos(indicador6, 3);
+      const resultados = [resultado1, resultado2, resultado3, resultado4, resultado5, resultado6];
+
+      mostrarNivel("maIndicador1", resultado1);
+      mostrarNivel("maIndicador2", resultado2);
+      mostrarNivel("maIndicador3", resultado3);
+      mostrarNivel("maIndicador4", resultado4);
+      mostrarNivel("maIndicador5", resultado5);
+      mostrarNivel("maIndicador6", resultado6);
+
+      const clasificacion = obtenerClasificacionMatematica(resultados);
+      const clasificacionEl = document.getElementById("clasificacionGlobalMatematica");
+      clasificacionEl.className = "linea-respuesta " + clasificacion.clase;
+      clasificacionEl.textContent = clasificacion.nombre;
+      document.getElementById("detalleClasificacionMatematica").textContent = clasificacion.detalle;
+
+      document.getElementById("resultadoGlobalMatematica").textContent = `Puntuación: ${total} / 17`;
+
+      const nombreEstudiante = document.getElementById("nombreMa").value.trim() || "sin nombre registrado";
+      const payload = {
+        tipoPrueba: "MATEMATICA",
+        idEstudiante: document.getElementById("idEstudianteMa").value.trim(),
+        nombreEstudiante: nombreEstudiante,
+        centroSede: document.getElementById("centroMa").value.trim(),
+        indicador1: resultado1.nivel,
+        indicador2: resultado2.nivel,
+        indicador3: resultado3.nivel,
+        indicador4: resultado4.nivel,
+        indicador5: resultado5.nivel,
+        indicador6: resultado6.nivel,
+        cantidadSatisfactorios: clasificacion.satisfactorios,
+        grupo: clasificacion.nombre,
+        puntuacionTotal: total + " / 17",
+        observacion: clasificacion.detalle
+      };
+
+      mostrarModalYGuardar(
+        `La prueba de Matemática del estudiante ${nombreEstudiante} fue registrada. Pertenece al grupo ${clasificacion.nombre}.`,
+        payload
+      );
+    }
+
+    function cerrarModal(){
+      document.getElementById("modalFinal").classList.add("oculto");
+    }
+
+    function limpiarLengua(){
+      document.querySelectorAll('#pantallaLengua input[type="radio"]').forEach(el => el.checked = false);
+      document.querySelectorAll('#pantallaLengua input[type="text"]').forEach(el => {
+        if(el.id !== "nombre" && el.id !== "idEstudiante" && el.id !== "centro"){ el.value = ""; }
+      });
+      document.querySelectorAll('#pantallaLengua [id^="r-p"]').forEach(el => {
+        el.className = "linea-respuesta";
+        el.textContent = "";
+      });
+      ["bloque1","bloque2","bloque3","bloque4","bloque5"].forEach(id => {
+        const el = document.getElementById(id);
+        el.className = "linea-respuesta neutra";
+        el.textContent = "";
+      });
+      document.getElementById("clasificacionGlobal").className = "linea-respuesta neutra";
+      document.getElementById("clasificacionGlobal").textContent = "";
+      document.getElementById("detalleClasificacion").textContent = "";
+      document.getElementById("resultadoGlobalLengua").textContent = "Puntuación: 0 / 21";
+    }
+
+    function limpiarMatematica(){
+      document.querySelectorAll('#pantallaMatematica input[type="radio"]').forEach(el => el.checked = false);
+      document.querySelectorAll('#pantallaMatematica input[type="text"]').forEach(el => {
+        if(el.id !== "nombreMa" && el.id !== "idEstudianteMa" && el.id !== "centroMa"){ el.value = ""; }
+      });
+      document.querySelectorAll('#pantallaMatematica [id^="r-ma"]').forEach(el => {
+        el.className = "linea-respuesta";
+        el.textContent = "";
+      });
+      ["maIndicador1","maIndicador2","maIndicador3","maIndicador4","maIndicador5","maIndicador6"].forEach(id => {
+        const el = document.getElementById(id);
+        if(el){
+          el.className = "linea-respuesta neutra";
+          el.textContent = "";
+        }
+      });
+      const cl = document.getElementById("clasificacionGlobalMatematica");
+      if(cl){
+        cl.className = "linea-respuesta neutra";
+        cl.textContent = "";
+      }
+      const det = document.getElementById("detalleClasificacionMatematica");
+      if(det){ det.textContent = ""; }
+      document.getElementById("resultadoGlobalMatematica").textContent = "Puntuación: 0 / 17";
+    }
+
+    function reiniciarLengua(){
+      limpiarLengua();
+      window.scrollTo({top:0, behavior:"smooth"});
+    }
+
+    function reiniciarMatematica(){
+      limpiarMatematica();
+      window.scrollTo({top:0, behavior:"smooth"});
+    }
+
+    function digitarOtraPrueba(){
+      cerrarModal();
+      limpiarLengua();
+      limpiarMatematica();
+
+      const nombreActual = document.getElementById("nombre").value || document.getElementById("nombreMa").value;
+      const idActual = document.getElementById("idEstudiante").value || document.getElementById("idEstudianteMa").value;
+      const centroActual = document.getElementById("centro").value || document.getElementById("centroMa").value;
+
+      document.getElementById("inicioNombre").value = nombreActual;
+      document.getElementById("inicioID").value = idActual;
+      document.getElementById("inicioCentro").value = centroActual;
+      document.querySelectorAll('input[name="tipoPrueba"]').forEach(el => el.checked = false);
+
+      document.getElementById("pantallaLengua").classList.add("oculto");
+      document.getElementById("pantallaMatematica").classList.add("oculto");
+      document.getElementById("pantallaInicio").classList.remove("oculto");
+    }
+
+    function digitarOtroEstudiante(){
+      cerrarModal();
+      limpiarLengua();
+      limpiarMatematica();
+
+      document.getElementById("inicioNombre").value = "";
+      document.getElementById("inicioID").value = "";
+      document.getElementById("inicioCentro").value = "";
+      mostrarEstadoBusqueda("", "neutra");
+      document.getElementById("nombre").value = "";
+      document.getElementById("idEstudiante").value = "";
+      document.getElementById("centro").value = "";
+      document.getElementById("nombreMa").value = "";
+      document.getElementById("idEstudianteMa").value = "";
+      document.getElementById("centroMa").value = "";
+      document.querySelectorAll('input[name="tipoPrueba"]').forEach(el => el.checked = false);
+
+      document.getElementById("pantallaLengua").classList.add("oculto");
+      document.getElementById("pantallaMatematica").classList.add("oculto");
+      document.getElementById("pantallaInicio").classList.remove("oculto");
+    }
   </script>
 </body>
 </html>
