@@ -929,6 +929,41 @@
       }
     }
 
+    function llamarAppsScript(params, callback, onError){
+      const nombreCallback = "callback_" + Date.now() + "_" + Math.floor(Math.random() * 100000);
+      let script;
+
+      window[nombreCallback] = function(respuesta){
+        try{
+          callback(respuesta);
+        } finally {
+          delete window[nombreCallback];
+          if(script && script.parentNode){
+            script.parentNode.removeChild(script);
+          }
+        }
+      };
+
+      const query = new URLSearchParams({
+        ...params,
+        callback: nombreCallback
+      });
+
+      script = document.createElement("script");
+      script.src = SCRIPT_URL + "?" + query.toString();
+      script.onerror = function(){
+        delete window[nombreCallback];
+        if(script && script.parentNode){
+          script.parentNode.removeChild(script);
+        }
+        if(onError){
+          onError();
+        }
+      };
+
+      document.body.appendChild(script);
+    }
+
     function buscarEstudianteDesdeInicio(mostrarAlerta){
       const id = document.getElementById("inicioID").value.trim();
       if(!id){
@@ -938,25 +973,15 @@
 
       mostrarEstadoBusqueda("Buscando estudiante...", "neutra");
 
-      if(typeof google !== "undefined" && google.script && google.script.run){
-        google.script.run
-          .withSuccessHandler(function(res){ procesarBusquedaEstudiante(res, mostrarAlerta); })
-          .withFailureHandler(function(err){
-            const mensaje = err && err.message ? err.message : "No se pudo consultar el listado.";
-            mostrarEstadoBusqueda(mensaje, "incorrecta");
-            if(mostrarAlerta) alert(mensaje);
-          })
-          .buscarEstudiantePorID(id);
-      } else {
-        fetch(SCRIPT_URL + "?accion=buscar&idEstudiante=" + encodeURIComponent(id))
-          .then(r => r.json())
-          .then(res => procesarBusquedaEstudiante(res, mostrarAlerta))
-          .catch(() => {
-            const mensaje = "No se pudo consultar el listado. Si está usando Apps Script, ejecute este HTML como archivo Index del proyecto.";
-            mostrarEstadoBusqueda(mensaje, "incorrecta");
-            if(mostrarAlerta) alert(mensaje);
-          });
-      }
+      llamarAppsScript(
+        { accion: "buscar", id: id },
+        function(res){ procesarBusquedaEstudiante(res, mostrarAlerta); },
+        function(){
+          const mensaje = "No se pudo consultar el listado. Verifique la implementación de Apps Script y que el acceso sea público.";
+          mostrarEstadoBusqueda(mensaje, "incorrecta");
+          if(mostrarAlerta) alert(mensaje);
+        }
+      );
     }
 
     function procesarBusquedaEstudiante(res, mostrarAlerta){
@@ -975,23 +1000,16 @@
     }
 
     function guardarResultadoServidor(payload, callback){
-      if(typeof google !== "undefined" && google.script && google.script.run){
-        google.script.run
-          .withSuccessHandler(function(res){ callback(res || {ok:true, mensaje:"Resultado guardado correctamente."}); })
-          .withFailureHandler(function(err){
-            callback({ok:false, mensaje: err && err.message ? err.message : "No se pudo guardar el resultado."});
-          })
-          .guardarResultado(payload);
-      } else {
-        fetch(SCRIPT_URL, {
-          method:"POST",
-          headers:{"Content-Type":"text/plain;charset=utf-8"},
-          body:JSON.stringify(payload)
-        })
-        .then(r => r.json())
-        .then(res => callback(res))
-        .catch(() => callback({ok:false, mensaje:"No se pudo guardar. Use este HTML dentro del proyecto Apps Script o habilite doPost en Code.gs."}));
-      }
+      llamarAppsScript(
+        {
+          accion: "guardar",
+          payload: JSON.stringify(payload)
+        },
+        function(res){ callback(res || {ok:true, mensaje:"Resultado guardado correctamente."}); },
+        function(){
+          callback({ok:false, mensaje:"No se pudo guardar. Verifique la implementación de Apps Script y que el acceso sea público."});
+        }
+      );
     }
 
     function mostrarModalYGuardar(mensaje, payload){
