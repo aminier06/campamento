@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Registro de pruebas</title>
+  <title>Registro de pruebas - Campamento Aprender es Divertido 2026</title>
   <style>
     :root{
       --azul:#0f4c81;
@@ -53,7 +53,7 @@
       position:relative;
       overflow:hidden;
       background:
-        linear-gradient(rgba(255,255,255,.68), rgba(255,255,255,.78)),
+        linear-gradient(rgba(255,255,255,.72), rgba(255,255,255,.84)),
         url("Foto campamento.png") center top/cover no-repeat;
     }
 
@@ -81,13 +81,17 @@
       font-weight:700;
     }
 
-    input[type="text"]{
+    input[type="text"], select{
       width:100%;
       padding:10px 12px;
       border:1px solid #cfd8e3;
       border-radius:10px;
       font-size:15px;
       background:#fff;
+    }
+
+    input[readonly]{
+      background:#f3f6f9;
     }
 
     .grupo-opciones{
@@ -108,12 +112,6 @@
 
     .opcion-prueba input[type="radio"]{
       transform:scale(1.15);
-    }
-
-    .opcion-prueba small{
-      color:var(--gris);
-      display:block;
-      margin-top:2px;
     }
 
     .ayuda{
@@ -186,6 +184,7 @@
       border-top:1px solid var(--borde);
       padding:16px 0 0;
       margin-top:12px;
+      z-index:20;
     }
 
     .barra{
@@ -301,11 +300,6 @@
       box-shadow:0 12px 30px rgba(0,0,0,.18);
     }
 
-    .modal h3{
-      margin-top:0;
-      margin-bottom:10px;
-    }
-
     .acciones-modal{
       display:flex;
       gap:12px;
@@ -358,10 +352,6 @@
       min-width:240px;
     }
 
-    .cabecera-inicio-texto h1{
-      margin-bottom:6px;
-    }
-
     @media (max-width:700px){
       .resultado-global{
         margin-left:0;
@@ -375,23 +365,32 @@
   <div id="pantallaInicio" class="pantalla-inicio">
     <div class="cabecera-inicio">
       <img src="Foto campamento.png" alt="Logo del campamento" class="logo-inicio">
-
       <div class="cabecera-inicio-texto">
         <h1>Registro de pruebas</h1>
-        <p class="nota">Complete los datos antes de iniciar la digitación.</p>
+        <p class="nota">Digite el ID para autocompletar el nombre del estudiante.</p>
       </div>
     </div>
 
     <div class="campo">
       <label for="inicioID">ID del estudiante</label>
-      <input type="text" id="inicioID" placeholder="Escriba el ID del estudiante" onblur="buscarEstudianteDesdeInicio(false)">
-      <button type="button" class="btn-secundario" onclick="buscarEstudianteDesdeInicio(true)">Buscar estudiante</button>
-      <div class="linea-respuesta neutra" id="estadoBusqueda"></div>
+      <input type="text" id="inicioID" placeholder="Escriba el ID del estudiante">
+      <button class="btn-secundario" type="button" onclick="buscarEstudiante()">Buscar estudiante</button>
+      <div class="linea-respuesta neutra" id="mensajeBusqueda"></div>
     </div>
 
     <div class="campo">
       <label for="inicioNombre">Nombre del estudiante</label>
-      <input type="text" id="inicioNombre" placeholder="Se completará automáticamente al colocar el ID" readonly>
+      <input type="text" id="inicioNombre" placeholder="Se completará al buscar el ID" readonly>
+    </div>
+
+    <div class="campo">
+      <label for="inicioRegional">Regional</label>
+      <input type="text" id="inicioRegional" readonly>
+    </div>
+
+    <div class="campo">
+      <label for="inicioDistrito">Distrito</label>
+      <input type="text" id="inicioDistrito" readonly>
     </div>
 
     <div class="campo">
@@ -424,7 +423,7 @@
         <div class="encabezado-con-logo">
           <img src="Foto campamento.png" alt="Imagen de apoyo" class="logo-esquina">
           <div class="encabezado-texto">
-            <h1>Instrumento B: Prueba de Lengua Española</h1>
+            <h1>Prueba de Lengua Española</h1>
             <div class="grid-info">
               <div class="campo">
                 <label for="nombre">Nombre completo del estudiante</label>
@@ -433,6 +432,14 @@
               <div class="campo">
                 <label for="idEstudiante">ID del estudiante</label>
                 <input type="text" id="idEstudiante" readonly>
+              </div>
+              <div class="campo">
+                <label for="regional">Regional</label>
+                <input type="text" id="regional" readonly>
+              </div>
+              <div class="campo">
+                <label for="distrito">Distrito</label>
+                <input type="text" id="distrito" readonly>
               </div>
               <div class="campo">
                 <label for="centro">Centro sede</label>
@@ -449,10 +456,10 @@
         <div class="item">
           <p>1. Selecciona la opción correcta.</p>
           <div class="opciones">
-            <label><input type="radio" name="p1" value="a"> a) moto</label>
-            <label><input type="radio" name="p1" value="b"> b) mata</label>
-            <label><input type="radio" name="p1" value="c"> c) moco</label>
-            <label><input type="radio" name="p1" value="d"> d) mono</label>
+            <label><input type="radio" name="p1" value="a"> a) abejas</label>
+            <label><input type="radio" name="p1" value="b"> b) almejas</label>
+            <label><input type="radio" name="p1" value="c"> c) manejas</label>
+            <label><input type="radio" name="p1" value="d"> d) arvejas</label>
           </div>
           <div class="linea-respuesta" id="r-p1"></div>
         </div>
@@ -460,10 +467,10 @@
         <div class="item">
           <p>2. Selecciona la opción correcta.</p>
           <div class="opciones">
-            <label><input type="radio" name="p2" value="a"> a) pluma</label>
-            <label><input type="radio" name="p2" value="b"> b) paloma</label>
-            <label><input type="radio" name="p2" value="c"> c) palona</label>
-            <label><input type="radio" name="p2" value="d"> d) palloma</label>
+            <label><input type="radio" name="p2" value="a"> a) piel</label>
+            <label><input type="radio" name="p2" value="b"> b) fiel</label>
+            <label><input type="radio" name="p2" value="c"> c) miel</label>
+            <label><input type="radio" name="p2" value="d"> d) riel</label>
           </div>
           <div class="linea-respuesta" id="r-p2"></div>
         </div>
@@ -471,15 +478,15 @@
         <div class="item">
           <p>3. Selecciona la opción correcta.</p>
           <div class="opciones">
-            <label><input type="radio" name="p3" value="a"> a) cocodilo</label>
-            <label><input type="radio" name="p3" value="b"> b) cocobrilo</label>
-            <label><input type="radio" name="p3" value="c"> c) cocodrilo</label>
-            <label><input type="radio" name="p3" value="d"> d) cocolilo</label>
+            <label><input type="radio" name="p3" value="a"> a) ciruela</label>
+            <label><input type="radio" name="p3" value="b"> b) muela</label>
+            <label><input type="radio" name="p3" value="c"> c) abuela</label>
+            <label><input type="radio" name="p3" value="d"> d) escuela</label>
           </div>
           <div class="linea-respuesta" id="r-p3"></div>
         </div>
 
-        <div class="ayuda">Ahora escucharás palabras que no tienen significado. Presta mucha atención. En cada fila, selecciona la opción correcta.</div>
+        <div class="ayuda">Ahora escucharás palabras que no tienen significado. Presta mucha atención.</div>
 
         <div class="item">
           <p>4. Selecciona la opción correcta.</p>
@@ -487,7 +494,7 @@
             <label><input type="radio" name="p4" value="a"> a) Lomipe</label>
             <label><input type="radio" name="p4" value="b"> b) Lapimo</label>
             <label><input type="radio" name="p4" value="c"> c) Lemipo</label>
-            <label><input type="radio" name="p4" value="d"> d) Lopame</label>
+            <label><input type="radio" name="p4" value="d"> d) lopame</label>
           </div>
           <div class="linea-respuesta" id="r-p4"></div>
         </div>
@@ -498,7 +505,7 @@
             <label><input type="radio" name="p5" value="a"> a) trusal</label>
             <label><input type="radio" name="p5" value="b"> b) trisa</label>
             <label><input type="radio" name="p5" value="c"> c) tursal</label>
-            <label><input type="radio" name="p5" value="d"> d) turusal</label>
+            <label><input type="radio" name="p5" value="d"> d) turusa</label>
           </div>
           <div class="linea-respuesta" id="r-p5"></div>
         </div>
@@ -506,7 +513,7 @@
 
       <div class="seccion">
         <h2>2. Completa los nombres de las palabras</h2>
-        <div class="ayuda">Escribe la letra que falta en cada palabra, usando letras del recuadro original: c, l, n, g, s, r, k, m.</div>
+        <div class="ayuda">Escribe la letra que falta en cada palabra.</div>
 
         <div class="dos-columnas">
           <div class="item">
@@ -532,12 +539,12 @@
         <h2>3. Organiza correctamente las sílabas</h2>
         <div class="fila-palabras">
           <div class="caja-palabra">
-            <strong>1. tra - es - ma</strong>
+            <strong>1. ra - es - ma</strong>
             <p class="enunciado-hueco"><input type="text" id="p10"></p>
             <div class="linea-respuesta" id="r-p10"></div>
           </div>
           <div class="caja-palabra">
-            <strong>2. bri - lla - som</strong>
+            <strong>2. ri - lla - som</strong>
             <p class="enunciado-hueco"><input type="text" id="p11"></p>
             <div class="linea-respuesta" id="r-p11"></div>
           </div>
@@ -547,7 +554,7 @@
             <div class="linea-respuesta" id="r-p12"></div>
           </div>
           <div class="caja-palabra">
-            <strong>4. po - sa - ri - ma</strong>
+            <strong>4. po - ri - ma - sa</strong>
             <p class="enunciado-hueco"><input type="text" id="p13"></p>
             <div class="linea-respuesta" id="r-p13"></div>
           </div>
@@ -556,7 +563,9 @@
 
       <div class="seccion">
         <h2>4. Lee el texto y responde</h2>
-        <div class="ayuda">Texto base: <strong>El gato y los ratones</strong>.</div>
+        <div class="ayuda">
+          Texto base: <strong>El gato y los ratones</strong>. Responde según la lectura aplicada en la prueba.
+        </div>
 
         <div class="item">
           <p>1. ¿Cuál es el nombre del gato?</p>
@@ -600,7 +609,7 @@
       </div>
 
       <div class="seccion">
-        <h2>5. Completa cada una de las siguientes ideas utilizando las palabras del recuadro</h2>
+        <h2>5. Completa cada idea utilizando las palabras del recuadro</h2>
         <div class="ayuda">solución / cascabel / madrigueras / astuto</div>
 
         <div class="item">
@@ -630,33 +639,18 @@
         </div>
 
         <div class="tabla-bloques">
-          <div class="item">
-            <p><strong>Bloque 1. Discrimina sonidos con correspondencia</strong></p>
-            <div class="linea-respuesta neutra" id="bloque1"></div>
-          </div>
-          <div class="item">
-            <p><strong>Bloque 2. Completa palabras con fonemas adecuados</strong></p>
-            <div class="linea-respuesta neutra" id="bloque2"></div>
-          </div>
-          <div class="item">
-            <p><strong>Bloque 3. Organiza sílabas para formar palabras</strong></p>
-            <div class="linea-respuesta neutra" id="bloque3"></div>
-          </div>
-          <div class="item">
-            <p><strong>Bloque 4. Comprende información explícita e implícita</strong></p>
-            <div class="linea-respuesta neutra" id="bloque4"></div>
-          </div>
-          <div class="item">
-            <p><strong>Bloque 5. Completa ideas con vocabulario pertinente</strong></p>
-            <div class="linea-respuesta neutra" id="bloque5"></div>
-          </div>
+          <div class="item"><p><strong>Indicador 1. Discrimina sonidos con correspondencia</strong></p><div class="linea-respuesta neutra" id="bloque1"></div></div>
+          <div class="item"><p><strong>Indicador 2. Completa palabras con fonemas adecuados</strong></p><div class="linea-respuesta neutra" id="bloque2"></div></div>
+          <div class="item"><p><strong>Indicador 3. Organiza sílabas para formar palabras</strong></p><div class="linea-respuesta neutra" id="bloque3"></div></div>
+          <div class="item"><p><strong>Indicador 4. Comprende información explícita e implícita</strong></p><div class="linea-respuesta neutra" id="bloque4"></div></div>
+          <div class="item"><p><strong>Indicador 5. Completa ideas con vocabulario pertinente</strong></p><div class="linea-respuesta neutra" id="bloque5"></div></div>
         </div>
       </div>
     </div>
 
     <div class="controles">
       <div class="barra">
-        <button class="btn-principal" onclick="revisarPruebaLengua()">Enviar</button>
+        <button class="btn-principal" onclick="revisarPruebaLengua()">Enviar y guardar</button>
         <button class="btn-secundario" onclick="volverInicio()">Volver al inicio</button>
         <button class="btn-secundario" onclick="reiniciarLengua()">Reiniciar esta prueba</button>
         <div class="resultado-global" id="resultadoGlobalLengua">Puntuación: 0 / 21</div>
@@ -673,18 +667,11 @@
           <div class="encabezado-texto">
             <h1>Prueba de Matemática</h1>
             <div class="grid-info">
-              <div class="campo">
-                <label for="nombreMa">Nombre completo del estudiante</label>
-                <input type="text" id="nombreMa" readonly>
-              </div>
-              <div class="campo">
-                <label for="idEstudianteMa">ID del estudiante</label>
-                <input type="text" id="idEstudianteMa" readonly>
-              </div>
-              <div class="campo">
-                <label for="centroMa">Centro sede</label>
-                <input type="text" id="centroMa" readonly>
-              </div>
+              <div class="campo"><label for="nombreMa">Nombre completo del estudiante</label><input type="text" id="nombreMa" readonly></div>
+              <div class="campo"><label for="idEstudianteMa">ID del estudiante</label><input type="text" id="idEstudianteMa" readonly></div>
+              <div class="campo"><label for="regionalMa">Regional</label><input type="text" id="regionalMa" readonly></div>
+              <div class="campo"><label for="distritoMa">Distrito</label><input type="text" id="distritoMa" readonly></div>
+              <div class="campo"><label for="centroMa">Centro sede</label><input type="text" id="centroMa" readonly></div>
             </div>
           </div>
         </div>
@@ -693,210 +680,133 @@
       <div class="seccion">
         <h2>1. La abuela de Lucas tiene varias operaciones matemáticas que quiere realizar, para luego ir de compras, ¿la ayudas?</h2>
         <div class="ops-grid">
-          <div class="op-card">
-            <div class="expr">34
-+12</div>
-            <input type="text" id="ma1a" placeholder="Resultado">
-            <div class="linea-respuesta" id="r-ma1a"></div>
-          </div>
-          <div class="op-card">
-            <div class="expr">234
-+45</div>
-            <input type="text" id="ma1b" placeholder="Resultado">
-            <div class="linea-respuesta" id="r-ma1b"></div>
-          </div>
-          <div class="op-card">
-            <div class="expr">347
-+367</div>
-            <input type="text" id="ma1c" placeholder="Resultado">
-            <div class="linea-respuesta" id="r-ma1c"></div>
-          </div>
-          <div class="op-card">
-            <div class="expr">79
--56</div>
-            <input type="text" id="ma1d" placeholder="Resultado">
-            <div class="linea-respuesta" id="r-ma1d"></div>
-          </div>
-          <div class="op-card">
-            <div class="expr">465
--54</div>
-            <input type="text" id="ma1e" placeholder="Resultado">
-            <div class="linea-respuesta" id="r-ma1e"></div>
-          </div>
-          <div class="op-card">
-            <div class="expr">546
--537</div>
-            <input type="text" id="ma1f" placeholder="Resultado">
-            <div class="linea-respuesta" id="r-ma1f"></div>
-          </div>
+          <div class="op-card"><div class="expr">34
++12</div><input type="text" id="ma1a" placeholder="Resultado"><div class="linea-respuesta" id="r-ma1a"></div></div>
+          <div class="op-card"><div class="expr">234
++45</div><input type="text" id="ma1b" placeholder="Resultado"><div class="linea-respuesta" id="r-ma1b"></div></div>
+          <div class="op-card"><div class="expr">347
++367</div><input type="text" id="ma1c" placeholder="Resultado"><div class="linea-respuesta" id="r-ma1c"></div></div>
+          <div class="op-card"><div class="expr">79
+-56</div><input type="text" id="ma1d" placeholder="Resultado"><div class="linea-respuesta" id="r-ma1d"></div></div>
+          <div class="op-card"><div class="expr">465
+-54</div><input type="text" id="ma1e" placeholder="Resultado"><div class="linea-respuesta" id="r-ma1e"></div></div>
+          <div class="op-card"><div class="expr">546
+-537</div><input type="text" id="ma1f" placeholder="Resultado"><div class="linea-respuesta" id="r-ma1f"></div></div>
         </div>
       </div>
 
       <div class="seccion">
-        <h2>2. El número de la casa de María es 708 se lee:</h2>
-        <div class="item">
-          <div class="opciones">
-            <label><input type="radio" name="ma2" value="a"> A) Setenta y ocho</label>
-            <label><input type="radio" name="ma2" value="b"> B) Setecientos ocho</label>
-            <label><input type="radio" name="ma2" value="c"> C) Setecientos ochenta</label>
-            <label><input type="radio" name="ma2" value="d"> D) Siete mil ocho</label>
-          </div>
-          <div class="linea-respuesta" id="r-ma2"></div>
-        </div>
+        <h2>2. El número de la casa de María es 708. Se lee:</h2>
+        <div class="item"><div class="opciones">
+          <label><input type="radio" name="ma2" value="a"> A) Setenta y ocho</label>
+          <label><input type="radio" name="ma2" value="b"> B) Setecientos ocho</label>
+          <label><input type="radio" name="ma2" value="c"> C) Setecientos ochenta</label>
+          <label><input type="radio" name="ma2" value="d"> D) Siete mil ocho</label>
+        </div><div class="linea-respuesta" id="r-ma2"></div></div>
       </div>
 
       <div class="seccion">
-        <h2>3. Mil ochocientos cuarenta y cuatro es el año de nuestra Independencia Nacional, en cifra es:</h2>
-        <div class="item">
-          <div class="opciones">
-            <label><input type="radio" name="ma3" value="a"> A) 1,844</label>
-            <label><input type="radio" name="ma3" value="b"> B) 1,484</label>
-            <label><input type="radio" name="ma3" value="c"> C) 8,144</label>
-            <label><input type="radio" name="ma3" value="d"> D) 8,414</label>
-          </div>
-          <div class="linea-respuesta" id="r-ma3"></div>
-        </div>
+        <h2>3. Mil ochocientos cuarenta y cuatro es el año de nuestra Independencia Nacional. En cifra es:</h2>
+        <div class="item"><div class="opciones">
+          <label><input type="radio" name="ma3" value="a"> A) 1,844</label>
+          <label><input type="radio" name="ma3" value="b"> B) 1,484</label>
+          <label><input type="radio" name="ma3" value="c"> C) 8,144</label>
+          <label><input type="radio" name="ma3" value="d"> D) 8,414</label>
+        </div><div class="linea-respuesta" id="r-ma3"></div></div>
       </div>
 
       <div class="seccion">
         <h2>4. ¿Cuál de estos números es el mayor?</h2>
-        <div class="item">
-          <div class="opciones">
-            <label><input type="radio" name="ma4" value="a"> A) 2735</label>
-            <label><input type="radio" name="ma4" value="b"> B) 2537</label>
-            <label><input type="radio" name="ma4" value="c"> C) 2573</label>
-            <label><input type="radio" name="ma4" value="d"> D) 2753</label>
-          </div>
-          <div class="linea-respuesta" id="r-ma4"></div>
-        </div>
+        <div class="item"><div class="opciones">
+          <label><input type="radio" name="ma4" value="a"> A) 2735</label>
+          <label><input type="radio" name="ma4" value="b"> B) 2537</label>
+          <label><input type="radio" name="ma4" value="c"> C) 2573</label>
+          <label><input type="radio" name="ma4" value="d"> D) 2753</label>
+        </div><div class="linea-respuesta" id="r-ma4"></div></div>
       </div>
 
       <div class="seccion">
         <h2>5. Ordena de menor a mayor los precios y selecciona la opción correcta</h2>
-        <div class="ayuda">
-          Fresa RD$155 · Sandía RD$150 · Piña RD$140 · Manzana RD$160 · Guineo RD$145
-        </div>
-        <div class="item">
-          <div class="opciones">
-            <label><input type="radio" name="ma5" value="a"> A) 140, 155, 160, 145, 150</label>
-            <label><input type="radio" name="ma5" value="b"> B) 140, 150, 145, 155, 160</label>
-            <label><input type="radio" name="ma5" value="c"> C) 140, 155, 150, 145, 160</label>
-            <label><input type="radio" name="ma5" value="d"> D) 140, 145, 150, 155, 160</label>
-          </div>
-          <div class="linea-respuesta" id="r-ma5"></div>
-        </div>
+        <div class="ayuda">Fresa RD$155 · Sandía RD$150 · Piña RD$140 · Manzana RD$160 · Guineo RD$145</div>
+        <div class="item"><div class="opciones">
+          <label><input type="radio" name="ma5" value="a"> A) 140, 155, 160, 145, 150</label>
+          <label><input type="radio" name="ma5" value="b"> B) 140, 150, 145, 155, 160</label>
+          <label><input type="radio" name="ma5" value="c"> C) 140, 155, 150, 145, 160</label>
+          <label><input type="radio" name="ma5" value="d"> D) 140, 145, 150, 155, 160</label>
+        </div><div class="linea-respuesta" id="r-ma5"></div></div>
       </div>
 
       <div class="seccion">
-        <h2>6. En un juego en línea Manuel tiene 63 vidas y regala a su hermana 25 vidas. ¿Cuántas vidas le quedaron a Manuel?</h2>
-        <div class="item">
-          <div class="opciones">
-            <label><input type="radio" name="ma6" value="a"> A) 28 vidas</label>
-            <label><input type="radio" name="ma6" value="b"> B) 38 vidas</label>
-            <label><input type="radio" name="ma6" value="c"> C) 42 vidas</label>
-            <label><input type="radio" name="ma6" value="d"> D) 88 vidas</label>
-          </div>
-          <div class="linea-respuesta" id="r-ma6"></div>
-        </div>
+        <h2>6. En un juego en línea Manuel tiene 63 vidas y regala a su hermana 25 vidas. ¿Cuántas vidas le quedaron?</h2>
+        <div class="item"><div class="opciones">
+          <label><input type="radio" name="ma6" value="a"> A) 28 vidas</label>
+          <label><input type="radio" name="ma6" value="b"> B) 38 vidas</label>
+          <label><input type="radio" name="ma6" value="c"> C) 42 vidas</label>
+          <label><input type="radio" name="ma6" value="d"> D) 88 vidas</label>
+        </div><div class="linea-respuesta" id="r-ma6"></div></div>
       </div>
 
       <div class="seccion">
-        <h2>7. Wilson abre su alcancía y cuenta con RD$575 para ir de compras, su papá le regala RD$360. ¿Cuánto dinero tiene Wilson en total?</h2>
-        <div class="item">
-          <div class="opciones">
-            <label><input type="radio" name="ma7" value="a"> A) RD$8,135</label>
-            <label><input type="radio" name="ma7" value="b"> B) RD$9,135</label>
-            <label><input type="radio" name="ma7" value="c"> C) RD$835</label>
-            <label><input type="radio" name="ma7" value="d"> D) RD$935</label>
-          </div>
-          <div class="linea-respuesta" id="r-ma7"></div>
-        </div>
+        <h2>7. Wilson tiene RD$575 y su papá le regala RD$360. ¿Cuánto dinero tiene en total?</h2>
+        <div class="item"><div class="opciones">
+          <label><input type="radio" name="ma7" value="a"> A) RD$8,135</label>
+          <label><input type="radio" name="ma7" value="b"> B) RD$9,135</label>
+          <label><input type="radio" name="ma7" value="c"> C) RD$835</label>
+          <label><input type="radio" name="ma7" value="d"> D) RD$935</label>
+        </div><div class="linea-respuesta" id="r-ma7"></div></div>
       </div>
 
       <div class="seccion">
-        <h2>8. En un restaurante se sirven 54 mesas, cada mesa tiene 6 platos. ¿Cuántos platos se sirven en total en el restaurante?</h2>
-        <div class="item">
-          <div class="opciones">
-            <label><input type="radio" name="ma8" value="a"> A) 324 platos</label>
-            <label><input type="radio" name="ma8" value="b"> B) 342 platos</label>
-            <label><input type="radio" name="ma8" value="c"> C) 432 platos</label>
-            <label><input type="radio" name="ma8" value="d"> D) 312 platos</label>
-          </div>
-          <div class="linea-respuesta" id="r-ma8"></div>
-        </div>
+        <h2>8. En un restaurante se sirven 54 mesas, cada mesa tiene 6 platos. ¿Cuántos platos se sirven en total?</h2>
+        <div class="item"><div class="opciones">
+          <label><input type="radio" name="ma8" value="a"> A) 324 platos</label>
+          <label><input type="radio" name="ma8" value="b"> B) 342 platos</label>
+          <label><input type="radio" name="ma8" value="c"> C) 432 platos</label>
+          <label><input type="radio" name="ma8" value="d"> D) 312 platos</label>
+        </div><div class="linea-respuesta" id="r-ma8"></div></div>
       </div>
 
       <div class="seccion">
         <h2>9. Escribe la cifra que corresponde a cada valor posicional: 679</h2>
         <div class="dos-columnas">
-          <div class="item">
-            <p class="enunciado-hueco"><input type="text" id="ma9c" class="small-input"> Centenas</p>
-            <div class="linea-respuesta" id="r-ma9c"></div>
-          </div>
-          <div class="item">
-            <p class="enunciado-hueco"><input type="text" id="ma9d" class="small-input"> Decenas</p>
-            <div class="linea-respuesta" id="r-ma9d"></div>
-          </div>
-          <div class="item">
-            <p class="enunciado-hueco"><input type="text" id="ma9u" class="small-input"> Unidades</p>
-            <div class="linea-respuesta" id="r-ma9u"></div>
-          </div>
+          <div class="item"><p class="enunciado-hueco"><input type="text" id="ma9c" class="small-input"> Centenas</p><div class="linea-respuesta" id="r-ma9c"></div></div>
+          <div class="item"><p class="enunciado-hueco"><input type="text" id="ma9d" class="small-input"> Decenas</p><div class="linea-respuesta" id="r-ma9d"></div></div>
+          <div class="item"><p class="enunciado-hueco"><input type="text" id="ma9u" class="small-input"> Unidades</p><div class="linea-respuesta" id="r-ma9u"></div></div>
         </div>
       </div>
 
       <div class="seccion">
-        <h2>10. La escuela de Karla empieza a las 7. Ella llega una hora tarde. ¿A qué hora llega a la escuela?</h2>
-        <div class="item">
-          <div class="opciones">
-            <label><input type="radio" name="ma10" value="a"> A) A las 6</label>
-            <label><input type="radio" name="ma10" value="b"> B) A las 8</label>
-            <label><input type="radio" name="ma10" value="c"> C) A la 1</label>
-            <label><input type="radio" name="ma10" value="d"> D) A las 12</label>
-          </div>
-          <div class="linea-respuesta" id="r-ma10"></div>
-        </div>
+        <h2>10. La escuela de Karla empieza a las 7. Ella llega una hora tarde. ¿A qué hora llega?</h2>
+        <div class="item"><div class="opciones">
+          <label><input type="radio" name="ma10" value="a"> A) A las 6</label>
+          <label><input type="radio" name="ma10" value="b"> B) A las 8</label>
+          <label><input type="radio" name="ma10" value="c"> C) A la 1</label>
+          <label><input type="radio" name="ma10" value="d"> D) A las 12</label>
+        </div><div class="linea-respuesta" id="r-ma10"></div></div>
       </div>
 
       <div class="seccion">
-        <h2>Resultado de la evaluación de Matemática</h2>
+        <h2>Resultado de la evaluación</h2>
         <div class="item">
           <p><strong>Clasificación global del estudiante</strong></p>
-          <div class="linea-respuesta neutra" id="clasificacionGlobalMatematica"></div>
-          <div class="nota" id="detalleClasificacionMatematica"></div>
+          <div class="linea-respuesta neutra" id="clasificacionGlobalMa"></div>
+          <div class="nota" id="detalleClasificacionMa"></div>
         </div>
-
         <div class="tabla-bloques">
-          <div class="item">
-            <p><strong>Indicador 1. Aplica operaciones básicas de suma y resta</strong></p>
-            <div class="linea-respuesta neutra" id="maIndicador1"></div>
-          </div>
-          <div class="item">
-            <p><strong>Indicador 2. Lee y escribe números en diferentes representaciones</strong></p>
-            <div class="linea-respuesta neutra" id="maIndicador2"></div>
-          </div>
-          <div class="item">
-            <p><strong>Indicador 3. Compara y ordena números</strong></p>
-            <div class="linea-respuesta neutra" id="maIndicador3"></div>
-          </div>
-          <div class="item">
-            <p><strong>Indicador 4. Resuelve problemas de suma y resta en contexto</strong></p>
-            <div class="linea-respuesta neutra" id="maIndicador4"></div>
-          </div>
-          <div class="item">
-            <p><strong>Indicador 5. Resuelve problemas diversos en contexto</strong></p>
-            <div class="linea-respuesta neutra" id="maIndicador5"></div>
-          </div>
-          <div class="item">
-            <p><strong>Indicador 6. Identifica el valor posicional de las cifras</strong></p>
-            <div class="linea-respuesta neutra" id="maIndicador6"></div>
-          </div>
+          <div class="item"><p><strong>Indicador 1. Aplica operaciones básicas</strong></p><div class="linea-respuesta neutra" id="maInd1"></div></div>
+          <div class="item"><p><strong>Indicador 2. Lee y escribe números en diferentes representaciones</strong></p><div class="linea-respuesta neutra" id="maInd2"></div></div>
+          <div class="item"><p><strong>Indicador 3. Compara y ordena números</strong></p><div class="linea-respuesta neutra" id="maInd3"></div></div>
+          <div class="item"><p><strong>Indicador 4. Resuelve problemas de suma y resta</strong></p><div class="linea-respuesta neutra" id="maInd4"></div></div>
+          <div class="item"><p><strong>Indicador 5. Resuelve problemas de multiplicación</strong></p><div class="linea-respuesta neutra" id="maInd5"></div></div>
+          <div class="item"><p><strong>Indicador 6. Identifica valor posicional</strong></p><div class="linea-respuesta neutra" id="maInd6"></div></div>
+          <div class="item"><p><strong>Indicador 7. Resuelve situaciones de tiempo</strong></p><div class="linea-respuesta neutra" id="maInd7"></div></div>
         </div>
       </div>
     </div>
 
     <div class="controles">
       <div class="barra">
-        <button class="btn-principal" onclick="revisarPruebaMatematica()">Enviar</button>
+        <button class="btn-principal" onclick="revisarPruebaMatematica()">Enviar y guardar</button>
         <button class="btn-secundario" onclick="volverInicio()">Volver al inicio</button>
         <button class="btn-secundario" onclick="reiniciarMatematica()">Reiniciar esta prueba</button>
         <div class="resultado-global" id="resultadoGlobalMatematica">Puntuación: 0 / 17</div>
@@ -908,7 +818,6 @@
     <div class="modal">
       <h3>Proceso completado</h3>
       <p id="mensajeModal"></p>
-      <p class="nota" id="estadoGuardado"></p>
       <p class="nota">¿Qué desea hacer ahora?</p>
       <div class="acciones-modal">
         <button class="btn-principal" onclick="digitarOtraPrueba()">Digitar otra prueba</button>
@@ -921,115 +830,6 @@
   <script>
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw7NjbP8xQDMAini1c0OzQ6yhzFwdp51A-LQpvF-WNSFpkElO3Xb8PaOsd_peHWEVE5AQ/exec";
 
-    function mostrarEstadoBusqueda(mensaje, clase = "neutra"){
-      const el = document.getElementById("estadoBusqueda");
-      if(el){
-        el.className = "linea-respuesta " + clase;
-        el.textContent = mensaje;
-      }
-    }
-
-    function llamarAppsScript(params, callback, onError){
-      const nombreCallback = "callback_" + Date.now() + "_" + Math.floor(Math.random() * 100000);
-      let script;
-
-      window[nombreCallback] = function(respuesta){
-        try{
-          callback(respuesta);
-        } finally {
-          delete window[nombreCallback];
-          if(script && script.parentNode){
-            script.parentNode.removeChild(script);
-          }
-        }
-      };
-
-      const query = new URLSearchParams({
-        ...params,
-        callback: nombreCallback
-      });
-
-      script = document.createElement("script");
-      script.src = SCRIPT_URL + "?" + query.toString();
-      script.onerror = function(){
-        delete window[nombreCallback];
-        if(script && script.parentNode){
-          script.parentNode.removeChild(script);
-        }
-        if(onError){
-          onError();
-        }
-      };
-
-      document.body.appendChild(script);
-    }
-
-    function buscarEstudianteDesdeInicio(mostrarAlerta){
-      const id = document.getElementById("inicioID").value.trim();
-      if(!id){
-        mostrarEstadoBusqueda("Digite el ID del estudiante.", "incorrecta");
-        return;
-      }
-
-      mostrarEstadoBusqueda("Buscando estudiante...", "neutra");
-
-      llamarAppsScript(
-        { accion: "buscar", id: id },
-        function(res){ procesarBusquedaEstudiante(res, mostrarAlerta); },
-        function(){
-          const mensaje = "No se pudo consultar el listado. Verifique la implementación de Apps Script y que el acceso sea público.";
-          mostrarEstadoBusqueda(mensaje, "incorrecta");
-          if(mostrarAlerta) alert(mensaje);
-        }
-      );
-    }
-
-    function procesarBusquedaEstudiante(res, mostrarAlerta){
-      if(res && res.encontrado){
-        document.getElementById("inicioNombre").value = res.nombre || "";
-        if(res.centro && document.getElementById("inicioCentro")){
-          document.getElementById("inicioCentro").value = res.centro;
-        }
-        mostrarEstadoBusqueda("Estudiante encontrado.", "correcta");
-        return;
-      }
-      const mensaje = (res && res.mensaje) ? res.mensaje : "No se encontró un estudiante con ese ID.";
-      document.getElementById("inicioNombre").value = "";
-      mostrarEstadoBusqueda(mensaje, "incorrecta");
-      if(mostrarAlerta) alert(mensaje);
-    }
-
-    function guardarResultadoServidor(payload, callback){
-      llamarAppsScript(
-        {
-          accion: "guardar",
-          payload: JSON.stringify(payload)
-        },
-        function(res){ callback(res || {ok:true, mensaje:"Resultado guardado correctamente."}); },
-        function(){
-          callback({ok:false, mensaje:"No se pudo guardar. Verifique la implementación de Apps Script y que el acceso sea público."});
-        }
-      );
-    }
-
-    function mostrarModalYGuardar(mensaje, payload){
-      document.getElementById("mensajeModal").textContent = mensaje;
-      document.getElementById("estadoGuardado").className = "nota";
-      document.getElementById("estadoGuardado").textContent = "Guardando resultado en la hoja de cálculo...";
-      document.getElementById("modalFinal").classList.remove("oculto");
-
-      guardarResultadoServidor(payload, function(res){
-        const estado = document.getElementById("estadoGuardado");
-        if(res && res.ok){
-          estado.textContent = res.mensaje || "Resultado guardado correctamente.";
-          estado.style.color = "#1b8f4d";
-        } else {
-          estado.textContent = (res && res.mensaje) ? res.mensaje : "No se pudo confirmar el guardado.";
-          estado.style.color = "#c0392b";
-        }
-      });
-    }
-
     const respuestasTexto = {
       p6: "c", p7: "g", p8: "s", p9: "l",
       p10: "maestra", p11: "sombrilla", p12: "barco", p13: "mariposa",
@@ -1037,53 +837,115 @@
     };
 
     const respuestasMatematica = {
-      ma1a: "46",
-      ma1b: "279",
-      ma1c: "714",
-      ma1d: "23",
-      ma1e: "411",
-      ma1f: "9",
-      ma9c: "6",
-      ma9d: "7",
-      ma9u: "9"
+      ma1a: "46", ma1b: "279", ma1c: "714", ma1d: "23", ma1e: "411", ma1f: "9",
+      ma9c: "6", ma9d: "7", ma9u: "9"
     };
+
+    let ultimoResultadoLengua = null;
+    let ultimoResultadoMatematica = null;
+
+    function jsonp(params, callback, errorCallback){
+      const callbackName = "jsonp_cb_" + Date.now() + "_" + Math.floor(Math.random()*100000);
+      const script = document.createElement("script");
+
+      window[callbackName] = function(respuesta){
+        try { callback(respuesta); }
+        finally {
+          delete window[callbackName];
+          if (script.parentNode) script.parentNode.removeChild(script);
+        }
+      };
+
+      const url = new URL(SCRIPT_URL);
+      Object.keys(params).forEach(k => url.searchParams.set(k, params[k]));
+      url.searchParams.set("callback", callbackName);
+
+      script.src = url.toString();
+      script.onerror = function(){
+        delete window[callbackName];
+        if (script.parentNode) script.parentNode.removeChild(script);
+        if(errorCallback) errorCallback();
+      };
+
+      document.body.appendChild(script);
+    }
+
+    function buscarEstudiante(){
+      const id = document.getElementById("inicioID").value.trim();
+      const mensaje = document.getElementById("mensajeBusqueda");
+      mensaje.className = "linea-respuesta neutra";
+      mensaje.textContent = "";
+
+      if(!id){
+        alert("Debe digitar el ID del estudiante.");
+        return;
+      }
+
+      mensaje.textContent = "Consultando listado...";
+
+      jsonp(
+        { accion:"buscar", id:id },
+        function(respuesta){
+          if(respuesta && respuesta.encontrado){
+            document.getElementById("inicioNombre").value = respuesta.nombre || "";
+            document.getElementById("inicioRegional").value = respuesta.regional || "";
+            document.getElementById("inicioDistrito").value = respuesta.distrito || "";
+            mensaje.className = "linea-respuesta correcta";
+            mensaje.textContent = "Estudiante encontrado.";
+          }else{
+            document.getElementById("inicioNombre").value = "";
+            document.getElementById("inicioRegional").value = "";
+            document.getElementById("inicioDistrito").value = "";
+            mensaje.className = "linea-respuesta incorrecta";
+            mensaje.textContent = (respuesta && respuesta.mensaje) ? respuesta.mensaje : "No se encontró el estudiante.";
+          }
+        },
+        function(){
+          mensaje.className = "linea-respuesta incorrecta";
+          mensaje.textContent = "No se pudo consultar el listado. Verifique la implementación de Apps Script y que el acceso sea público.";
+        }
+      );
+    }
+
+    function guardarResultado(payload, callback){
+      jsonp(
+        { accion:"guardar", payload:JSON.stringify(payload) },
+        function(respuesta){
+          callback(respuesta);
+        },
+        function(){
+          callback({ ok:false, mensaje:"No se pudo guardar. Verifique la implementación de Apps Script." });
+        }
+      );
+    }
 
     function obtenerPruebaSeleccionada(){
       return document.querySelector('input[name="tipoPrueba"]:checked');
     }
 
     function iniciarProceso(){
+      const id = document.getElementById("inicioID").value.trim();
       const nombre = document.getElementById("inicioNombre").value.trim();
-      const idEstudiante = document.getElementById("inicioID").value.trim();
+      const regional = document.getElementById("inicioRegional").value.trim();
+      const distrito = document.getElementById("inicioDistrito").value.trim();
       const centro = document.getElementById("inicioCentro").value.trim();
       const prueba = obtenerPruebaSeleccionada();
 
-      if(!idEstudiante){
-        alert("Debe digitar el ID del estudiante.");
-        return;
-      }
+      if(!id){ alert("Debe digitar el ID del estudiante."); return; }
+      if(!nombre){ alert("Debe buscar el estudiante para autocompletar el nombre."); return; }
+      if(!centro){ alert("Debe digitar el nombre del centro sede."); return; }
+      if(!prueba){ alert("Debe seleccionar la prueba que se va a digitar."); return; }
 
-      if(!nombre){
-        alert("Debe buscar el estudiante por ID antes de continuar.");
-        buscarEstudianteDesdeInicio(true);
-        return;
-      }
-
-      if(!centro){
-        alert("Debe digitar el nombre del centro sede.");
-        return;
-      }
-
-      if(!prueba){
-        alert("Debe seleccionar la prueba que se va a digitar.");
-        return;
-      }
-
+      document.getElementById("idEstudiante").value = id;
       document.getElementById("nombre").value = nombre;
-      document.getElementById("idEstudiante").value = idEstudiante;
+      document.getElementById("regional").value = regional;
+      document.getElementById("distrito").value = distrito;
       document.getElementById("centro").value = centro;
+
+      document.getElementById("idEstudianteMa").value = id;
       document.getElementById("nombreMa").value = nombre;
-      document.getElementById("idEstudianteMa").value = idEstudiante;
+      document.getElementById("regionalMa").value = regional;
+      document.getElementById("distritoMa").value = distrito;
       document.getElementById("centroMa").value = centro;
 
       document.getElementById("pantallaInicio").classList.add("oculto");
@@ -1151,90 +1013,33 @@
       return 0;
     }
 
-    function obtenerNivelBloque(aciertos, actividad){
-      let texto = "", clase = "", nivel = "";
-
+    function obtenerNivelBloqueLengua(aciertos, actividad){
       if (actividad === 1) {
-        if (aciertos <= 1) {
-          nivel = "Elemental";
-          texto = `Elemental (${aciertos}/5).`;
-          clase = "elemental";
-        } else if (aciertos <= 3) {
-          nivel = "Aceptable";
-          texto = `Aceptable (${aciertos}/5).`;
-          clase = "aceptable";
-        } else {
-          nivel = "Satisfactorio";
-          texto = `Satisfactorio (${aciertos}/5).`;
-          clase = "satisfactorio";
-        }
+        if (aciertos <= 1) return { nivel:"Elemental", texto:`Elemental (${aciertos}/5).`, clase:"elemental" };
+        if (aciertos <= 3) return { nivel:"Aceptable", texto:`Aceptable (${aciertos}/5).`, clase:"aceptable" };
+        return { nivel:"Satisfactorio", texto:`Satisfactorio (${aciertos}/5).`, clase:"satisfactorio" };
       }
-
       if (actividad === 2) {
-        if (aciertos <= 1) {
-          nivel = "Elemental";
-          texto = `Elemental (${aciertos}/4).`;
-          clase = "elemental";
-        } else if (aciertos <= 2) {
-          nivel = "Aceptable";
-          texto = `Aceptable (${aciertos}/4).`;
-          clase = "aceptable";
-        } else {
-          nivel = "Satisfactorio";
-          texto = `Satisfactorio (${aciertos}/4).`;
-          clase = "satisfactorio";
-        }
+        if (aciertos <= 1) return { nivel:"Elemental", texto:`Elemental (${aciertos}/4).`, clase:"elemental" };
+        if (aciertos <= 2) return { nivel:"Aceptable", texto:`Aceptable (${aciertos}/4).`, clase:"aceptable" };
+        return { nivel:"Satisfactorio", texto:`Satisfactorio (${aciertos}/4).`, clase:"satisfactorio" };
       }
-
       if (actividad === 3) {
-        if (aciertos <= 1) {
-          nivel = "Elemental";
-          texto = `Elemental (${aciertos}/4).`;
-          clase = "elemental";
-        } else if (aciertos === 2) {
-          nivel = "Aceptable";
-          texto = `Aceptable (${aciertos}/4).`;
-          clase = "aceptable";
-        } else {
-          nivel = "Satisfactorio";
-          texto = `Satisfactorio (${aciertos}/4).`;
-          clase = "satisfactorio";
-        }
+        if (aciertos <= 1) return { nivel:"Elemental", texto:`Elemental (${aciertos}/4).`, clase:"elemental" };
+        if (aciertos === 2) return { nivel:"Aceptable", texto:`Aceptable (${aciertos}/4).`, clase:"aceptable" };
+        return { nivel:"Satisfactorio", texto:`Satisfactorio (${aciertos}/4).`, clase:"satisfactorio" };
       }
-
       if (actividad === 4) {
-        if (aciertos <= 1) {
-          nivel = "Elemental";
-          texto = `Elemental (${aciertos}/4).`;
-          clase = "elemental";
-        } else if (aciertos <= 2) {
-          nivel = "Aceptable";
-          texto = `Aceptable (${aciertos}/4).`;
-          clase = "aceptable";
-        } else {
-          nivel = "Satisfactorio";
-          texto = `Satisfactorio (${aciertos}/4).`;
-          clase = "satisfactorio";
-        }
+        if (aciertos <= 1) return { nivel:"Elemental", texto:`Elemental (${aciertos}/4).`, clase:"elemental" };
+        if (aciertos <= 2) return { nivel:"Aceptable", texto:`Aceptable (${aciertos}/4).`, clase:"aceptable" };
+        return { nivel:"Satisfactorio", texto:`Satisfactorio (${aciertos}/4).`, clase:"satisfactorio" };
       }
-
       if (actividad === 5) {
-        if (aciertos <= 1) {
-          nivel = "Elemental";
-          texto = `Elemental (${aciertos}/4).`;
-          clase = "elemental";
-        } else if (aciertos === 2) {
-          nivel = "Aceptable";
-          texto = `Aceptable (${aciertos}/4).`;
-          clase = "aceptable";
-        } else {
-          nivel = "Satisfactorio";
-          texto = `Satisfactorio (${aciertos}/4).`;
-          clase = "satisfactorio";
-        }
+        if (aciertos <= 1) return { nivel:"Elemental", texto:`Elemental (${aciertos}/4).`, clase:"elemental" };
+        if (aciertos === 2) return { nivel:"Aceptable", texto:`Aceptable (${aciertos}/4).`, clase:"aceptable" };
+        return { nivel:"Satisfactorio", texto:`Satisfactorio (${aciertos}/4).`, clase:"satisfactorio" };
       }
-
-      return { nivel, texto, clase };
+      return { nivel:"Elemental", texto:"Elemental.", clase:"elemental" };
     }
 
     function mostrarNivel(id, resultado){
@@ -1243,68 +1048,22 @@
       el.textContent = resultado.texto;
     }
 
-    function obtenerClasificacionGlobal(resultados){
+    function obtenerClasificacionLengua(resultados){
       const satisfactorios = resultados.filter(r => r.nivel === "Satisfactorio").length;
-
-      if (satisfactorios <= 1) {
-        return {
-          nombre: "Explorador",
-          detalle: `${satisfactorios} bloque(s) en satisfactorio.`,
-          clase: "elemental"
-        };
-      }
-
-      if (satisfactorios <= 3) {
-        return {
-          nombre: "Creador",
-          detalle: `${satisfactorios} bloque(s) en satisfactorio.`,
-          clase: "aceptable"
-        };
-      }
-
-      return {
-        nombre: "Innovador",
-        detalle: `${satisfactorios} bloque(s) en satisfactorio.`,
-        clase: "satisfactorio"
-      };
-    }
-
-    function nivelPorAciertos(aciertos, totalItems){
-      if(totalItems === 1){
-        return aciertos === 1
-          ? {nivel:"Satisfactorio", texto:`Satisfactorio (${aciertos}/${totalItems}).`, clase:"satisfactorio"}
-          : {nivel:"Elemental", texto:`Elemental (${aciertos}/${totalItems}).`, clase:"elemental"};
-      }
-      const proporcion = aciertos / totalItems;
-      if(proporcion >= 0.80){
-        return {nivel:"Satisfactorio", texto:`Satisfactorio (${aciertos}/${totalItems}).`, clase:"satisfactorio"};
-      }
-      if(proporcion >= 0.50){
-        return {nivel:"Aceptable", texto:`Aceptable (${aciertos}/${totalItems}).`, clase:"aceptable"};
-      }
-      return {nivel:"Elemental", texto:`Elemental (${aciertos}/${totalItems}).`, clase:"elemental"};
-    }
-
-    function obtenerClasificacionMatematica(resultados){
-      const satisfactorios = resultados.filter(r => r.nivel === "Satisfactorio").length;
-      if(satisfactorios >= 5){
-        return {nombre:"Innovador", detalle:`${satisfactorios} indicador(es) en satisfactorio.`, clase:"satisfactorio", satisfactorios};
-      }
-      if(satisfactorios >= 3){
-        return {nombre:"Creador", detalle:`${satisfactorios} indicador(es) en satisfactorio.`, clase:"aceptable", satisfactorios};
-      }
-      return {nombre:"Explorador", detalle:`${satisfactorios} indicador(es) en satisfactorio.`, clase:"elemental", satisfactorios};
+      if (satisfactorios <= 1) return { nombre:"Explorador", detalle:`${satisfactorios} indicador(es) en satisfactorio.`, clase:"elemental" };
+      if (satisfactorios <= 3) return { nombre:"Creador", detalle:`${satisfactorios} indicador(es) en satisfactorio.`, clase:"aceptable" };
+      return { nombre:"Innovador", detalle:`${satisfactorios} indicador(es) en satisfactorio.`, clase:"satisfactorio" };
     }
 
     function revisarPruebaLengua(){
       let total = 0;
       let bloque1 = 0, bloque2 = 0, bloque3 = 0, bloque4 = 0, bloque5 = 0;
 
-      bloque1 += revisarRadio("p1", "c", "r-p1");
-      bloque1 += revisarRadio("p2", "b", "r-p2");
-      bloque1 += revisarRadio("p3", "c", "r-p3");
-      bloque1 += revisarRadio("p4", "c", "r-p4");
-      bloque1 += revisarRadio("p5", "d", "r-p5");
+      bloque1 += revisarRadio("p1", "a", "r-p1");
+      bloque1 += revisarRadio("p2", "c", "r-p2");
+      bloque1 += revisarRadio("p3", "d", "r-p3");
+      bloque1 += revisarRadio("p4", "d", "r-p4");
+      bloque1 += revisarRadio("p5", "c", "r-p5");
       total += bloque1;
 
       bloque2 += revisarTexto("p6", respuestasTexto.p6, "r-p6");
@@ -1331,234 +1090,225 @@
       bloque5 += revisarTexto("p20", respuestasTexto.p20, "r-p20");
       total += bloque5;
 
-      const resultado1 = obtenerNivelBloque(bloque1, 1);
-      const resultado2 = obtenerNivelBloque(bloque2, 2);
-      const resultado3 = obtenerNivelBloque(bloque3, 3);
-      const resultado4 = obtenerNivelBloque(bloque4, 4);
-      const resultado5 = obtenerNivelBloque(bloque5, 5);
+      const resultados = [
+        obtenerNivelBloqueLengua(bloque1, 1),
+        obtenerNivelBloqueLengua(bloque2, 2),
+        obtenerNivelBloqueLengua(bloque3, 3),
+        obtenerNivelBloqueLengua(bloque4, 4),
+        obtenerNivelBloqueLengua(bloque5, 5)
+      ];
 
-      mostrarNivel("bloque1", resultado1);
-      mostrarNivel("bloque2", resultado2);
-      mostrarNivel("bloque3", resultado3);
-      mostrarNivel("bloque4", resultado4);
-      mostrarNivel("bloque5", resultado5);
+      mostrarNivel("bloque1", resultados[0]);
+      mostrarNivel("bloque2", resultados[1]);
+      mostrarNivel("bloque3", resultados[2]);
+      mostrarNivel("bloque4", resultados[3]);
+      mostrarNivel("bloque5", resultados[4]);
 
-      const clasificacion = obtenerClasificacionGlobal([resultado1, resultado2, resultado3, resultado4, resultado5]);
-      const clasificacionEl = document.getElementById("clasificacionGlobal");
-      clasificacionEl.className = "linea-respuesta " + clasificacion.clase;
-      clasificacionEl.textContent = clasificacion.nombre;
+      const clasificacion = obtenerClasificacionLengua(resultados);
+      const cg = document.getElementById("clasificacionGlobal");
+      cg.className = "linea-respuesta " + clasificacion.clase;
+      cg.textContent = clasificacion.nombre;
       document.getElementById("detalleClasificacion").textContent = clasificacion.detalle;
       document.getElementById("resultadoGlobalLengua").textContent = `Puntuación: ${total} / 21`;
 
-      const nombreEstudiante = document.getElementById("nombre").value.trim() || "sin nombre registrado";
-      const cantidadSatisfactorios = [resultado1, resultado2, resultado3, resultado4, resultado5].filter(r => r.nivel === "Satisfactorio").length;
-      const payload = {
-        tipoPrueba: "LENGUA",
-        idEstudiante: document.getElementById("idEstudiante").value.trim(),
-        nombreEstudiante: nombreEstudiante,
-        centroSede: document.getElementById("centro").value.trim(),
-        indicador1: resultado1.nivel,
-        indicador2: resultado2.nivel,
-        indicador3: resultado3.nivel,
-        indicador4: resultado4.nivel,
-        indicador5: resultado5.nivel,
-        indicador6: "",
-        cantidadSatisfactorios: cantidadSatisfactorios,
-        grupo: clasificacion.nombre,
-        puntuacionTotal: total + " / 21",
-        observacion: clasificacion.detalle
+      const cantidadSatisfactorios = resultados.filter(r => r.nivel === "Satisfactorio").length;
+
+      ultimoResultadoLengua = {
+        tipoPrueba:"LENGUA",
+        idEstudiante:document.getElementById("idEstudiante").value,
+        nombreEstudiante:document.getElementById("nombre").value,
+        regional:document.getElementById("regional").value,
+        distrito:document.getElementById("distrito").value,
+        centroSede:document.getElementById("centro").value,
+        indicador1:resultados[0].nivel,
+        indicador2:resultados[1].nivel,
+        indicador3:resultados[2].nivel,
+        indicador4:resultados[3].nivel,
+        indicador5:resultados[4].nivel,
+        indicador6:"",
+        cantidadSatisfactorios:cantidadSatisfactorios,
+        grupo:clasificacion.nombre,
+        puntuacionTotal:`${total}/21`,
+        observacion:""
       };
 
-      mostrarModalYGuardar(
-        `El estudiante ${nombreEstudiante} pertenece al grupo ${clasificacion.nombre} según el resultado.`,
-        payload
-      );
+      guardarResultado(ultimoResultadoLengua, function(respuesta){
+        mostrarModal((respuesta && respuesta.ok)
+          ? `Prueba de Lengua guardada correctamente. Grupo: ${clasificacion.nombre}.`
+          : `La prueba fue revisada, pero no se guardó. ${respuesta && respuesta.mensaje ? respuesta.mensaje : ""}`);
+      });
+    }
+
+    function nivelMatematica(aciertos, total){
+      if(total === 1){
+        if(aciertos === 1) return { nivel:"Satisfactorio", texto:`Satisfactorio (${aciertos}/${total}).`, clase:"satisfactorio" };
+        return { nivel:"Elemental", texto:`Elemental (${aciertos}/${total}).`, clase:"elemental" };
+      }
+      if(total === 2){
+        if(aciertos === 2) return { nivel:"Satisfactorio", texto:`Satisfactorio (${aciertos}/${total}).`, clase:"satisfactorio" };
+        if(aciertos === 1) return { nivel:"Aceptable", texto:`Aceptable (${aciertos}/${total}).`, clase:"aceptable" };
+        return { nivel:"Elemental", texto:`Elemental (${aciertos}/${total}).`, clase:"elemental" };
+      }
+      if(total === 3){
+        if(aciertos === 3) return { nivel:"Satisfactorio", texto:`Satisfactorio (${aciertos}/${total}).`, clase:"satisfactorio" };
+        if(aciertos === 2) return { nivel:"Aceptable", texto:`Aceptable (${aciertos}/${total}).`, clase:"aceptable" };
+        return { nivel:"Elemental", texto:`Elemental (${aciertos}/${total}).`, clase:"elemental" };
+      }
+      if(total === 6){
+        if(aciertos >= 5) return { nivel:"Satisfactorio", texto:`Satisfactorio (${aciertos}/${total}).`, clase:"satisfactorio" };
+        if(aciertos >= 3) return { nivel:"Aceptable", texto:`Aceptable (${aciertos}/${total}).`, clase:"aceptable" };
+        return { nivel:"Elemental", texto:`Elemental (${aciertos}/${total}).`, clase:"elemental" };
+      }
+      return { nivel:"Elemental", texto:`Elemental (${aciertos}/${total}).`, clase:"elemental" };
+    }
+
+    function obtenerClasificacionMatematica(resultados){
+      const satisfactorios = resultados.filter(r => r.nivel === "Satisfactorio").length;
+      if(satisfactorios >= 5) return { nombre:"Innovador", detalle:`${satisfactorios} indicador(es) en satisfactorio.`, clase:"satisfactorio" };
+      if(satisfactorios >= 3) return { nombre:"Creador", detalle:`${satisfactorios} indicador(es) en satisfactorio.`, clase:"aceptable" };
+      return { nombre:"Explorador", detalle:`${satisfactorios} indicador(es) en satisfactorio.`, clase:"elemental" };
     }
 
     function revisarPruebaMatematica(){
       let total = 0;
-      let indicador1 = 0; // operaciones básicas de suma y resta
-      let indicador2 = 0; // lectura y escritura de números
-      let indicador3 = 0; // comparación y ordenamiento
-      let indicador4 = 0; // problemas de suma y resta
-      let indicador5 = 0; // problemas diversos en contexto
-      let indicador6 = 0; // valor posicional
 
-      indicador1 += revisarTexto("ma1a", respuestasMatematica.ma1a, "r-ma1a");
-      indicador1 += revisarTexto("ma1b", respuestasMatematica.ma1b, "r-ma1b");
-      indicador1 += revisarTexto("ma1c", respuestasMatematica.ma1c, "r-ma1c");
-      indicador1 += revisarTexto("ma1d", respuestasMatematica.ma1d, "r-ma1d");
-      indicador1 += revisarTexto("ma1e", respuestasMatematica.ma1e, "r-ma1e");
-      indicador1 += revisarTexto("ma1f", respuestasMatematica.ma1f, "r-ma1f");
-      total += indicador1;
+      let ind1 = 0;
+      ind1 += revisarTexto("ma1a", respuestasMatematica.ma1a, "r-ma1a");
+      ind1 += revisarTexto("ma1b", respuestasMatematica.ma1b, "r-ma1b");
+      ind1 += revisarTexto("ma1c", respuestasMatematica.ma1c, "r-ma1c");
+      ind1 += revisarTexto("ma1d", respuestasMatematica.ma1d, "r-ma1d");
+      ind1 += revisarTexto("ma1e", respuestasMatematica.ma1e, "r-ma1e");
+      ind1 += revisarTexto("ma1f", respuestasMatematica.ma1f, "r-ma1f");
+      total += ind1;
 
-      indicador2 += revisarRadio("ma2", "b", "r-ma2");
-      indicador2 += revisarRadio("ma3", "a", "r-ma3");
-      total += indicador2;
+      let ind2 = 0;
+      ind2 += revisarRadio("ma2", "b", "r-ma2");
+      ind2 += revisarRadio("ma3", "a", "r-ma3");
+      total += ind2;
 
-      indicador3 += revisarRadio("ma4", "d", "r-ma4");
-      indicador3 += revisarRadio("ma5", "d", "r-ma5");
-      total += indicador3;
+      let ind3 = 0;
+      ind3 += revisarRadio("ma4", "d", "r-ma4");
+      ind3 += revisarRadio("ma5", "d", "r-ma5");
+      total += ind3;
 
-      indicador4 += revisarRadio("ma6", "b", "r-ma6");
-      indicador4 += revisarRadio("ma7", "d", "r-ma7");
-      total += indicador4;
+      let ind4 = 0;
+      ind4 += revisarRadio("ma6", "b", "r-ma6");
+      ind4 += revisarRadio("ma7", "d", "r-ma7");
+      total += ind4;
 
-      indicador5 += revisarRadio("ma8", "a", "r-ma8");
-      indicador5 += revisarRadio("ma10", "b", "r-ma10");
-      total += indicador5;
+      let ind5 = 0;
+      ind5 += revisarRadio("ma8", "a", "r-ma8");
+      total += ind5;
 
-      indicador6 += revisarTexto("ma9c", respuestasMatematica.ma9c, "r-ma9c");
-      indicador6 += revisarTexto("ma9d", respuestasMatematica.ma9d, "r-ma9d");
-      indicador6 += revisarTexto("ma9u", respuestasMatematica.ma9u, "r-ma9u");
-      total += indicador6;
+      let ind6 = 0;
+      ind6 += revisarTexto("ma9c", respuestasMatematica.ma9c, "r-ma9c");
+      ind6 += revisarTexto("ma9d", respuestasMatematica.ma9d, "r-ma9d");
+      ind6 += revisarTexto("ma9u", respuestasMatematica.ma9u, "r-ma9u");
+      total += ind6;
 
-      const resultado1 = nivelPorAciertos(indicador1, 6);
-      const resultado2 = nivelPorAciertos(indicador2, 2);
-      const resultado3 = nivelPorAciertos(indicador3, 2);
-      const resultado4 = nivelPorAciertos(indicador4, 2);
-      const resultado5 = nivelPorAciertos(indicador5, 2);
-      const resultado6 = nivelPorAciertos(indicador6, 3);
-      const resultados = [resultado1, resultado2, resultado3, resultado4, resultado5, resultado6];
+      let ind7 = 0;
+      ind7 += revisarRadio("ma10", "b", "r-ma10");
+      total += ind7;
 
-      mostrarNivel("maIndicador1", resultado1);
-      mostrarNivel("maIndicador2", resultado2);
-      mostrarNivel("maIndicador3", resultado3);
-      mostrarNivel("maIndicador4", resultado4);
-      mostrarNivel("maIndicador5", resultado5);
-      mostrarNivel("maIndicador6", resultado6);
+      const resultados = [
+        nivelMatematica(ind1, 6),
+        nivelMatematica(ind2, 2),
+        nivelMatematica(ind3, 2),
+        nivelMatematica(ind4, 2),
+        nivelMatematica(ind5, 1),
+        nivelMatematica(ind6, 3),
+        nivelMatematica(ind7, 1)
+      ];
+
+      mostrarNivel("maInd1", resultados[0]);
+      mostrarNivel("maInd2", resultados[1]);
+      mostrarNivel("maInd3", resultados[2]);
+      mostrarNivel("maInd4", resultados[3]);
+      mostrarNivel("maInd5", resultados[4]);
+      mostrarNivel("maInd6", resultados[5]);
+      mostrarNivel("maInd7", resultados[6]);
 
       const clasificacion = obtenerClasificacionMatematica(resultados);
-      const clasificacionEl = document.getElementById("clasificacionGlobalMatematica");
-      clasificacionEl.className = "linea-respuesta " + clasificacion.clase;
-      clasificacionEl.textContent = clasificacion.nombre;
-      document.getElementById("detalleClasificacionMatematica").textContent = clasificacion.detalle;
-
+      const cg = document.getElementById("clasificacionGlobalMa");
+      cg.className = "linea-respuesta " + clasificacion.clase;
+      cg.textContent = clasificacion.nombre;
+      document.getElementById("detalleClasificacionMa").textContent = clasificacion.detalle;
       document.getElementById("resultadoGlobalMatematica").textContent = `Puntuación: ${total} / 17`;
 
-      const nombreEstudiante = document.getElementById("nombreMa").value.trim() || "sin nombre registrado";
-      const payload = {
-        tipoPrueba: "MATEMATICA",
-        idEstudiante: document.getElementById("idEstudianteMa").value.trim(),
-        nombreEstudiante: nombreEstudiante,
-        centroSede: document.getElementById("centroMa").value.trim(),
-        indicador1: resultado1.nivel,
-        indicador2: resultado2.nivel,
-        indicador3: resultado3.nivel,
-        indicador4: resultado4.nivel,
-        indicador5: resultado5.nivel,
-        indicador6: resultado6.nivel,
-        cantidadSatisfactorios: clasificacion.satisfactorios,
-        grupo: clasificacion.nombre,
-        puntuacionTotal: total + " / 17",
-        observacion: clasificacion.detalle
+      const cantidadSatisfactorios = resultados.filter(r => r.nivel === "Satisfactorio").length;
+
+      ultimoResultadoMatematica = {
+        tipoPrueba:"MATEMATICA",
+        idEstudiante:document.getElementById("idEstudianteMa").value,
+        nombreEstudiante:document.getElementById("nombreMa").value,
+        regional:document.getElementById("regionalMa").value,
+        distrito:document.getElementById("distritoMa").value,
+        centroSede:document.getElementById("centroMa").value,
+        indicador1:resultados[0].nivel,
+        indicador2:resultados[1].nivel,
+        indicador3:resultados[2].nivel,
+        indicador4:resultados[3].nivel,
+        indicador5:resultados[4].nivel,
+        indicador6:resultados[5].nivel,
+        cantidadSatisfactorios:cantidadSatisfactorios,
+        grupo:clasificacion.nombre,
+        puntuacionTotal:`${total}/17`,
+        observacion:`Indicador 7: ${resultados[6].nivel}`
       };
 
-      mostrarModalYGuardar(
-        `La prueba de Matemática del estudiante ${nombreEstudiante} fue registrada. Pertenece al grupo ${clasificacion.nombre}.`,
-        payload
-      );
+      guardarResultado(ultimoResultadoMatematica, function(respuesta){
+        mostrarModal((respuesta && respuesta.ok)
+          ? `Prueba de Matemática guardada correctamente. Grupo: ${clasificacion.nombre}.`
+          : `La prueba fue revisada, pero no se guardó. ${respuesta && respuesta.mensaje ? respuesta.mensaje : ""}`);
+      });
+    }
+
+    function mostrarModal(mensaje){
+      document.getElementById("mensajeModal").textContent = mensaje;
+      document.getElementById("modalFinal").classList.remove("oculto");
     }
 
     function cerrarModal(){
       document.getElementById("modalFinal").classList.add("oculto");
     }
 
-    function limpiarLengua(){
-      document.querySelectorAll('#pantallaLengua input[type="radio"]').forEach(el => el.checked = false);
-      document.querySelectorAll('#pantallaLengua input[type="text"]').forEach(el => {
-        if(el.id !== "nombre" && el.id !== "idEstudiante" && el.id !== "centro"){ el.value = ""; }
-      });
-      document.querySelectorAll('#pantallaLengua [id^="r-p"]').forEach(el => {
-        el.className = "linea-respuesta";
-        el.textContent = "";
-      });
-      ["bloque1","bloque2","bloque3","bloque4","bloque5"].forEach(id => {
-        const el = document.getElementById(id);
-        el.className = "linea-respuesta neutra";
-        el.textContent = "";
-      });
-      document.getElementById("clasificacionGlobal").className = "linea-respuesta neutra";
-      document.getElementById("clasificacionGlobal").textContent = "";
-      document.getElementById("detalleClasificacion").textContent = "";
-      document.getElementById("resultadoGlobalLengua").textContent = "Puntuación: 0 / 21";
-    }
-
-    function limpiarMatematica(){
-      document.querySelectorAll('#pantallaMatematica input[type="radio"]').forEach(el => el.checked = false);
-      document.querySelectorAll('#pantallaMatematica input[type="text"]').forEach(el => {
-        if(el.id !== "nombreMa" && el.id !== "idEstudianteMa" && el.id !== "centroMa"){ el.value = ""; }
-      });
-      document.querySelectorAll('#pantallaMatematica [id^="r-ma"]').forEach(el => {
-        el.className = "linea-respuesta";
-        el.textContent = "";
-      });
-      ["maIndicador1","maIndicador2","maIndicador3","maIndicador4","maIndicador5","maIndicador6"].forEach(id => {
-        const el = document.getElementById(id);
-        if(el){
-          el.className = "linea-respuesta neutra";
-          el.textContent = "";
-        }
-      });
-      const cl = document.getElementById("clasificacionGlobalMatematica");
-      if(cl){
-        cl.className = "linea-respuesta neutra";
-        cl.textContent = "";
-      }
-      const det = document.getElementById("detalleClasificacionMatematica");
-      if(det){ det.textContent = ""; }
-      document.getElementById("resultadoGlobalMatematica").textContent = "Puntuación: 0 / 17";
-    }
-
-    function reiniciarLengua(){
-      limpiarLengua();
-      window.scrollTo({top:0, behavior:"smooth"});
-    }
-
-    function reiniciarMatematica(){
-      limpiarMatematica();
-      window.scrollTo({top:0, behavior:"smooth"});
-    }
-
     function digitarOtraPrueba(){
       cerrarModal();
-      limpiarLengua();
-      limpiarMatematica();
-
-      const nombreActual = document.getElementById("nombre").value || document.getElementById("nombreMa").value;
-      const idActual = document.getElementById("idEstudiante").value || document.getElementById("idEstudianteMa").value;
-      const centroActual = document.getElementById("centro").value || document.getElementById("centroMa").value;
-
-      document.getElementById("inicioNombre").value = nombreActual;
-      document.getElementById("inicioID").value = idActual;
-      document.getElementById("inicioCentro").value = centroActual;
-      document.querySelectorAll('input[name="tipoPrueba"]').forEach(el => el.checked = false);
-
-      document.getElementById("pantallaLengua").classList.add("oculto");
-      document.getElementById("pantallaMatematica").classList.add("oculto");
-      document.getElementById("pantallaInicio").classList.remove("oculto");
+      volverInicio();
+      document.getElementById("inicioCentro").focus();
     }
 
     function digitarOtroEstudiante(){
       cerrarModal();
-      limpiarLengua();
-      limpiarMatematica();
+      reiniciarTodo();
+      volverInicio();
+      document.getElementById("inicioID").focus();
+    }
 
-      document.getElementById("inicioNombre").value = "";
-      document.getElementById("inicioID").value = "";
-      document.getElementById("inicioCentro").value = "";
-      mostrarEstadoBusqueda("", "neutra");
-      document.getElementById("nombre").value = "";
-      document.getElementById("idEstudiante").value = "";
-      document.getElementById("centro").value = "";
-      document.getElementById("nombreMa").value = "";
-      document.getElementById("idEstudianteMa").value = "";
-      document.getElementById("centroMa").value = "";
-      document.querySelectorAll('input[name="tipoPrueba"]').forEach(el => el.checked = false);
+    function reiniciarTodo(){
+      document.querySelectorAll("input[type='text']").forEach(i => i.value = "");
+      document.querySelectorAll("input[type='radio']").forEach(i => i.checked = false);
+      document.querySelectorAll(".linea-respuesta").forEach(el => { el.className = "linea-respuesta neutra"; el.textContent = ""; });
+      document.getElementById("resultadoGlobalLengua").textContent = "Puntuación: 0 / 21";
+      document.getElementById("resultadoGlobalMatematica").textContent = "Puntuación: 0 / 17";
+    }
 
-      document.getElementById("pantallaLengua").classList.add("oculto");
-      document.getElementById("pantallaMatematica").classList.add("oculto");
-      document.getElementById("pantallaInicio").classList.remove("oculto");
+    function reiniciarLengua(){
+      document.querySelectorAll("#pantallaLengua input[type='text']").forEach(i => {
+        if(!["nombre","idEstudiante","regional","distrito","centro"].includes(i.id)) i.value = "";
+      });
+      document.querySelectorAll("#pantallaLengua input[type='radio']").forEach(i => i.checked = false);
+      document.querySelectorAll("#pantallaLengua .linea-respuesta").forEach(el => { el.className = "linea-respuesta neutra"; el.textContent = ""; });
+      document.getElementById("resultadoGlobalLengua").textContent = "Puntuación: 0 / 21";
+    }
+
+    function reiniciarMatematica(){
+      document.querySelectorAll("#pantallaMatematica input[type='text']").forEach(i => {
+        if(!["nombreMa","idEstudianteMa","regionalMa","distritoMa","centroMa"].includes(i.id)) i.value = "";
+      });
+      document.querySelectorAll("#pantallaMatematica input[type='radio']").forEach(i => i.checked = false);
+      document.querySelectorAll("#pantallaMatematica .linea-respuesta").forEach(el => { el.className = "linea-respuesta neutra"; el.textContent = ""; });
+      document.getElementById("resultadoGlobalMatematica").textContent = "Puntuación: 0 / 17";
     }
   </script>
 </body>
