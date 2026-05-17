@@ -394,8 +394,10 @@
     </div>
 
     <div class="campo">
-      <label for="inicioCentro">Nombre del centro sede</label>
-      <input type="text" id="inicioCentro" placeholder="Escriba el nombre del centro sede">
+      <label for="inicioCentro">Centro sede</label>
+      <select id="inicioCentro">
+        <option value="">Seleccione el centro sede</option>
+      </select>
     </div>
 
     <div class="campo">
@@ -818,7 +820,7 @@
   </div>
 
   <script>
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyE42xT8DBrUCyn2pKbjB0Su0ZGKp2Sns7DhEzq1XGX_xhaTGIXFWz5GMJkSADIPzLMQA/exec";
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxNhwUNeUf35yeomqUQnNi2wmhoTm0yqVdqGeA7kvcLGqMr-d3RhQlVYXhSYZwiwnaXBg/exec";
 
     const respuestasTexto = {
       p6: "c", p7: "g", p8: "s", p9: "l",
@@ -859,6 +861,41 @@
       document.body.appendChild(script);
     }
 
+    function cargarSedesPorDistrito(regional, distrito){
+      const selectCentro = document.getElementById("inicioCentro");
+
+      selectCentro.innerHTML = '<option value="">Cargando centros sede...</option>';
+
+      jsonp(
+        {
+          accion: "sedes",
+          regional: regional,
+          distrito: distrito
+        },
+        function(respuesta){
+          selectCentro.innerHTML = '<option value="">Seleccione el centro sede</option>';
+
+          if(!respuesta || !respuesta.ok || !respuesta.sedes || respuesta.sedes.length === 0){
+            selectCentro.innerHTML = '<option value="">No hay sedes registradas para este distrito</option>';
+            return;
+          }
+
+          respuesta.sedes.forEach(function(sede){
+            const nombreSede = sede.centroSede || sede.nombre || sede.centro || "";
+            if(!nombreSede) return;
+
+            const option = document.createElement("option");
+            option.value = nombreSede;
+            option.textContent = nombreSede;
+            selectCentro.appendChild(option);
+          });
+        },
+        function(){
+          selectCentro.innerHTML = '<option value="">No se pudieron cargar las sedes</option>';
+        }
+      );
+    }
+
     function buscarEstudiante(){
       const id = document.getElementById("inicioID").value.trim();
       const mensaje = document.getElementById("mensajeBusqueda");
@@ -879,12 +916,19 @@
             document.getElementById("inicioNombre").value = respuesta.nombre || "";
             document.getElementById("inicioRegional").value = respuesta.regional || "";
             document.getElementById("inicioDistrito").value = respuesta.distrito || "";
+            document.getElementById("inicioCentro").innerHTML = '<option value="">Seleccione el centro sede</option>';
+
+            if(respuesta.regional && respuesta.distrito){
+              cargarSedesPorDistrito(respuesta.regional, respuesta.distrito);
+            }
+
             mensaje.className = "linea-respuesta correcta";
             mensaje.textContent = "Estudiante encontrado.";
           }else{
             document.getElementById("inicioNombre").value = "";
             document.getElementById("inicioRegional").value = "";
             document.getElementById("inicioDistrito").value = "";
+            document.getElementById("inicioCentro").innerHTML = '<option value="">Seleccione el centro sede</option>';
             mensaje.className = "linea-respuesta incorrecta";
             mensaje.textContent = (respuesta && respuesta.mensaje) ? respuesta.mensaje : "No se encontró el estudiante.";
           }
@@ -922,7 +966,7 @@
 
       if(!id){ alert("Debe digitar el ID del estudiante."); return; }
       if(!nombre){ alert("Debe buscar el estudiante para autocompletar el nombre."); return; }
-      if(!centro){ alert("Debe digitar el nombre del centro sede."); return; }
+      if(!centro){ alert("Debe seleccionar el centro sede."); return; }
       if(!prueba){ alert("Debe seleccionar la prueba que se va a digitar."); return; }
 
       document.getElementById("idEstudiante").value = id;
@@ -1268,6 +1312,7 @@
       document.querySelectorAll("input[type='text']").forEach(i => i.value = "");
       document.querySelectorAll("input[type='radio']").forEach(i => i.checked = false);
       document.querySelectorAll(".linea-respuesta").forEach(el => { el.className = "linea-respuesta neutra"; el.textContent = ""; });
+      document.getElementById("inicioCentro").innerHTML = '<option value="">Seleccione el centro sede</option>';
       document.getElementById("resultadoGlobalLengua").textContent = "Puntuación: 0 / 21";
       document.getElementById("resultadoGlobalMatematica").textContent = "Puntuación: 0 / 12";
     }
